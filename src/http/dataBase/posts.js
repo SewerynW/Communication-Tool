@@ -27,7 +27,7 @@ export default {
     })
   },
 
-  updataPost(postId, data) {
+  updatePost(postId, data) {
     return new Promise((resolve, reject) => {
       api.put(`/post/${postId}`, data)
         .then((res) => {
@@ -37,7 +37,7 @@ export default {
     })
   },
 
-  deletePost(postId, data) {
+  deletePost(postId) {
     return new Promise((resolve, reject) => {
       api.delete(`/post/${postId}`)
         .then((res) => {
