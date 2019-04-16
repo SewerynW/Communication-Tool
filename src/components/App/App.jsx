@@ -85,7 +85,7 @@ class App extends Component {
           <PrivateRoute
             path="/profilePage"
             component={ProfilePage}
-            clearSession={this.logoutAndClearSession}
+            logoutAndClearSession={this.logoutAndClearSession}
             setSession={this.setSession}
             logged={this.state.logged}
             person={this.state.person}

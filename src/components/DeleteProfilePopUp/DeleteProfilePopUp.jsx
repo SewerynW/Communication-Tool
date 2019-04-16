@@ -16,14 +16,6 @@ import {
 import { removeProfile } from '../../actions/profileActions';
 import { connect } from 'react-redux';
 
-
-  /* //zrobić form z dwoma gridami
-          1. form checkbox, direction column
-          2. form direction row
-          space around odstep miedzy */
-
-
-
 const stylesMaterialUi = theme => ({
   paper: {
     position: "absolute",
@@ -47,7 +39,8 @@ class DeleteProfilePopUp extends React.PureComponent {
 
 handleDeleteProfile = () =>{
   this.props.deleteProfile();
-  this.props.clearSession();
+  this.props.logoutAndClearSession();
+  this.props.offBlur();
 }
   
   render(){
@@ -100,15 +93,11 @@ handleDeleteProfile = () =>{
                   }
                   label="Just do it!"
                 />
-                
-                 <div  display="flex" justifyContent="space-between" alignItems="center">
-                <Button variant="contained" className={classes.button} onClick={onClose} > I'm staying </Button>
-               <Button variant="contained" className={classes.button} onClick={this.handleDeleteProfile} 
-                disabled={!(this.state.checkbox1&&this.state.checkbox2&&this.state.checkbox3)}
-               >
-                Delete </Button>
-              
-              </div>
+                <div  display="flex" justifyContent="space-between" alignItems="center">
+                  <Button variant="contained" className={classes.button} onClick={onClose} > I'm staying </Button>
+                  <Button variant="contained" className={classes.button} onClick={this.handleDeleteProfile} 
+                    disabled={!(this.state.checkbox1&&this.state.checkbox2&&this.state.checkbox3)}> Delete </Button>
+                </div>
               </FormGroup>
             </FormControl>
             <FormControl required error={error} component="fieldset" className={classes.formControl}>
@@ -121,7 +110,6 @@ handleDeleteProfile = () =>{
    );
   }
 }
-
 const mapDispatchToProps = dispatch => ({
   deleteProfile: () => {
     dispatch(removeProfile());

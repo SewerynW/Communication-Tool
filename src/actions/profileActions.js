@@ -15,6 +15,7 @@ export const editProfile = profile => dispatch => {
     const tempProfile={
         Name: profile.Name,
         GivenName: profile.Surname,
+        Photo: profile.Photo
 
     };
     const tempPhoto = profile.Photo || null;
@@ -41,12 +42,8 @@ const editProfileSuccess = ({ Name, Surname, Photo }) => ({
     }
   });
 
-
-
-
   const removeProfileSuccess = () => ({
     type: REMOVE_PROFILE
-
   });
 
 
@@ -56,12 +53,7 @@ const editProfileSuccess = ({ Name, Surname, Photo }) => ({
           console.log(response);
           dispatch(removeProfileSuccess()
         )})};
-    
-
-
-
-
-
+ 
   export const fetchProfile = () =>  dispatch => 
      Axios.getInfoAboutUser()
         .then(response => {
