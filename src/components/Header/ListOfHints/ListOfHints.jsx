@@ -6,10 +6,6 @@ import style from "./ListOfHints.module.scss";
 import Hint from "./Hint/Hint";
 
 class ListOfHints extends React.Component {
-  // state = {
-  //   activePopup: false
-  // };
-
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutSide);
   }
@@ -19,7 +15,7 @@ class ListOfHints extends React.Component {
 
   handleClickOutSide = event => {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      // this.props.handleCloseHintPopUp();
+      this.props.handleCloseHintPopUp();
     }
   };
 
@@ -27,22 +23,8 @@ class ListOfHints extends React.Component {
     this.wrapperRef = node;
   };
 
-  // handleTogglePopup = () => {
-  //   if (!this.state.activePopup) {
-  //     document.getElementById("root").style.filter = "blur(2px)";
-  //   } else {
-  //     document.getElementById("root").style.filter = "blur(0)";
-  //   }
-  //   this.setState(() => {
-  //     return {
-  //       activePopup: !this.state.activePopup
-  //     };
-  //   });
-  // };
-
   render() {
     const { filteredPosts, activePopup, handleTogglePopup } = this.props;
-    // const { activePopup } = this.state;
 
     return (
       <div ref={this.setWrapperRef}>

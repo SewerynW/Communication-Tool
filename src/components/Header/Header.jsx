@@ -79,8 +79,7 @@ class Header extends React.Component {
   state = {
     anchorEl: null,
     query: "",
-    hintPopUp: false,
-    activePopup: false
+    hintPopUp: null
   };
 
   handleMenu = event => {
@@ -94,7 +93,7 @@ class Header extends React.Component {
   };
 
   handleCloseHintPopUp = () => {
-    console.log("zamykam ", this.state.hintPopUp);
+    console.log("zamykam liste podpowiedzi ", this.state.hintPopUp);
     this.setState(() => {
       return {
         hintPopUp: false
@@ -122,26 +121,9 @@ class Header extends React.Component {
     });
   };
 
-  handleTogglePopup = () => {
-    // e.stopPropagation();
-    console.log("toggle zmienia", this.state.activePopup);
-    // if (!this.state.activePopup) {
-    //   document.getElementById("root").style.filter = "blur(2px)";
-    // } else {
-    //   document.getElementById("root").style.filter = "blur(0)";
-    // }
-    // this.handleCloseHintPopUp();
-    this.setState(() => {
-      return {
-        activePopup: !this.state.activePopup
-      };
-    });
-    console.log("toggle zmienia", this.state.activePopup);
-  };
-
   render() {
     const { classes, person, logged } = this.props;
-    const { anchorEl, hintPopUp, activePopup } = this.state;
+    const { anchorEl, hintPopUp } = this.state;
     const open = Boolean(anchorEl);
 
     let filteredPosts = this.props.userPosts.filter(post => {
@@ -185,7 +167,6 @@ class Header extends React.Component {
                   root: classes.inputRoot,
                   input: classes.inputInput
                 }}
-                // value={query}
                 onChange={this.handleChange}
               />
               {hintPopUp ? (
@@ -193,7 +174,6 @@ class Header extends React.Component {
                   id="listOfHints"
                   filteredPosts={filteredPosts}
                   handleCloseHintPopUp={this.handleCloseHintPopUp}
-                  activePopup={activePopup}
                   handleTogglePopup={this.handleTogglePopup}
                 />
               ) : null}

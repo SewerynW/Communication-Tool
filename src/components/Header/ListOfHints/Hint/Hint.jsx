@@ -25,44 +25,23 @@ const styles = theme => ({
 });
 
 class Hint extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return this.props.activePopup !== nextProps.activePopup;
-  }
-  // state = {
-  //   activePopup: false
-  // };
+  state = {
+    activePopup: false
+  };
 
-  // handleTogglePopup = () => {
-  //   if (!this.state.activePopup) {
-  //     document.getElementById("root").style.filter = "blur(2px)";
-  //   } else {
-  //     document.getElementById("root").style.filter = "blur(0)";
-  //   }
-  //   this.setState(() => {
-  //     return {
-  //       activePopup: !this.state.activePopup
-  //     };
-  //   });
-  // };
-
-  cos = () => {
-    this.props.handleTogglePopup();
-    // if (!this.props.activePopup) {
-    //   document.getElementById("root").style.filter = "blur(2px)";
-    // } else {
-    //   document.getElementById("root").style.filter = "blur(0)";
-    // }
+  handleTogglePopupLOC = e => {
+    this.setState(prevState => ({
+      activePopup: !prevState.activePopup
+    }));
   };
 
   render() {
-    const { classes, post, activePopup, handleTogglePopup } = this.props;
-    // const { activePopup } = this.state;
-    console.log("z podpowiedzi", this.props);
+    const { classes, post } = this.props;
 
     return (
       <CardActionArea
         className={`${style.hint} ${classes.root}`}
-        onClick={this.cos}
+        onClick={this.handleTogglePopupLOC}
       >
         <div className={style.title}>
           <div className={style.titleLabel}>
@@ -79,10 +58,10 @@ class Hint extends React.Component {
         <div className={style.text}>
           <Typography component="p">{post.Text}</Typography>
         </div>
-        {activePopup ? (
+        {this.state.activePopup ? (
           <PostModal
-            onClose={this.cos}
-            open={activePopup}
+            onClose={this.handleTogglePopupLOC}
+            open={this.state.activePopup}
             postTitle={post.Title}
             postContent={post.Text}
             postImage={post.ThumbnailPhoto}
@@ -96,9 +75,7 @@ class Hint extends React.Component {
 
 Hint.propTypes = {
   classes: PropTypes.object.isRequired,
-  post: PropTypes.object,
-  activePopup: PropTypes.bool,
-  handleTogglePopup: PropTypes.func
+  post: PropTypes.object
 };
 
 export default withStyles(styles)(Hint);
