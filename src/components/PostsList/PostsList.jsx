@@ -21,6 +21,7 @@ class PostsList extends PureComponent {
           ? this.userPostsSorted.map(post => (
               <li key={post.Id}>
                 <ShortPostElement
+                  Id={post.Id}
                   Title={post.Title}
                   Text={post.Text}
                   ThumbnailPhoto={post.ThumbnailPhoto}
@@ -35,7 +36,7 @@ class PostsList extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  userPosts: state.userPosts
+  userPosts: state.postReducer.userPosts
 });
 
 export default connect(
