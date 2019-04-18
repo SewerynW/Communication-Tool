@@ -45,16 +45,12 @@ export default {
         .catch(err => reject(err));
     });
   }
-<<<<<<< HEAD
-}
-api.interceptors.request.use((config) => {
+};
+api.interceptors.request.use(config => {
   if (sessionStorage.userId) {
     config.headers = {
-      'X-ZUMO-AUTH': sessionStorage.userId
-    }
-    return config
+      "X-ZUMO-AUTH": sessionStorage.userId
+    };
+    return config;
   }
-})
-=======
-};
->>>>>>> origin/development
+});

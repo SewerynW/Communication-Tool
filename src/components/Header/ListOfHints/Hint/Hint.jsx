@@ -29,7 +29,7 @@ class Hint extends React.Component {
     activePopup: false
   };
 
-  handleTogglePopupLOC = e => {
+  handleToggleModal = e => {
     this.setState(prevState => ({
       activePopup: !prevState.activePopup
     }));
@@ -41,7 +41,7 @@ class Hint extends React.Component {
     return (
       <CardActionArea
         className={`${style.hint} ${classes.root}`}
-        onClick={this.handleTogglePopupLOC}
+        onClick={this.handleToggleModal}
       >
         <div className={style.title}>
           <div className={style.titleLabel}>
@@ -60,7 +60,7 @@ class Hint extends React.Component {
         </div>
         {this.state.activePopup ? (
           <PostModal
-            onClose={this.handleTogglePopupLOC}
+            onClose={this.handleToggleModal}
             open={this.state.activePopup}
             postTitle={post.Title}
             postContent={post.Text}

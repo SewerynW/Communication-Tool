@@ -36,18 +36,19 @@ class App extends Component {
   };
 
   setSession = async data => {
+    console.log("userid", data);
     sessionStorage.setItem("userId", data);
-    await this.setUser()
+    await this.setUser();
     this.setState(() => {
       return {
         logged: true
-      }
-    })
-
-  }
+      };
+    });
+  };
 
   setUser = async () => {
     const user = await userApi.getInfoAboutUser();
+    console.log(user);
     this.setState(() => {
       return {
         person: {
@@ -56,16 +57,15 @@ class App extends Component {
         }
       };
     });
-    this.props.fetchPosts()
+    this.props.fetchPosts();
   };
 
   render() {
-    // console.log("redux szukam", this.props)
     return (
       <div className={style.App}>
         <BrowserRouter>
           <Header
-            handleOnClick={this.logoutAndClearSession}
+            logoutAndClearSession={this.logoutAndClearSession}
             logged={this.state.logged}
             person={this.state.person}
             userPosts={this.props.userPosts}
@@ -97,16 +97,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    userPosts: state.userPosts
-  }
-}
+    userPosts: state.postReducer.userPosts
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPosts: () => { dispatch(fetchPosts()) }
-  }
+    fetchPosts: () => {
+      dispatch(fetchPosts());
+    }
+  };
 };
 
 export default connect(

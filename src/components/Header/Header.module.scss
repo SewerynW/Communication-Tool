@@ -1,7 +1,5 @@
 @import "../../scss/variables";
 
-
-
 .appBar {
   justify-content: space-between;
   align-items: center;
@@ -13,62 +11,35 @@
     font-size: 16px;
   }
 
-  .headerLinks {
-    font-family: 'Oleo Script', cursive;
-    display: none;
-
-
-    .link {
-      margin: 0 10px;
-      color: whitesmoke;
-      font-size: 25px;
-      text-decoration: none;
-    }
-  }
-
-
-
   .rightBar {
     display: flex;
     align-items: center;
 
     .welcomeText {
-      font-size: 16px
+      font-size: 16px;
     }
 
     .personalBar {
       display: none;
     }
-
-    .mobileMenu {}
   }
-}
-
-.linkMobileMenu {
-  text-decoration: none;
-  font-family: 'Oleo Script', cursive;
-  color: #000;
 }
 
 @media (min-width: $smallDevice) {
   .appBar {
-
     .textLogo {
       font-size: 24px;
     }
   }
 }
 
-
 @media (min-width: $mediumDevices) {
   .appBar {
-
     .textLogo {
       font-size: 38px;
     }
 
     .rightBar {
-
       .personalBar {
         display: flex;
         flex-direction: row;
@@ -78,20 +49,10 @@
   }
 }
 
-
 @media (min-width: $desktop) {
   .appBar {
     .mobileMenu {
       display: none;
-    }
-
-    .headerLinks {
-      display: flex;
-
-      .link:hover {
-        color: gray;
-        cursor: pointer;
-      }
     }
   }
 }

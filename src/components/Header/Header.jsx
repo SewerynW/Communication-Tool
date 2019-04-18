@@ -1,25 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-  InputBase
-} from "@material-ui/core";
+import { AppBar, Typography, InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import Avatar from "@material-ui/core/Avatar";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import style from "./Header.module.scss";
-import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AvatarPhoto from "../../assets/janedoe.jpg";
 
+// Components
 import ListOfHints from "./ListOfHints/ListOfHints";
-
-const ITEM_HEIGHT = 48;
+import MobileMenu from "./MobileMenu/MobileMenu";
+import Navigation from "./Navigation/Navigation";
 
 const styles = theme => ({
   root: {
@@ -77,40 +69,17 @@ const styles = theme => ({
 
 class Header extends React.Component {
   state = {
-    anchorEl: null,
     query: "",
     hintPopUp: null
   };
 
-  handleMenu = event => {
-    this.setState(() => {
-      return { anchorEl: event.currentTarget };
-    });
-  };
-
-  handleClose = () => {
-    this.setState(() => ({ anchorEl: null }));
-  };
-
   handleCloseHintPopUp = () => {
-    console.log("zamykam liste podpowiedzi ", this.state.hintPopUp);
-    this.setState(() => {
-      return {
-        hintPopUp: false
-      };
-    });
+    this.setState(() => ({ hintPopUp: false }));
   };
 
-  handleClick = event => {
-    this.setState(() => {
-      return { anchorEl: event.currentTarget };
-    });
-  };
-
-  handleChange = event => {
+  handleInputChanges = event => {
     let queryFromInput = event.target.value;
     if (!queryFromInput) {
-      console.log("jestem pusty");
       this.handleCloseHintPopUp();
     }
     this.setState(() => {
@@ -122,9 +91,8 @@ class Header extends React.Component {
   };
 
   render() {
-    const { classes, person, logged } = this.props;
-    const { anchorEl, hintPopUp } = this.state;
-    const open = Boolean(anchorEl);
+    const { classes, person, logged, logoutAndClearSession } = this.props;
+    const { hintPopUp } = this.state;
 
     let filteredPosts = this.props.userPosts.filter(post => {
       return (
@@ -145,18 +113,7 @@ class Header extends React.Component {
 
         {logged ? (
           <React.Fragment>
-            <div className={style.headerLinks}>
-              <Link to="/profilePage" className={style.link}>
-                #profile page
-              </Link>
-              <Link to="/dashboard" className={style.link}>
-                #post list
-              </Link>
-              <p onClick={this.props.handleOnClick} className={style.link}>
-                #log out
-              </p>
-            </div>
-
+            <Navigation logoutAndClearSession={logoutAndClearSession} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -167,7 +124,7 @@ class Header extends React.Component {
                   root: classes.inputRoot,
                   input: classes.inputInput
                 }}
-                onChange={this.handleChange}
+                onChange={this.handleInputChanges}
               />
               {hintPopUp ? (
                 <ListOfHints
@@ -193,47 +150,7 @@ class Header extends React.Component {
                 />
               </div>
               <div className={style.mobileMenu}>
-                <IconButton
-                  aria-label="More"
-                  aria-owns={open ? "long-menu" : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleClick}
-                  color="inherit"
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="long-menu"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={this.handleClose}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.5,
-                      width: 200
-                    }
-                  }}
-                >
-                  <MenuItem onClick={this.handleClose}>
-                    <Link to="/dashboard" className={style.linkMobileMenu}>
-                      #post list
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={this.handleClose}>
-                    <Link to="/profilePage" className={style.linkMobileMenu}>
-                      #profile page
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={this.handleClose}>
-                    <p
-                      onClick={this.props.handleOnClick}
-                      className={style.linkMobileMenu}
-                    >
-                      #log out
-                    </p>
-                  </MenuItem>
-                  )}
-                </Menu>
+                <MobileMenu logoutAndClearSession={logoutAndClearSession} />
               </div>
             </div>
           </React.Fragment>

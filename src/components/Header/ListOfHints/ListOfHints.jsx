@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import style from "./ListOfHints.module.scss";
-
 import Hint from "./Hint/Hint";
 
 class ListOfHints extends React.Component {
@@ -42,10 +41,5 @@ class ListOfHints extends React.Component {
     );
   }
 }
-
-ListOfHints.propTypes = {
-  filteredPosts: PropTypes.array,
-  onClose: PropTypes.func
-};
 
 export default ListOfHints;
