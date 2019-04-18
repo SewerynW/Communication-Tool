@@ -48,7 +48,7 @@ class App extends Component {
   };
 
   setUser = async () => {
-    const user = await userApi.getInfoAboutUser();
+      const user = await userApi.getInfoAboutUser();
     // this.setState(() => {
     //   return {
     //     person: {

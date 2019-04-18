@@ -1,23 +1,17 @@
 import Axios from "./../http/dataBase/user";
-
-
 export const EDIT_PROFILE = "Edit_Profile";
 export const REMOVE_PROFILE = "Remove_Profile";
 export const REMOVE_DATA = "Remove_Data";
 export const FETCH_PROFILE = "Fetch_Profile";
 
 
-
-
-//przesyłam obiekt profilu
-
 export const editProfile = profile => dispatch => {
     const tempProfile={
         Name: profile.Name,
         GivenName: profile.Surname,
         Photo: profile.Photo
-
     };
+
     const tempPhoto = profile.Photo || null;
     const formData= new FormData();
     if(tempPhoto){
@@ -27,7 +21,7 @@ export const editProfile = profile => dispatch => {
     return Axios.updateUserProfile(formData)
         .then(response => 
             dispatch (editProfileSuccess(response.data)
-            ));
+    ));
 }
 
 
@@ -48,7 +42,6 @@ const editProfileSuccess = ({ Name, Surname, Photo }) => ({
 
 
   export const removeProfile = () => dispatch => {
-   //   console.log("Hello");
       return Axios.deleteUserProfile().then(response => {
           console.log(response);
           dispatch(removeProfileSuccess()
@@ -63,18 +56,4 @@ const editProfileSuccess = ({ Name, Surname, Photo }) => ({
     const fetchProfileSuccess = user => ({
         type: FETCH_PROFILE,
         payload: user
-          })
-
-
-
-// export const removeProfile = () => dispatch => {
-//     //   console.log("Hello");
-//        return Axios.deleteUserProfile().then(dispatch(removeProfileSuccess()))};
-
-
-// export const removeProfile = () => dispatch => {
-//     //   console.log("Hello");
-//        return Axios.deleteUserProfile().then(response => {
-//            console.log(response);
-//            dispatch(removeProfileSuccess()
-//          )})};
+    })
