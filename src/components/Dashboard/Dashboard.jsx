@@ -1,62 +1,67 @@
 import React from "react";
-import PostModal from "../PostModal/PostModal";
 import PostsList from "../PostsList/PostsList";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { FormControl, Input, InputLabel } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import style from "./Dashboard.module.scss";
 
-export default class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activePopup: false,
-      posts: []
-    };
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  formControl: {
+    margin: theme.spacing.unit
   }
+});
 
-  handleTogglePopup = () => {
-    if (!this.state.activePopup) {
-      document.getElementById("root").style.filter = "blur(2px)";
-    } else {
-      document.getElementById("root").style.filter = "blur(0)";
-    }
-    this.setState(prevState => ({
-      activePopup: !prevState.activePopup
-    }));
+class Dashboard extends React.Component {
+  state = {
+    query: ""
   };
 
-  componentDidMount() {
-    const timeIntervalForUpdate = setInterval(() => {
-      this.setState(prevState => ({
-        posts: [
-          ...prevState.posts,
-          {
-            Id: new Date().getTime(),
-            UserId: new Date().getTime() / 24,
-            Title: "Title of post second!",
-            Text:
-              "in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper auctor neque vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae",
-            ThumbnailPhoto:
-              "https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            PublishDate: new Date("2019-03-20T06:56:48.7005913Z")
-          }
-        ]
-      }));
-    }, 5000);
-  }
+  handleInputChanges = event => {
+    let queryFromInput = event.target.value;
+    this.setState(() => ({ query: queryFromInput }));
+  };
 
   render() {
+    const { classes } = this.props;
+
+    let filteredPosts = this.props.userPosts.filter(post => {
+      return (
+        post.Title.toLowerCase().indexOf(this.state.query.toLowerCase()) !==
+          -1 ||
+        post.Text.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+      );
+    });
+
     return (
       <React.Fragment>
-        {this.state.activePopup ? (
-          <PostModal
-            onClose={this.handleTogglePopup}
-            open={this.state.activePopup}
-            postTitle="Title of post!"
-            postContent="in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper auctor neque vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae"
-            postImage="https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            postPublishDate="2019-03-20T06:56:48.7005913Z"
-          />
-        ) : null}
-        <PostsList userPosts={this.state.posts} />
+        <div className={style.search}>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="component-simple">Search Post</InputLabel>
+            <Input id="component-simple" onChange={this.handleInputChanges} />
+          </FormControl>
+        </div>
+
+        <PostsList filteredPosts={filteredPosts} />
       </React.Fragment>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userPosts: state.postReducer.userPosts
+});
+
+Dashboard.propTypes = {
+  classes: PropTypes.object,
+  userPosts: PropTypes.array
+};
+
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(Dashboard))
+);

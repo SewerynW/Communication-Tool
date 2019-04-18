@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class PostsList extends PureComponent {
   get userPostsSorted() {
-    if (this.props.userPosts.length > 2) {
-      return [...this.props.userPosts].sort(
+    if (this.props.filteredPosts.length > 2) {
+      return [...this.props.filteredPosts].sort(
         (a, b) => Date.parse(b.PublishDate) - Date.parse(a.PublishDate)
       );
     } else {
-      return this.props.userPosts.length ? [...this.props.userPosts] : [];
+      return this.props.filteredPosts.length
+        ? [...this.props.filteredPosts]
+        : [];
     }
   }
 
@@ -35,11 +37,8 @@ class PostsList extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  userPosts: state.postReducer.userPosts
-});
+PostsList.propTypes = {
+  filteredPosts: PropTypes.array
+};
 
-export default connect(
-  mapStateToProps,
-  null
-)(PostsList);
+export default PostsList;

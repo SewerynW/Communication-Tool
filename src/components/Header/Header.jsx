@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { AppBar, Typography, InputBase } from "@material-ui/core";
+import { AppBar, Typography, InputBase, Avatar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import Avatar from "@material-ui/core/Avatar";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import style from "./Header.module.scss";
 import AvatarPhoto from "../../assets/janedoe.jpg";
+import { withRouter } from "react-router-dom";
 
 // Components
 import ListOfHints from "./ListOfHints/ListOfHints";
@@ -91,8 +91,16 @@ class Header extends React.Component {
   };
 
   render() {
-    const { classes, person, logged, logoutAndClearSession } = this.props;
+    const {
+      classes,
+      person,
+      logged,
+      logoutAndClearSession,
+      location
+    } = this.props;
     const { hintPopUp } = this.state;
+    const path =
+      location.pathname !== "/dashboard" && location.pathname !== "/";
 
     let filteredPosts = this.props.userPosts.filter(post => {
       return (
@@ -114,28 +122,29 @@ class Header extends React.Component {
         {logged ? (
           <React.Fragment>
             <Navigation logoutAndClearSession={logoutAndClearSession} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-                onChange={this.handleInputChanges}
-              />
-              {hintPopUp ? (
-                <ListOfHints
-                  id="listOfHints"
-                  filteredPosts={filteredPosts}
-                  handleCloseHintPopUp={this.handleCloseHintPopUp}
-                  handleTogglePopup={this.handleTogglePopup}
+            {path ? (
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                  onChange={this.handleInputChanges}
                 />
-              ) : null}
-            </div>
-
+                {hintPopUp ? (
+                  <ListOfHints
+                    id="listOfHints"
+                    filteredPosts={filteredPosts}
+                    handleCloseHintPopUp={this.handleCloseHintPopUp}
+                    handleTogglePopup={this.handleTogglePopup}
+                  />
+                ) : null}
+              </div>
+            ) : null}
             <div className={style.rightBar}>
               <div className={style.personalBar}>
                 <Typography
@@ -164,4 +173,4 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Header);
+export default withRouter(withStyles(styles)(Header));

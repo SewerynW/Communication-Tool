@@ -3,15 +3,6 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import style from "./MobileMenu.module.scss";
-import { withStyles } from "@material-ui/core/styles";
-import { noAuto } from "@fortawesome/fontawesome-svg-core";
-
-const styles = () => ({
-  // paper: {
-  //   left: "auto",
-  //   rigth: "15px"
-  // }
-});
 
 class MobileMenu extends React.Component {
   state = {
@@ -27,7 +18,7 @@ class MobileMenu extends React.Component {
   };
 
   render() {
-    const { logoutAndClearSession, classes } = this.props;
+    const { logoutAndClearSession } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -42,7 +33,6 @@ class MobileMenu extends React.Component {
           <MoreIcon />
         </IconButton>
         <Menu
-          className={classes.paper}
           id="menu-appbar"
           anchorEl={anchorEl}
           anchorOrigin={{
@@ -81,4 +71,4 @@ class MobileMenu extends React.Component {
   }
 }
 
-export default withStyles(styles)(MobileMenu);
+export default MobileMenu;
