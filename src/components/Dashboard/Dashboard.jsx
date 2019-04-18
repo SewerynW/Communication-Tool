@@ -1,7 +1,5 @@
 import React from "react";
-
 import PostModal from "../PostModal/PostModal";
-import FontAwesomeButton from "../FontAwesomeButton/FontAwesomeButton";
 import PostsList from "../PostsList/PostsList";
 
 export default class Dashboard extends React.Component {

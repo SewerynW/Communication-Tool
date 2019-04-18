@@ -16,6 +16,7 @@ import Footer from "../Footer/Footer";
 import userApi from "../../http/dataBase/user";
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/postActions";
+import { fetchProfile } from "../../actions/profileActions";
 
 library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose);
 
@@ -47,15 +48,17 @@ class App extends Component {
   };
 
   setUser = async () => {
-    const user = await userApi.getInfoAboutUser();
-    this.setState(() => {
-      return {
-        person: {
-          name: user.GivenName,
-          surname: user.Name
-        }
-      };
-    }, this.props.fetchPosts());
+      const user = await userApi.getInfoAboutUser();
+    // this.setState(() => {
+    //   return {
+    //     person: {
+    //       name: user.GivenName,
+    //       surname: user.Name
+    //     }
+    //   };
+    // }, 
+    this.props.fetchPosts();
+    this.props.fetchProfile();
   };
 
   render() {
@@ -82,6 +85,7 @@ class App extends Component {
           <PrivateRoute
             path="/profilePage"
             component={ProfilePage}
+            logoutAndClearSession={this.logoutAndClearSession}
             setSession={this.setSession}
             logged={this.state.logged}
             person={this.state.person}
@@ -96,8 +100,12 @@ class App extends Component {
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => {
     dispatch(fetchPosts());
+  },
+  fetchProfile:()=>{
+    dispatch(fetchProfile());
   }
 });
+
 
 export default connect(
   null,

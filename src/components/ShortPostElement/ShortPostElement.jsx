@@ -60,7 +60,7 @@ class ShortPostElement extends PureComponent {
     }));
   };
 
-  viewFirst200CharactersFullWords = fullPost => {
+  viewFirst200CharactersFullWords = fullPost => { //sortowanie
     if (fullPost === undefined) return null;
     return fullPost.length > 200
       ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 200))}...`
@@ -135,7 +135,7 @@ class ShortPostElement extends PureComponent {
                   className={style.postTitle}
                   onClick={this.handleTogglePopup}
                 >
-                  {Title}
+                  {Title} 
                 </Typography>
                 <Typography
                   component="p"
