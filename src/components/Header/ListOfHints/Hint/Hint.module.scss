@@ -4,7 +4,7 @@
   flex-direction: row;
   margin: 5px 0;
   height: 60px;
-  font-family: 'PT Serif', serif;
+  font-family: "PT Serif", serif;
 
   .title {
     text-align: center;
@@ -22,22 +22,21 @@
     border-left: 1px solid gray;
     text-align: left;
     width: 100%;
-    padding: 10px 0 0 5px;
+    padding: 0 0 0 5px;
   }
 }
 
 @media (min-width: $smallDevice) {
   .hint {
-    height: 90px;
+    height: 100px;
 
     .title {
       width: 150px;
     }
 
     .text {
-      width: 300px;
-      height: 70px;
-      ;
+      width: 350px;
+      // height: 70px;
     }
   }
 }

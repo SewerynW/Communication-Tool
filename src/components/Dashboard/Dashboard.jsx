@@ -7,6 +7,7 @@ import { FormControl, Input, InputLabel } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import style from "./Dashboard.module.scss";
 import { filtrPosts } from "../../actions/postActions";
+import yoda from "../../assets/yoda2.jpg";
 
 import Axios from "../../http/dataBase/posts";
 
@@ -24,14 +25,16 @@ class Dashboard extends React.Component {
   state = {
     query: "",
     post: {
-      title: "Drugi post",
+      title: "krakow",
       text:
-        "withRouter does not subscribe to location changes like React Redux’s connect does for state changes. Instead, re-renders after location changes propagate out from the component. This means that withRouter does not re-render on route transitions unless its parent component re-renders."
-    }
+        "Terminy front-end i back-end są najczęściej stosowane w tej dziedzinie i zazwyczaj odnoszą się do nakładek zapewniających graficzny lub tekstowy interfejs (front-end) dla aplikacji konsolowych (back-end). Model takiego właśnie rozdzielania aplikacji jest szczególnie popularny pośród oprogramowania dla systemu GNU/Linux jak na przykład:"
+    },
+    image: yoda
   };
 
   addPost = () => {
     const formData = new FormData();
+    formData.append("photo", this.state.image);
     formData.append("post", JSON.stringify(this.state.post));
     Axios.createPost(formData);
   };
