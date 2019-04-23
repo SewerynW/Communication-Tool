@@ -2,11 +2,21 @@ import {
   ADD_POST,
   EDIT_POST,
   FETCH_POSTS,
-  REMOVE_POST
+  REMOVE_POST,
+  FILTR_POSTS
 } from "../actions/postActions";
 
 const initState = {
-  userPosts: []
+  userPosts: [],
+  filteredUserPosts: []
+};
+
+const isInPostTitle = (post, payload) => {
+  return post.Title.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
+};
+
+const isInPostText = (post, payload) => {
+  return post.Text.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
 };
 
 const getNewPost = (oldPost, newPost) => {
@@ -24,6 +34,7 @@ export const postReducer = (state = initState, action) => {
       };
     case FETCH_POSTS:
       return {
+        ...state,
         userPosts: [...action.payload]
       };
     case REMOVE_POST:
@@ -36,6 +47,15 @@ export const postReducer = (state = initState, action) => {
           post.Id === action.payload.Id
             ? getNewPost(post, action.payload)
             : post
+        )
+      };
+    case FILTR_POSTS:
+      return {
+        ...state,
+        filteredUserPosts: state.userPosts.filter(
+          post =>
+            isInPostTitle(post, action.payload) ||
+            isInPostText(post, action.payload)
         )
       };
     default:

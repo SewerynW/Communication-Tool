@@ -36,7 +36,6 @@ class App extends Component {
   };
 
   setSession = async data => {
-    console.log("userid", data);
     sessionStorage.setItem("userId", data);
     await this.setUser();
     this.setState(() => {

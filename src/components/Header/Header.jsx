@@ -7,6 +7,8 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import style from "./Header.module.scss";
 import AvatarPhoto from "../../assets/janedoe.jpg";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { filtrPosts } from "../../actions/postActions";
 
 // Components
 import ListOfHints from "./ListOfHints/ListOfHints";
@@ -79,15 +81,13 @@ class Header extends React.Component {
 
   handleInputChanges = event => {
     let queryFromInput = event.target.value;
+    if (queryFromInput.length > 0) {
+      this.props.filtrPosts(queryFromInput);
+      this.setState(() => ({ hintPopUp: true }));
+    }
     if (!queryFromInput) {
       this.handleCloseHintPopUp();
     }
-    this.setState(() => {
-      return {
-        query: queryFromInput,
-        hintPopUp: true
-      };
-    });
   };
 
   render() {
@@ -96,19 +96,12 @@ class Header extends React.Component {
       person,
       logged,
       logoutAndClearSession,
-      location
+      location,
+      filteredUserPosts
     } = this.props;
     const { hintPopUp } = this.state;
     const path =
       location.pathname !== "/dashboard" && location.pathname !== "/";
-
-    let filteredPosts = this.props.userPosts.filter(post => {
-      return (
-        post.Title.toLowerCase().indexOf(this.state.query.toLowerCase()) !==
-          -1 ||
-        post.Text.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
-      );
-    });
 
     return (
       <AppBar position="sticky" className={`${style.appBar} ${classes.root} `}>
@@ -138,7 +131,7 @@ class Header extends React.Component {
                 {hintPopUp ? (
                   <ListOfHints
                     id="listOfHints"
-                    filteredPosts={filteredPosts}
+                    filteredPosts={filteredUserPosts}
                     handleCloseHintPopUp={this.handleCloseHintPopUp}
                     handleTogglePopup={this.handleTogglePopup}
                   />
@@ -173,4 +166,21 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRouter(withStyles(styles)(Header));
+const mapStateToProps = state => ({
+  filteredUserPosts: state.postReducer.filteredUserPosts
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    filtrPosts: query => {
+      dispatch(filtrPosts(query));
+    }
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(Header))
+);

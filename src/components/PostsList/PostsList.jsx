@@ -5,14 +5,12 @@ import PropTypes from "prop-types";
 
 class PostsList extends PureComponent {
   get userPostsSorted() {
-    if (this.props.filteredPosts.length > 2) {
-      return [...this.props.filteredPosts].sort(
+    if (this.props.userPosts.length > 2) {
+      return [...this.props.userPosts].sort(
         (a, b) => Date.parse(b.PublishDate) - Date.parse(a.PublishDate)
       );
     } else {
-      return this.props.filteredPosts.length
-        ? [...this.props.filteredPosts]
-        : [];
+      return this.props.userPosts.length ? [...this.props.userPosts] : [];
     }
   }
 
@@ -38,7 +36,7 @@ class PostsList extends PureComponent {
 }
 
 PostsList.propTypes = {
-  filteredPosts: PropTypes.array
+  userPosts: PropTypes.array
 };
 
 export default PostsList;
