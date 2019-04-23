@@ -24,8 +24,8 @@ const styles = theme => ({
     }
   },
   media: {
-    width: "100%",
-    height: "100%"
+    width: 100
+    // height: "auto"
   }
 });
 
@@ -48,7 +48,7 @@ class Hint extends React.Component {
   };
 
   render() {
-    const { classes, post, ThumbnailPhoto } = this.props;
+    const { classes, post } = this.props;
     console.log(post);
 
     return (
@@ -71,12 +71,13 @@ class Hint extends React.Component {
         <CardMedia
           className={classes.media}
           component="img"
-          src={ThumbnailPhoto}
+          src={post.ThumbnailPhoto}
           title="Photo"
         />
 
         <div>
-          <div className={style.title}>
+          <Typography variant="caption">{post.Title}</Typography>
+          {/* <div className={style.title}>
             <Typography
               variant="h6"
               gutterBottom
@@ -84,7 +85,7 @@ class Hint extends React.Component {
             >
               {post.Title}
             </Typography>
-          </div>
+          </div> */}
 
           <div className={style.text}>
             <Typography component="p">

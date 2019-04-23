@@ -7,9 +7,6 @@ import { FormControl, Input, InputLabel } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import style from "./Dashboard.module.scss";
 import { filtrPosts } from "../../actions/postActions";
-import yoda from "../../assets/yoda2.jpg";
-
-import Axios from "../../http/dataBase/posts";
 
 const styles = theme => ({
   textField: {
@@ -23,20 +20,7 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
   state = {
-    query: "",
-    post: {
-      title: "krakow",
-      text:
-        "Terminy front-end i back-end są najczęściej stosowane w tej dziedzinie i zazwyczaj odnoszą się do nakładek zapewniających graficzny lub tekstowy interfejs (front-end) dla aplikacji konsolowych (back-end). Model takiego właśnie rozdzielania aplikacji jest szczególnie popularny pośród oprogramowania dla systemu GNU/Linux jak na przykład:"
-    },
-    image: yoda
-  };
-
-  addPost = () => {
-    const formData = new FormData();
-    formData.append("photo", this.state.image);
-    formData.append("post", JSON.stringify(this.state.post));
-    Axios.createPost(formData);
+    query: ""
   };
 
   handleInputChanges = event => {
@@ -58,7 +42,6 @@ class Dashboard extends React.Component {
             <Input id="component-simple" onChange={this.handleInputChanges} />
           </FormControl>
         </div>
-        <button onClick={this.addPost}>dodwanie posta</button>
 
         <PostsList
           userPosts={

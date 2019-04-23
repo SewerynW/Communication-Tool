@@ -93,15 +93,16 @@ class Header extends React.Component {
   render() {
     const {
       classes,
-      person,
       logged,
       logoutAndClearSession,
       location,
-      filteredUserPosts
+      filteredUserPosts,
+      GivenName
     } = this.props;
     const { hintPopUp } = this.state;
     const path =
       location.pathname !== "/dashboard" && location.pathname !== "/";
+    console.log("header", this.props);
 
     return (
       <AppBar position="sticky" className={`${style.appBar} ${classes.root} `}>
@@ -143,7 +144,7 @@ class Header extends React.Component {
                 <Typography
                   className={`${style.welcomeText} ${classes.typography}`}
                 >
-                  {`Hi ${person.name}`}
+                  {`Hi ${GivenName}`}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
@@ -167,7 +168,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  filteredUserPosts: state.postReducer.filteredUserPosts
+  filteredUserPosts: state.postReducer.filteredUserPosts,
+  userProfile: state.profileReducer.userProfile
 });
 
 const mapDispatchToProps = dispatch => {
