@@ -30,7 +30,7 @@ class PostForm extends Component {
   };
 
   handleCancel = () => {
-    this.props.history.push({ pathname: "/postList" });
+    this.props.history.push({ pathname: "/" });
   };
 
   handleSelectedFile = event => {
@@ -91,7 +91,7 @@ class PostForm extends Component {
           userPost: post,
           image: selectedFile
         });
-    this.props.history.push({ pathname: "/postList" });
+    this.props.history.push({ pathname: "/" });
   };
 
   render() {
