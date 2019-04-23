@@ -1,0 +1,36 @@
+.postForm {
+  margin-top: 1%;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #3f51b5;
+  box-sizing: border-box;
+  & h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  & .form {
+    box-sizing: border-box;
+    margin-right: 2%;
+
+    & .textForm {
+      & .button {
+        font-size: 0.875rem;
+        font-family: "Roboto", sans-serif;
+        margin-left: 2%;
+        margin-top: 100%;
+        border-radius: 2px;
+        padding: 15px 15px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: 0.1s;
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+  }
+  & .buttonPanel {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
