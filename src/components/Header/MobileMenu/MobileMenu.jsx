@@ -3,6 +3,13 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import style from "./MobileMenu.module.scss";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  root: {
+    paddingLeft: 0
+  }
+});
 
 class MobileMenu extends React.Component {
   state = {
@@ -18,7 +25,7 @@ class MobileMenu extends React.Component {
   };
 
   render() {
-    const { logoutAndClearSession } = this.props;
+    const { logoutAndClearSession, classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -29,6 +36,7 @@ class MobileMenu extends React.Component {
           aria-haspopup="true"
           onClick={this.handleMenu}
           color="inherit"
+          className={classes.root}
         >
           <MoreIcon />
         </IconButton>
@@ -71,4 +79,4 @@ class MobileMenu extends React.Component {
   }
 }
 
-export default MobileMenu;
+export default withStyles(styles)(MobileMenu);
