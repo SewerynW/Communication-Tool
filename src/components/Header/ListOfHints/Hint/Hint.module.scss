@@ -17,26 +17,11 @@
       padding: 0 0 0 5px;
     }
   }
-
-  .title {
-    text-align: center;
-    width: 100%;
-    padding-right: 10px;
-
-    .titleLabel {
-      text-align: left;
-      border-bottom: 1px solid gray;
-    }
-  }
 }
 
 @media (min-width: $smallDevice) {
   .hint {
     flex-direction: row;
-
-    .title {
-      width: 150px;
-    }
 
     .text {
       width: 350px;

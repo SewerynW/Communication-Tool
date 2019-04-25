@@ -67,7 +67,9 @@ class Hint extends React.Component {
         />
 
         <div className={style.description}>
-          <Typography variant="caption">{post.Title}</Typography>
+          <Typography variant="caption" className={classes.rootTypography}>
+            {post.Title}
+          </Typography>
           <div className={style.text}>
             <Typography component="p">
               {this.shortedOutPostText(post.Text)}
