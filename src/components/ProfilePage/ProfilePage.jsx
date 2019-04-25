@@ -1,31 +1,12 @@
 import React from "react";
 import { Maincontent } from "../Maincontent/Maincontent.jsx";
 import Buttonspanel from "../Buttonspanel/Buttonspanel.jsx";
-import AvatarPhoto from "../../assets/janedoe.jpg";
 import { connect } from "react-redux";
-import Axios from "../../http/dataBase/user";
+import PropTypes from "prop-types";
 
 class ProfilePage extends React.Component {
-  state = {
-    person: {
-      name: "",
-      surname: ""
-    },
-    image: AvatarPhoto,
-    user: {
-      Name: "Seweryn",
-      GivenName: "Wadowski"
-    }
-  };
-
-  editProfile = () => {
-    const formData = new FormData();
-    formData.append("user", JSON.stringify(this.state.user));
-    Axios.updateUserProfile(formData);
-  };
   render() {
     const { Photo, GivenName, Name } = this.props.userProfile;
-    console.log(this.props);
     return (
       <React.Fragment>
         <Maincontent
@@ -41,6 +22,11 @@ class ProfilePage extends React.Component {
     );
   }
 }
+
+ProfilePage.propTypes = {
+  userProfile: PropTypes.object,
+  logoutAndClearSession: PropTypes.func
+};
 
 const mapStateToProps = state => ({
   userProfile: state.profileReducer
