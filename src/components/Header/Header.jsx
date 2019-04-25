@@ -97,12 +97,12 @@ class Header extends React.Component {
       logoutAndClearSession,
       location,
       filteredUserPosts,
-      GivenName
+      userProfile
     } = this.props;
     const { hintPopUp } = this.state;
     const path =
       location.pathname !== "/dashboard" && location.pathname !== "/";
-    console.log("header", this.props);
+    const welcome = `Hi ${userProfile.Name}`;
 
     return (
       <AppBar position="sticky" className={`${style.appBar} ${classes.root} `}>
@@ -144,7 +144,7 @@ class Header extends React.Component {
                 <Typography
                   className={`${style.welcomeText} ${classes.typography}`}
                 >
-                  {`Hi ${GivenName}`}
+                  {userProfile.Name !== (null && undefined) ? welcome : "Hi"}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"

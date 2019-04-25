@@ -58,8 +58,6 @@ class App extends Component {
           <Header
             logoutAndClearSession={this.logoutAndClearSession}
             logged={this.state.logged}
-            person={this.state.person}
-            userPosts={this.props.userPosts}
           />
           <PrivateRoute
             exact
@@ -77,22 +75,18 @@ class App extends Component {
           <PrivateRoute
             path="/profilePage"
             component={ProfilePage}
-            logoutAndClearSession={this.logoutAndClearSession}
             setSession={this.setSession}
             logged={this.state.logged}
-            person={this.state.person}
           />
           <PrivateRoute
             path="/newPost"
             component={PostForm}
-            logoutAndClearSession={this.logoutAndClearSession}
             setSession={this.setSession}
             logged={this.state.logged}
           />
           <PrivateRoute
             path="/editPost"
             component={PostForm}
-            logoutAndClearSession={this.logoutAndClearSession}
             setSession={this.setSession}
             logged={this.state.logged}
           />
@@ -102,12 +96,6 @@ class App extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    userPosts: state.postReducer.userPosts
-  };
-};
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => {
@@ -119,6 +107,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);
