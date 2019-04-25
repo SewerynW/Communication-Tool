@@ -6,7 +6,8 @@ import {
   faEdit,
   faTrash,
   faExclamationTriangle,
-  faWindowClose
+  faWindowClose,
+  faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
@@ -18,7 +19,7 @@ import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
 import PostForm from "../PostForm/PostForm";
 
-library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose);
+library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose, faEnvelope);
 
 class App extends Component {
   state = {

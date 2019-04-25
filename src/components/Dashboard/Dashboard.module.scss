@@ -1,7 +1,20 @@
+@import "../../scss//variables";
+
 .container {
-  .search {
+  display: flex;
+  flex-direction: column;
+
+  .features {
     width: 100%;
     // display: flex;
     justify-content: center;
   }
+
+  .icon {
+    padding-left: 5px;
+    font-size: 40px;
+  }
+}
+
+@media (min-width: $smallDevice) {
 }
