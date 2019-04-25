@@ -2,9 +2,21 @@
 
 .hint {
   flex-direction: row;
+  justify-content: space-between;
   margin: 5px 0;
-  height: 60px;
+
   font-family: "PT Serif", serif;
+
+  .description {
+    width: 100%;
+    padding-left: 5px;
+    align-self: flex-start;
+
+    .text {
+      text-align: left;
+      padding: 0 0 0 5px;
+    }
+  }
 
   .title {
     text-align: center;
@@ -16,19 +28,11 @@
       border-bottom: 1px solid gray;
     }
   }
-
-  .text {
-    display: flex;
-    border-left: 1px solid gray;
-    text-align: left;
-    width: 100%;
-    padding: 0 0 0 5px;
-  }
 }
 
 @media (min-width: $smallDevice) {
   .hint {
-    height: 100px;
+    flex-direction: row;
 
     .title {
       width: 150px;
@@ -36,7 +40,6 @@
 
     .text {
       width: 350px;
-      // height: 70px;
     }
   }
 }

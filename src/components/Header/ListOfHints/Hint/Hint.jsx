@@ -10,6 +10,7 @@ import PostModal from "../../../PostModal/PostModal";
 const styles = theme => ({
   root: {
     display: "flex",
+    justifyContent: "space-between",
     paddingTop: 5,
     paddingBottom: 5,
     "&:hover": {
@@ -24,8 +25,12 @@ const styles = theme => ({
     }
   },
   media: {
-    width: 100
-    // height: "auto"
+    width: 100,
+    height: 80,
+    [theme.breakpoints.up("sm")]: {
+      width: 150,
+      height: 100
+    }
   }
 });
 
@@ -42,32 +47,18 @@ class Hint extends React.Component {
 
   shortedOutPostText = fullPost => {
     if (fullPost === undefined) return null;
-    return fullPost.length > 80
-      ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 80))}...`
+    return fullPost.length > 100
+      ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 100))}...`
       : fullPost;
   };
 
   render() {
     const { classes, post } = this.props;
-    console.log(post);
-
     return (
       <CardActionArea
         className={`${style.hint} ${classes.root}`}
         onClick={this.handleToggleModal}
       >
-        {/* <div className={style.title}>
-          <div className={style.titleLabel}>
-            <Typography variant="caption">Title</Typography>
-          </div>
-          <Typography
-            variant="h6"
-            gutterBottom
-            className={classes.rootTypography}
-          >
-            {post.Title}
-          </Typography>
-        </div> */}
         <CardMedia
           className={classes.media}
           component="img"
@@ -75,18 +66,8 @@ class Hint extends React.Component {
           title="Photo"
         />
 
-        <div>
+        <div className={style.description}>
           <Typography variant="caption">{post.Title}</Typography>
-          {/* <div className={style.title}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              className={classes.rootTypography}
-            >
-              {post.Title}
-            </Typography>
-          </div> */}
-
           <div className={style.text}>
             <Typography component="p">
               {this.shortedOutPostText(post.Text)}
