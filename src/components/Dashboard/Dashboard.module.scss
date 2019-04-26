@@ -1,3 +1,16 @@
-.dashboard {
-  min-height: 70vh;
+@import "../../scss//variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .features {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icon {
+    padding-left: 5px;
+    font-size: 40px;
+  }
 }

@@ -46,3 +46,11 @@ export default {
     });
   }
 };
+api.interceptors.request.use(config => {
+  if (sessionStorage.userId) {
+    config.headers = {
+      "X-ZUMO-AUTH": sessionStorage.userId
+    };
+    return config;
+  }
+});
