@@ -7,8 +7,8 @@ import googleLogo from "../../assets/googleLogo.svg";
 import googleApi from "../../http/google/user";
 
 class Login extends React.Component {
-  redirectAndSetSession = data => {
-    this.props.setSession(data);
+  redirectAndSetSession = async data => {
+    await this.props.setSession(data);
     this.props.history.push(this.props.path);
   };
 

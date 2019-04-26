@@ -1,12 +1,13 @@
 import React from "react";
-import { Maincontent } from "../Maincontent/Maincontent.jsx";
-import Buttonspanel from "../Buttonspanel/Buttonspanel.jsx";
+import { Maincontent } from "./Maincontent/Maincontent";
+import Buttonspanel from "./Buttonspanel/Buttonspanel";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 class ProfilePage extends React.Component {
   render() {
     const { Photo, GivenName, Name } = this.props.userProfile;
+    console.log("leci ze stora", this.props.userProfile);
     return (
       <React.Fragment>
         <Maincontent
@@ -17,7 +18,6 @@ class ProfilePage extends React.Component {
         <Buttonspanel
           logoutAndClearSession={this.props.logoutAndClearSession}
         />
-        <button onClick={this.editProfile}>update</button>
       </React.Fragment>
     );
   }

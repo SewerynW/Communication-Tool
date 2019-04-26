@@ -19,6 +19,9 @@ import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
 import PostForm from "../PostForm/PostForm";
 
+// Components
+import EditProfile from "../EditProfile/EditProfile";
+
 library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose, faEnvelope);
 
 class App extends Component {
@@ -89,6 +92,12 @@ class App extends Component {
           <PrivateRoute
             path="/editPost"
             component={PostForm}
+            setSession={this.setSession}
+            logged={this.state.logged}
+          />
+          <PrivateRoute
+            path="/editProfile"
+            component={EditProfile}
             setSession={this.setSession}
             logged={this.state.logged}
           />
