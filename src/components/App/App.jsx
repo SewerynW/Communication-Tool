@@ -9,18 +9,20 @@ import {
   faWindowClose,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
+
+// Redux
+import { connect } from "react-redux";
+import { fetchPosts } from "../../actions/postActions";
+import { fetchProfile } from "../../actions/profileActions";
+
+// Components
+import EditProfile from "../EditProfile/EditProfile";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import Footer from "../Footer/Footer";
-import { connect } from "react-redux";
-import { fetchPosts } from "../../actions/postActions";
-import { fetchProfile } from "../../actions/profileActions";
 import PostForm from "../PostForm/PostForm";
-
-// Components
-import EditProfile from "../EditProfile/EditProfile";
 
 library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose, faEnvelope);
 

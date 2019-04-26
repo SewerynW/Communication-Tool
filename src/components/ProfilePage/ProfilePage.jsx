@@ -1,6 +1,6 @@
 import React from "react";
 import { Maincontent } from "./Maincontent/Maincontent";
-import Buttonspanel from "./Buttonspanel/Buttonspanel";
+import ButtonsPanel from "./ButtonsPanel/ButtonsPanel";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -15,7 +15,7 @@ class ProfilePage extends React.Component {
           profileInfoName={Name}
           profileInfoSurname={GivenName}
         />
-        <Buttonspanel
+        <ButtonsPanel
           logoutAndClearSession={this.props.logoutAndClearSession}
         />
       </React.Fragment>

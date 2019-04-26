@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import styles from "./Buttonspanel.module.scss";
+import styles from "./ButtonsPanel.module.scss";
 import DeleteProfilePopUp from "../../DeleteProfilePopUp/DeleteProfilePopUp";
+import { withRouter } from "react-router-dom";
 
-export default class Buttonspanel extends React.Component {
+class ButtonsPanel extends React.Component {
   state = {
     activePopup: false
   };
@@ -20,14 +21,16 @@ export default class Buttonspanel extends React.Component {
   };
 
   handleOnClickEditProfile = () => {
-    console.log("edycja");
+    this.props.history.push("/editProfile");
   };
+
   render() {
     const { activePopup } = this.state;
+    console.log("panel", this.props);
 
     return (
       <>
-        <div className={styles.Buttonspanel}>
+        <div className={styles.ButtonsPanel}>
           <Button
             variant="contained"
             className={styles.EditButton}
@@ -55,3 +58,5 @@ export default class Buttonspanel extends React.Component {
     );
   }
 }
+
+export default withRouter(ButtonsPanel);
