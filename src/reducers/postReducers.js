@@ -3,7 +3,7 @@ import {
   EDIT_POST,
   FETCH_POSTS,
   REMOVE_POST,
-  FILTR_POSTS
+  FILTER_POSTS
 } from "../actions/postActions";
 
 const initState = {
@@ -49,7 +49,7 @@ export const postReducer = (state = initState, action) => {
             : post
         )
       };
-    case FILTR_POSTS:
+    case FILTER_POSTS:
       return {
         ...state,
         filteredUserPosts: state.userPosts.filter(

@@ -46,7 +46,7 @@ class Hint extends React.Component {
   };
 
   shortedOutPostText = fullPost => {
-    if (fullPost === undefined) return null;
+    if (fullPost === undefined || null) return null;
     return fullPost.length > 100
       ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 100))}...`
       : fullPost;

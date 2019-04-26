@@ -4,7 +4,7 @@ export const ADD_POST = "Add_Post";
 export const FETCH_POSTS = "Fetch_Posts";
 export const EDIT_POST = "Edit_Post";
 export const REMOVE_POST = "Remove_Post";
-export const FILTR_POSTS = "Filtr_Posts";
+export const FILTER_POSTS = "Filter_Posts";
 
 export const addPost = ({ userPost, image }) => dispatch => {
   const formData = new FormData();
@@ -83,7 +83,7 @@ const removePostSuccess = id => ({
   payload: id
 });
 
-export const filtrPosts = query => ({
-  type: FILTR_POSTS,
+export const filterPosts = query => ({
+  type: FILTER_POSTS,
   payload: query
 });

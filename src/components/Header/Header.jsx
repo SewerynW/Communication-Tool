@@ -8,7 +8,7 @@ import style from "./Header.module.scss";
 import AvatarPhoto from "../../assets/janedoe.jpg";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { filtrPosts } from "../../actions/postActions";
+import { filterPosts } from "../../actions/postActions";
 
 // Components
 import ListOfHints from "./ListOfHints/ListOfHints";
@@ -82,7 +82,7 @@ class Header extends React.Component {
   handleInputChanges = event => {
     let queryFromInput = event.target.value;
     if (queryFromInput.length > 0) {
-      this.props.filtrPosts(queryFromInput);
+      this.props.filterPosts(queryFromInput);
       this.setState(() => ({ hintPopUp: true }));
     }
     if (!queryFromInput) {
@@ -174,8 +174,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    filtrPosts: query => {
-      dispatch(filtrPosts(query));
+    filterPosts: query => {
+      dispatch(filterPosts(query));
     }
   };
 };

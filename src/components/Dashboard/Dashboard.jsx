@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import style from "./Dashboard.module.scss";
-import { filtrPosts } from "../../actions/postActions";
+import { filterPosts } from "../../actions/postActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = theme => ({
@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
     this.setState(() => ({
       query: queryFromInput
     }));
-    this.props.filtrPosts(queryFromInput);
+    this.props.filterPosts(queryFromInput);
   };
 
   render() {
@@ -80,8 +80,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    filtrPosts: query => {
-      dispatch(filtrPosts(query));
+    filterPosts: query => {
+      dispatch(filterPosts(query));
     }
   };
 };
