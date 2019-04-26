@@ -11,13 +11,12 @@ const initState = {
   filteredUserPosts: []
 };
 
-const isInPostTitle = (post, payload) => {
-  return post.Title.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
-};
+const checkText = (text, payload) =>
+  text.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
 
-const isInPostText = (post, payload) => {
-  return post.Text.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
-};
+const isInPostTitle = (post, payload) => checkText(post.Title, payload);
+
+const isInPostText = (post, payload) => checkText(post.Text, payload);
 
 const getNewPost = (oldPost, newPost) => {
   oldPost.Title = newPost.Title;
