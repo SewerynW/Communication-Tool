@@ -14,7 +14,7 @@ export default class PrivateRoute extends React.Component {
         {...this.props}
         component={() => {
           return logged ? (
-            <Component person={this.props.person} />
+            <Component logoutAndClearSession={this.props.logoutAndClearSession} person={this.props.person} />
           ) : (
               <Login setSession={this.props.setSession} path={this.props.path} />
             );

@@ -6,22 +6,23 @@ import {
   faEdit,
   faTrash,
   faExclamationTriangle,
-  faWindowClose
+  faWindowClose,
+  faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import Footer from "../Footer/Footer";
-import userApi from "../../http/dataBase/user";
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/postActions";
+import { fetchProfile } from "../../actions/profileActions";
+import PostForm from "../PostForm/PostForm";
 
-library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose);
+library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose, faEnvelope);
 
 class App extends Component {
   state = {
-    posts: [],
     logged: false,
     person: {
       name: "",
@@ -36,26 +37,19 @@ class App extends Component {
     sessionStorage.clear();
   };
 
-  setSession = data => {
+  setSession = async data => {
     sessionStorage.setItem("userId", data);
+    await this.setUser();
     this.setState(() => {
       return {
         logged: true
       };
     });
-    this.setUser();
   };
 
   setUser = async () => {
-    const user = await userApi.getInfoAboutUser();
-    this.setState(() => {
-      return {
-        person: {
-          name: user.GivenName,
-          surname: user.Name
-        }
-      };
-    }, this.props.fetchPosts());
+    await this.props.fetchPosts();
+    await this.props.fetchProfile();
   };
 
   render() {
@@ -63,7 +57,7 @@ class App extends Component {
       <div className={style.App}>
         <BrowserRouter>
           <Header
-            handleOnClick={this.logoutAndClearSession}
+            logoutAndClearSession={this.logoutAndClearSession}
             logged={this.state.logged}
           />
           <PrivateRoute
@@ -84,7 +78,19 @@ class App extends Component {
             component={ProfilePage}
             setSession={this.setSession}
             logged={this.state.logged}
-            person={this.state.person}
+            logoutAndClearSession={this.logoutAndClearSession}
+          />
+          <PrivateRoute
+            path="/newPost"
+            component={PostForm}
+            setSession={this.setSession}
+            logged={this.state.logged}
+          />
+          <PrivateRoute
+            path="/editPost"
+            component={PostForm}
+            setSession={this.setSession}
+            logged={this.state.logged}
           />
           <Footer />
         </BrowserRouter>
@@ -96,6 +102,9 @@ class App extends Component {
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => {
     dispatch(fetchPosts());
+  },
+  fetchProfile: () => {
+    dispatch(fetchProfile());
   }
 });
 

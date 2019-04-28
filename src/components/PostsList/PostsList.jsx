@@ -1,19 +1,16 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
+import PropTypes from "prop-types";
 
-class PostsList extends Component {
-  state = {
-    userPosts: this.props.userPosts
-  };
-
+class PostsList extends PureComponent {
   get userPostsSorted() {
-    if (this.state.userPosts.length > 2) {
-      return [...this.state.userPosts].sort(
-        (a, b) => b.PublishDate - a.PublishDate
+    if (this.props.userPosts.length > 2) {
+      return [...this.props.userPosts].sort(
+        (a, b) => Date.parse(b.PublishDate) - Date.parse(a.PublishDate)
       );
     } else {
-      return this.state.userPosts.length ? [...this.state.userPosts] : [];
+      return this.props.userPosts.length ? [...this.props.userPosts] : [];
     }
   }
 
@@ -24,12 +21,11 @@ class PostsList extends Component {
           ? this.userPostsSorted.map(post => (
               <li key={post.Id}>
                 <ShortPostElement
+                  Id={post.Id}
                   Title={post.Title}
                   Text={post.Text}
                   ThumbnailPhoto={post.ThumbnailPhoto}
-                  PublishDate={`Post published on ${post.PublishDate.toLocaleDateString(
-                    "en-GB"
-                  )}`}
+                  PublishDate={post.PublishDate}
                 />
               </li>
             ))
@@ -37,14 +33,10 @@ class PostsList extends Component {
       </ul>
     );
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.userPosts.length !== this.props.userPosts.length) {
-      this.setState(prevState => ({
-        userPosts: this.props.userPosts
-      }));
-    }
-  }
 }
+
+PostsList.propTypes = {
+  userPosts: PropTypes.array
+};
 
 export default PostsList;

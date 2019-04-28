@@ -1,17 +1,27 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import style from "./ShortPostElement.module.scss";
 import buttonStyle from "./../FontAwesomeButton/FontAwesomeButton.module.scss";
 import { withStyles } from "@material-ui/core/styles";
 import {
+  Button,
   Card,
   CardMedia,
   CardContent,
   Grid,
-  Typography
+  Typography,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogContentText,
+  DialogActions,
+  withMobileDialog
 } from "@material-ui/core/";
 import PostModal from "./../PostModal/PostModal";
 import FontAwesomeButton from "./../FontAwesomeButton/FontAwesomeButton";
+import { connect } from "react-redux";
+import { removePost } from "../../actions/postActions";
+import { withRouter } from "react-router-dom";
 
 const stylesMaterialUi = {
   media: {
@@ -20,31 +30,59 @@ const stylesMaterialUi = {
   }
 };
 
-class ShortPostElement extends Component {
+class ShortPostElement extends PureComponent {
   state = {
-    activePopup: false
+    activePopup: false,
+    activeConfirmDialog: false
   };
 
+  handleOnClickEdit = () => {
+    const location = {
+      pathname: "/editPost",
+      state: { postId: this.props.Id }
+    };
+    this.props.history.push(location);
+  };
+
+  handleOnClickDelete = () =>
+    this.setState(prevState => ({
+      activeConfirmDialog: !prevState.activeConfirmDialog
+    }));
+
+  handleOnClickConfirmDelete = () => this.props.deletePost(this.props.Id);
+
   handleTogglePopup = () => {
-    if (!this.state.activePopup) {
-      document.getElementById("root").style.filter = "blur(2px)";
-    } else {
-      document.getElementById("root").style.filter = "blur(0)";
-    }
+    !this.state.activePopup
+      ? (document.getElementById("root").style.filter = "blur(2px)")
+      : (document.getElementById("root").style.filter = "blur(0)");
     this.setState(prevState => ({
       activePopup: !prevState.activePopup
     }));
   };
 
-  viewFirst200CharactersFullWords = fullPost => {
+  viewFirst200CharactersFullWords = fullPost => { //sortowanie
     if (fullPost === undefined) return null;
-    const indexOfLastSpace = fullPost.lastIndexOf(" ", 200);
-    return `${fullPost.slice(0, indexOfLastSpace)}...`;
+    return fullPost.length > 200
+      ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 200))}...`
+      : fullPost;
   };
 
+  get localDateString() {
+    return `Post published on ${new Date(
+      this.props.PublishDate
+    ).toLocaleDateString("en-GB")}`;
+  }
+
   render() {
-    const { classes, Title, Text, ThumbnailPhoto, PublishDate } = this.props;
-    const { activePopup } = this.state;
+    const {
+      classes,
+      Title,
+      Text,
+      ThumbnailPhoto,
+      PublishDate,
+      fullScreen
+    } = this.props;
+    const { activePopup, activeConfirmDialog } = this.state;
     return (
       <>
         <Card className={style.shortPostElement}>
@@ -80,15 +118,15 @@ class ShortPostElement extends Component {
                 <FontAwesomeButton
                   icon="edit"
                   colorButton={buttonStyle.green}
-                  handleOnClick={() => alert("Edit button")}
+                  handleOnClick={this.handleOnClickEdit}
                 />
                 <FontAwesomeButton
                   icon="trash"
                   colorButton={buttonStyle.red}
-                  handleOnClick={() => alert("Delete button")}
+                  handleOnClick={this.handleOnClickDelete}
                 />
               </Grid>
-              <CardContent>
+              <CardContent className={style.mainContent}>
                 <Typography
                   align="left"
                   gutterBottom
@@ -97,9 +135,13 @@ class ShortPostElement extends Component {
                   className={style.postTitle}
                   onClick={this.handleTogglePopup}
                 >
-                  {Title}
+                  {Title} 
                 </Typography>
-                <Typography component="p" variant="body1">
+                <Typography
+                  component="p"
+                  variant="body1"
+                  className={style.postDescription}
+                >
                   {this.viewFirst200CharactersFullWords(Text)}
                 </Typography>
               </CardContent>
@@ -109,11 +151,33 @@ class ShortPostElement extends Component {
                 component="p"
                 variant="body1"
               >
-                {PublishDate}
+                {this.localDateString}
               </Typography>
             </Grid>
           </Grid>
         </Card>
+        <Dialog
+          fullScreen={fullScreen}
+          open={activeConfirmDialog}
+          onClose={this.handleOnClickDelete}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">
+            Are you sure, you want to delete this post?
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleOnClickConfirmDelete} color="primary">
+              Yes, of course!
+            </Button>
+            <Button
+              onClick={this.handleOnClickDelete}
+              color="primary"
+              autoFocus
+            >
+              No, I don't
+            </Button>
+          </DialogActions>
+        </Dialog>
         {activePopup ? (
           <PostModal
             onClose={this.handleTogglePopup}
@@ -121,7 +185,7 @@ class ShortPostElement extends Component {
             postTitle={Title}
             postContent={Text}
             postImage={ThumbnailPhoto}
-            postPublishDate={PublishDate}
+            postPublishDate={this.localDateString}
           />
         ) : null}
       </>
@@ -130,7 +194,19 @@ class ShortPostElement extends Component {
 }
 
 ShortPostElement.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  fullScreen: PropTypes.bool.isRequired
 };
 
-export default withStyles(stylesMaterialUi)(ShortPostElement);
+const mapDispatchToProps = dispatch => ({
+  deletePost: id => {
+    dispatch(removePost(id));
+  }
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(withMobileDialog()(withStyles(stylesMaterialUi)(ShortPostElement)))
+);

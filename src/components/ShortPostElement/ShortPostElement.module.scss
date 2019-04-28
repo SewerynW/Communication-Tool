@@ -10,10 +10,7 @@
   font-size: 1.2rem;
   margin: 10px 2%;
   max-width: 800px;
-  & .postTitle {
-    text-transform: uppercase;
-    cursor: pointer;
-  }
+  overflow: hidden;
   & .postImage {
     width: 50%;
   }
@@ -21,7 +18,25 @@
     padding: 1%;
     width: 50%;
     text-align: justify;
+    & .mainContent {
+      box-sizing: border-box;
+      max-width: 100%;
+      flex-grow: 2;
+      & .postTitle {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      & .postDescription{
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+    }
   }
+}
+.toolTip{
+  display: none;
 }
 
 @media (orientation: portrait) {

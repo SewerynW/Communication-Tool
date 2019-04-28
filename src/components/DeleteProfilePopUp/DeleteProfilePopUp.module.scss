@@ -1,0 +1,55 @@
+@import "./../../scss/variables";
+
+
+
+
+.modal {
+  overflow-y: scroll;
+  & > div {
+    width: 99vw;
+  }
+ 
+  & .modal_inner {
+    padding: 1%;
+    width: auto;
+    left: 10vw;
+    right: 10vw;
+    max-width: 40vw;
+    top: 10vh;
+    margin-bottom: 10vh;
+    border-radius: 25px;
+    text-align: justify;
+
+    button:nth-of-type(1) {
+      margin-right:20px;   
+    }
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  .modal {
+    & .modal_inner {
+      padding: 3%;
+      width: auto;
+      left: 30vw;
+      right: 30vw;
+      max-width: 40vw;
+      top: 10vh;
+      margin-bottom: 10vh;
+      border-radius: 25px;
+      
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .modal {
+    & .btn {
+      transition: 0.3s;
+      transform: translate(-50%, 50%) scale(1);
+      &:hover {
+        transform: translate(-60%, 60%) scale(1.2);
+      }
+    }
+  }
+}

@@ -1,38 +1,59 @@
-.header {
-  min-height: 10vh;
-  font-family: 'Oleo Script', cursive;
-  top: 0;
-  bottom: auto;
+@import "../../scss/variables";
 
-  .Logo {
-    font-size: 40px;
-    margin-left: 30px;
-    margin-bottom: 1px;
-    margin-top: 10px;
+.appBar {
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+
+  .textLogo {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 16px;
   }
 
-  .HeaderLinks {
-    color: whitesmoke;
-    font-size: 25px;
-    margin-top: 23px;
-    margin-left: 60px;
-    text-decoration: none;
-  }
-
-  .WholeHeader {
+  .rightBar {
     display: flex;
-    flex-direction: row;
-  }
+    align-items: center;
 
-  .LogoutButton {
-    color: whitesmoke;
-    font-size: 25px;
-    margin-top: 23px;
-    margin-left: 60px;
-    font-family: 'Oleo Script', cursive;
-    background-color: inherit;
-    box-shadow: none;
-    border: none;
-    cursor: pointer;
+    .welcomeText {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .appBar {
+    .textLogo {
+      font-size: 24px;
+    }
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  .appBar {
+    .textLogo {
+      font-size: 38px;
+    }
+
+    .rightBar {
+      .personalBar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .welcomeText {
+        display: block;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .appBar {
+    .mobileMenu {
+      display: none;
+    }
   }
 }
