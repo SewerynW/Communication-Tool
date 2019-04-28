@@ -54,4 +54,18 @@ export const fetchProfile = () =>  dispatch =>
 const fetchProfileSuccess = user => ({
         type: FETCH_PROFILE,
         payload: user
-    })
+     })
+
+
+
+// export const removeProfile = () => dispatch => {
+//     //   console.log("Hello");
+//        return Axios.deleteUserProfile().then(dispatch(removeProfileSuccess()))};
+
+
+// export const removeProfile = () => dispatch => {
+//     //   console.log("Hello");
+//        return Axios.deleteUserProfile().then(response => {
+//            console.log(response);
+//            dispatch(removeProfileSuccess()
+//          )})};

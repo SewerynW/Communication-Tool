@@ -15,7 +15,7 @@ class ProfilePage extends React.Component {
           profileInfoSurname={GivenName}
         />
         <Buttonspanel
-          logoutAndClearSession={this.props.logoutAndClearSession}
+          logoutAndClearSession={this.props.logoutAndClearSession}  logged={this.props.logged}
         />
         <button onClick={this.editProfile}>update</button>
       </React.Fragment>

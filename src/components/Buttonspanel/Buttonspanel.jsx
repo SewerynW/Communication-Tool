@@ -33,6 +33,7 @@ export default class Buttonspanel extends React.Component {
           onClose={this.handleTogglePopup}
           open={activePopup}
           logoutAndClearSession={this.props.logoutAndClearSession}
+          logged={this.props.logged}
           offBlur={this.handleTogglePopup}
         />
       ) : null}

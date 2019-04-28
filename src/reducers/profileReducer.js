@@ -8,7 +8,6 @@ import {
 
   const initState = {
     userProfile:{},
-  //  userPosts: []
   };
 
   export const profileReducer = (state = initState, action) => {
@@ -23,8 +22,8 @@ import {
         };
       case REMOVE_PROFILE:
         return {
-         // userPosts: [],
-          userProfile:{}
+          userProfile:{},
+          state: undefined
 
         };
      case FETCH_PROFILE:
