@@ -7,4 +7,5 @@ import thunk from "redux-thunk";
 const appReducer = combineReducers({postReducer, profileReducer})
 
 export const store = createStore(appReducer, applyMiddleware(thunk));
-//
+
+window.store=store
