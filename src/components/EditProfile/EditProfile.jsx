@@ -43,7 +43,6 @@ class EditProfile extends React.Component {
     });
   };
   handleClickUpdateProfile = () => {
-    // console.log("user1", this.state.user.name);
     console.log("user", this.state.user);
     this.props.editProfile(this.state.user);
     this.props.history.push("/profilePage");
@@ -81,7 +80,7 @@ class EditProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
-    // console.log("edit profile", this.props);
+
     return (
       <Card className={style.container}>
         <Typography align="center" variant="h4" component="h4" gutterBottom>
@@ -92,7 +91,6 @@ class EditProfile extends React.Component {
             id="name"
             label="Name"
             className={classes.textField}
-            // value={this.state.user.name}
             onChange={this.handleChange}
             margin="normal"
             variant="outlined"
@@ -104,7 +102,6 @@ class EditProfile extends React.Component {
             id="lastName"
             label="Last Name"
             className={classes.textField}
-            // value={this.state.user.lastName}
             onChange={this.handleChange}
             margin="normal"
             variant="outlined"
@@ -115,7 +112,6 @@ class EditProfile extends React.Component {
             <Button
               variant="outlined"
               className={classes.button}
-              // onClick={this.handleClick}
               id="fileInputButton"
             >
               Add Photo

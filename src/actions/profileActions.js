@@ -6,13 +6,12 @@ export const FETCH_PROFILE = "Fetch_Profile";
 
 export const editProfile = profile => dispatch => {
   const formData = new FormData();
-  if (profile.Photo) {
-    formData.append("photo", profile.Photo);
-  }
+  const userPhoto = profile.photo;
   const userProfile = {
     Name: profile.name,
     GivenName: profile.lastName
   };
+  formData.append("photo", userPhoto);
   formData.append("user", JSON.stringify(userProfile));
 
   return Axios.updateUserProfile(formData).then(response =>

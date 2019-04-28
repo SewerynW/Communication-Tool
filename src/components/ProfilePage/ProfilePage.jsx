@@ -3,15 +3,15 @@ import { Maincontent } from "./Maincontent/Maincontent";
 import ButtonsPanel from "./ButtonsPanel/ButtonsPanel";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import AvatarPhoto from "../../assets/profile.png";
 
 class ProfilePage extends React.Component {
   render() {
     const { Photo, GivenName, Name } = this.props.userProfile;
-    console.log("leci ze stora", this.props.userProfile);
     return (
       <React.Fragment>
         <Maincontent
-          profilePhoto={Photo}
+          profilePhoto={Photo !== (null || undefined) ? Photo : AvatarPhoto}
           profileInfoName={Name}
           profileInfoSurname={GivenName}
         />

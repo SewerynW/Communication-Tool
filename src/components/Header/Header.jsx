@@ -5,7 +5,7 @@ import { AppBar, Typography, InputBase, Avatar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import style from "./Header.module.scss";
-import AvatarPhoto from "../../assets/janedoe.jpg";
+import AvatarPhoto from "../../assets/profile.png";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { filterPosts } from "../../actions/postActions";
@@ -148,7 +148,11 @@ class Header extends React.Component {
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
-                  src={AvatarPhoto}
+                  src={
+                    userProfile.Photo !== (null || undefined)
+                      ? userProfile.Photo
+                      : AvatarPhoto
+                  }
                   className={classes.avatar}
                 />
               </div>

@@ -15,7 +15,6 @@ export default {
       api
         .put("/user", data)
         .then(res => {
-          console.log("axios update", res.data);
           resolve(res.data);
         })
         .catch(err => reject(err));
