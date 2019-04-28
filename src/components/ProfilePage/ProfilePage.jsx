@@ -31,6 +31,7 @@ ProfilePage.propTypes = {
 const mapStateToProps = state => ({
   userProfile: state.profileReducer
 });
+
 export default connect(
   mapStateToProps,
   null

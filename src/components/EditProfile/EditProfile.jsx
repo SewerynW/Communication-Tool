@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, Typography, Button, TextField } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { editProfile } from "../../actions/profileActions";
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   textField: {
@@ -28,31 +30,35 @@ class EditProfile extends React.Component {
   };
 
   componentDidMount = () => {
-    this.listener();
+    this.fillUpFields();
+    this.mountListener();
   };
 
-  handleChange = name => event => {
-    console.log(event.target, name);
+  handleChange = event => {
     this.setState({
       user: {
         ...this.state.user,
-        [name]: event.target.value
+        [event.target.id]: event.target.value
       }
     });
   };
-  handleClick = e => {
+  handleClickUpdateProfile = () => {
+    // console.log("user1", this.state.user.name);
     console.log("user", this.state.user);
+    this.props.editProfile(this.state.user);
+    this.props.history.push("/profilePage");
   };
 
   handleClickInputPhoto = event => {
     this.setState({
       user: {
+        ...this.state.user,
         photo: event.target.files[0]
       }
     });
   };
 
-  listener = () => {
+  mountListener = () => {
     const fileInput = document.getElementById("fileInput");
     const inputButton = document.getElementById("fileInputButton");
     inputButton.addEventListener("click", () => {
@@ -60,9 +66,22 @@ class EditProfile extends React.Component {
     });
   };
 
+  fillUpFields = () => {
+    const { Name, GivenName, Photo } = this.props.userProfile;
+    this.setState(() => ({
+      user: {
+        name: Name,
+        lastName: GivenName,
+        photo: Photo
+      }
+    }));
+  };
+
+  userProfile;
+
   render() {
     const { classes } = this.props;
-    // console.log(this.props);
+    // console.log("edit profile", this.props);
     return (
       <Card className={style.container}>
         <Typography align="center" variant="h4" component="h4" gutterBottom>
@@ -70,52 +89,56 @@ class EditProfile extends React.Component {
         </Typography>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
-            id="outlined-name"
+            id="name"
             label="Name"
             className={classes.textField}
             // value={this.state.user.name}
-            onChange={this.handleChange("name")}
+            onChange={this.handleChange}
             margin="normal"
             variant="outlined"
+            required
+            value={this.state.user.name}
           />
 
           <TextField
-            id="outlined-name"
+            id="lastName"
             label="Last Name"
             className={classes.textField}
             // value={this.state.user.lastName}
-            onChange={this.handleChange("lastName")}
+            onChange={this.handleChange}
             margin="normal"
             variant="outlined"
+            required
+            value={this.state.user.lastName}
           />
-        </form>
-        <form>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            // onClick={this.handleClick}
-            id="fileInputButton"
-          >
-            Add Photo
-            <FontAwesomeIcon
-              icon="envelope"
-              size="lg"
-              className={classes.rightIcon}
+          <div>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              // onClick={this.handleClick}
+              id="fileInputButton"
+            >
+              Add Photo
+              <FontAwesomeIcon
+                icon="envelope"
+                size="lg"
+                className={classes.rightIcon}
+              />
+            </Button>
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={this.handleClickInputPhoto}
+              id="fileInput"
             />
-          </Button>
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={this.handleClickInputPhoto}
-            id="fileInput"
-          />
+          </div>
         </form>
         <div>
           <Button
             variant="outlined"
             className={classes.button}
-            onClick={this.handleClick}
+            onClick={this.handleClickUpdateProfile}
           >
             Save
             <FontAwesomeIcon
@@ -133,9 +156,17 @@ const mapStateToProps = state => ({
   userProfile: state.profileReducer
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => {
+  return {
+    editProfile: profile => {
+      dispatch(editProfile(profile));
+    }
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(EditProfile));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(EditProfile))
+);

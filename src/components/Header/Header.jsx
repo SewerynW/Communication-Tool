@@ -144,7 +144,7 @@ class Header extends React.Component {
                 <Typography
                   className={`${style.welcomeText} ${classes.typography}`}
                 >
-                  {userProfile.Name !== (null && undefined) ? welcome : "Hi"}
+                  {userProfile.Name !== (null || undefined) ? welcome : "Hi"}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"

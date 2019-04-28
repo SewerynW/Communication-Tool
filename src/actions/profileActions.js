@@ -4,56 +4,52 @@ export const REMOVE_PROFILE = "Remove_Profile";
 export const REMOVE_DATA = "Remove_Data";
 export const FETCH_PROFILE = "Fetch_Profile";
 
-
 export const editProfile = profile => dispatch => {
-    const tempProfile={
-        Name: profile.Name,
-        GivenName: profile.Surname,
-        Photo: profile.Photo
-    };
+  const formData = new FormData();
+  if (profile.Photo) {
+    formData.append("photo", profile.Photo);
+  }
+  const userProfile = {
+    Name: profile.name,
+    GivenName: profile.lastName
+  };
+  formData.append("user", JSON.stringify(userProfile));
 
-    const tempPhoto = profile.Photo || null;
-    const formData= new FormData();
-    if(tempPhoto){
-        formData.append('photo', tempPhoto);
-    }
-    formData.append('user', JSON.stringify(tempProfile));
-    return Axios.updateUserProfile(formData)
-        .then(response => 
-            dispatch (editProfileSuccess(response.data)
-    ));
-}
+  return Axios.updateUserProfile(formData).then(response =>
+    dispatch(editProfileSuccess(response))
+  );
+};
 
+const editProfileSuccess = ({ Name, GivenName, Id, Photo }) => ({
+  type: EDIT_PROFILE,
+  payload: {
+    Name,
+    GivenName,
+    Photo
+  }
+});
 
+const removeProfileSuccess = () => ({
+  type: REMOVE_PROFILE
+});
 
-const editProfileSuccess = ({ Name, Surname, Photo }) => ({
-
-    type: EDIT_PROFILE,
-    payload: {
-        Name,
-        Surname,
-        Photo
-    }
+export const removeProfile = () => dispatch => {
+  return Axios.deleteUserProfile().then(response => {
+    console.log(response);
+    dispatch(removeProfileSuccess());
   });
+};
 
-  const removeProfileSuccess = () => ({
-    type: REMOVE_PROFILE
-  });
-
-
-  export const removeProfile = () => dispatch => {
-      return Axios.deleteUserProfile().then(response => {
-          console.log(response);
-          dispatch(removeProfileSuccess()
-        )})};
- 
-  export const fetchProfile = () =>  dispatch => 
-     Axios.getInfoAboutUser()
-        .then(response => {
-            dispatch(fetchProfileSuccess(response))})
-        .catch(error => {throw error});
-
-    const fetchProfileSuccess = user => ({
-        type: FETCH_PROFILE,
-        payload: user
+export const fetchProfile = () => dispatch =>
+  Axios.getInfoAboutUser()
+    .then(response => {
+      dispatch(fetchProfileSuccess(response));
     })
+    .catch(error => {
+      throw error;
+    });
+
+const fetchProfileSuccess = user => ({
+  type: FETCH_PROFILE,
+  payload: user
+});

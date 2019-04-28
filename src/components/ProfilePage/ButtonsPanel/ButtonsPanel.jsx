@@ -26,8 +26,6 @@ class ButtonsPanel extends React.Component {
 
   render() {
     const { activePopup } = this.state;
-    console.log("panel", this.props);
-
     return (
       <>
         <div className={styles.ButtonsPanel}>
