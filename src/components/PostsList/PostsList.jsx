@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class PostsList extends PureComponent {
   get userPostsSorted() {
@@ -35,11 +35,8 @@ class PostsList extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  userPosts: state.postReducer.userPosts
-});
+PostsList.propTypes = {
+  userPosts: PropTypes.array
+};
 
-export default connect(
-  mapStateToProps,
-  null
-)(PostsList);
+export default PostsList;
