@@ -3,7 +3,8 @@ import {
   EDIT_POST,
   FETCH_POSTS,
   REMOVE_POST,
-  FILTER_POSTS
+  FILTER_POSTS,
+  REMOVE_ALL_POST
 } from "../actions/postActions";
 
 const initState = {
@@ -57,6 +58,11 @@ export const postReducer = (state = initState, action) => {
             isInPostText(post, action.payload)
         )
       };
+      //
+      case REMOVE_ALL_POST:
+        return{
+          userPosts:[]
+        }
     default:
       return state;
   }

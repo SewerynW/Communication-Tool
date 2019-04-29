@@ -5,6 +5,12 @@ export const FETCH_POSTS = "Fetch_Posts";
 export const EDIT_POST = "Edit_Post";
 export const REMOVE_POST = "Remove_Post";
 export const FILTER_POSTS = "Filter_Posts";
+export const REMOVE_ALL_POST= "Remove_All_Posts";
+
+
+export const removeAllPosts = () => ({
+  type: REMOVE_ALL_POST
+});
 
 export const addPost = ({ userPost, image }) => dispatch => {
   const formData = new FormData();
