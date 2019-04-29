@@ -1,8 +1,9 @@
 import React from "react";
-import { Maincontent } from "../Maincontent/Maincontent.jsx";
-import Buttonspanel from "../Buttonspanel/Buttonspanel.jsx";
+import { Maincontent } from "./Maincontent/Maincontent";
+import ButtonsPanel from "./ButtonsPanel/ButtonsPanel";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import AvatarPhoto from "../../assets/profile.png";
 
 class ProfilePage extends React.Component {
   render() {
@@ -10,14 +11,13 @@ class ProfilePage extends React.Component {
     return (
       <React.Fragment>
         <Maincontent
-          profilePhoto={Photo}
+          profilePhoto={Photo !== (null || undefined) ? Photo : AvatarPhoto}
           profileInfoName={Name}
           profileInfoSurname={GivenName}
         />
-        <Buttonspanel
-          logoutAndClearSession={this.props.logoutAndClearSession}  logged={this.props.logged}
+        <ButtonsPanel
+          logoutAndClearSession={this.props.logoutAndClearSession}
         />
-        <button onClick={this.editProfile}>update</button>
       </React.Fragment>
     );
   }
@@ -31,6 +31,7 @@ ProfilePage.propTypes = {
 const mapStateToProps = state => ({
   userProfile: state.profileReducer
 });
+
 export default connect(
   mapStateToProps,
   null

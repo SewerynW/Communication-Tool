@@ -1,14 +1,13 @@
 import {
-    EDIT_PROFILE,
-    REMOVE_PROFILE,
-    FETCH_PROFILE,
-    REMOVE_DATA
-    
-  } from "../actions/profileActions";
+  EDIT_PROFILE,
+  REMOVE_PROFILE,
+  FETCH_PROFILE,
+  REMOVE_DATA
+} from "../actions/profileActions";
 
-  const initState = {
-    userProfile:{},
-  };
+const initState = {
+  userProfile: {}
+};
 
   export const profileReducer = (state = initState, action) => {
     switch (action.type) {

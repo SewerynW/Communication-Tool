@@ -1,0 +1,46 @@
+@import "../../scss/variables";
+
+.container {
+  margin: 20px 10px 0;
+  padding: 20px;
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+
+    .textsInputs {
+      display: flex;
+      width: 100%;
+    }
+    .photo {
+      width: 100%;
+      padding-top: 10px;
+
+      .inputButton {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .uploadButton {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .container {
+    max-width: 600px;
+    margin: 20px auto 0 auto;
+
+    .inputs {
+      flex-direction: row;
+
+      .textsInputs {
+        flex-direction: column;
+      }
+    }
+  }
+}
