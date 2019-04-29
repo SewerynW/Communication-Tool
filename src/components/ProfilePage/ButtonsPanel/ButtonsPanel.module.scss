@@ -1,0 +1,15 @@
+.ButtonsPanel {
+  display: flex;
+  justify-content: center;
+  .EditButton {
+    background: #3f51b5;
+    color: white;
+    margin: 10px;
+  }
+  .DeleteButton {
+    color: inherit;
+    margin: 10px;
+    background: #3f51b5;
+    color: white;
+  }
+}

@@ -7,19 +7,32 @@ import {
   faTrash,
   faExclamationTriangle,
   faWindowClose,
-  faEnvelope
+  faEnvelope,
+  faFileImage
 } from "@fortawesome/free-solid-svg-icons";
+
+// Redux
+import { connect } from "react-redux";
+import { fetchPosts } from "../../actions/postActions";
+import { fetchProfile } from "../../actions/profileActions";
+
+// Components
+import EditProfile from "../EditProfile/EditProfile";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import Footer from "../Footer/Footer";
-import { connect } from "react-redux";
-import { fetchPosts } from "../../actions/postActions";
-import { fetchProfile } from "../../actions/profileActions";
 import PostForm from "../PostForm/PostForm";
 
-library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose, faEnvelope);
+library.add(
+  faTrash,
+  faEdit,
+  faExclamationTriangle,
+  faWindowClose,
+  faEnvelope,
+  faFileImage
+);
 
 class App extends Component {
   state = {
@@ -89,6 +102,12 @@ class App extends Component {
           <PrivateRoute
             path="/editPost"
             component={PostForm}
+            setSession={this.setSession}
+            logged={this.state.logged}
+          />
+          <PrivateRoute
+            path="/editProfile"
+            component={EditProfile}
             setSession={this.setSession}
             logged={this.state.logged}
           />
