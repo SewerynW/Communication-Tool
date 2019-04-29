@@ -12,7 +12,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { editProfile } from "../../actions/profileActions";
 import { withRouter } from "react-router-dom";
-import AvatarPhoto from "../../assets/profile.png";
 
 const styles = theme => ({
   textField: {

@@ -9,12 +9,14 @@ class ButtonsPanel extends React.Component {
     activePopup: false
   };
 
+  setUpBlur = parameter => {
+    const root = document.getElementById("root");
+    root.style.filter = `blur(${parameter})`;
+  };
+
   handleTogglePopup = () => {
-    if (!this.state.activePopup) {
-      document.getElementById("root").style.filter = "blur(2px)";
-    } else {
-      document.getElementById("root").style.filter = "blur(0)";
-    }
+    this.setUpBlur(!this.state.activePopup ? "2px" : 0);
+
     this.setState(prevState => ({
       activePopup: !prevState.activePopup
     }));

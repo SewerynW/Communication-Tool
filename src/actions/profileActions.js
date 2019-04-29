@@ -34,7 +34,6 @@ const removeProfileSuccess = () => ({
 
 export const removeProfile = () => dispatch => {
   return Axios.deleteUserProfile().then(response => {
-    console.log(response);
     dispatch(removeProfileSuccess());
   });
 };
