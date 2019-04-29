@@ -14,6 +14,8 @@ import {
   CardContent
 } from "@material-ui/core";
 import { removeProfile } from '../../actions/profileActions';
+import { removeAllPosts} from '../../actions/postActions'
+
 import { connect } from 'react-redux';
 
 const stylesMaterialUi = theme => ({
@@ -39,6 +41,8 @@ class DeleteProfilePopUp extends React.PureComponent {
 
 handleDeleteProfile = () =>{
   this.props.deleteProfile();
+  this.props.deleteAllPosts();
+
   this.props.offBlur();
 }
   
@@ -112,8 +116,13 @@ handleDeleteProfile = () =>{
 const mapDispatchToProps = dispatch => ({
   deleteProfile: () => {
     dispatch(removeProfile());
+  },
+  deleteAllPosts: () =>{
+    dispatch(removeAllPosts());
   }
+
 })
+
 
 
 export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));

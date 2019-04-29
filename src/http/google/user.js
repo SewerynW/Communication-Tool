@@ -7,6 +7,7 @@ export default {
                     id_token: token
                 })
                 .then((res) => resolve(res.data))
+                .catch((err) => reject(err))
         })
     }
 }

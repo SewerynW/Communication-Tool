@@ -7,7 +7,7 @@ import {
   } from "../actions/profileActions";
 
   const initState = {
-    userProfile:{}
+    userProfile:{},
   };
 
   export const profileReducer = (state = initState, action) => {
@@ -21,7 +21,9 @@ import {
         };
       case REMOVE_PROFILE:
         return {
-          userPosts: null
+          userProfile:{},
+          state: undefined
+
         };
      case FETCH_PROFILE:
      return{
