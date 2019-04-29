@@ -2,10 +2,17 @@ import React from "react";
 import style from "./EditProfile.module.scss";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { Card, Typography, Button, TextField } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  Button,
+  TextField,
+  CardMedia
+} from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { editProfile } from "../../actions/profileActions";
 import { withRouter } from "react-router-dom";
+import AvatarPhoto from "../../assets/profile.png";
 
 const styles = theme => ({
   textField: {
@@ -17,6 +24,10 @@ const styles = theme => ({
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
+  },
+  media: {
+    height: 140,
+    backgroundSize: "contain"
   }
 });
 
@@ -25,8 +36,9 @@ class EditProfile extends React.Component {
     user: {
       name: "",
       lastName: "",
-      photo: []
-    }
+      photo: ""
+    },
+    tmPhoto: ""
   };
 
   componentDidMount = () => {
@@ -43,12 +55,21 @@ class EditProfile extends React.Component {
     });
   };
   handleClickUpdateProfile = () => {
-    console.log("user", this.state.user);
     this.props.editProfile(this.state.user);
     this.props.history.push("/profilePage");
   };
 
   handleClickInputPhoto = event => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const url = reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      this.setState({
+        tmPhoto: reader.result
+      });
+    };
+
     this.setState({
       user: {
         ...this.state.user,
@@ -76,61 +97,71 @@ class EditProfile extends React.Component {
     }));
   };
 
-  userProfile;
-
   render() {
     const { classes } = this.props;
-
+    const { user, tmPhoto } = this.state;
     return (
       <Card className={style.container}>
         <Typography align="center" variant="h4" component="h4" gutterBottom>
           Edit Profile
         </Typography>
-        <form className={classes.container} noValidate autoComplete="off">
-          <TextField
-            id="name"
-            label="Name"
-            className={classes.textField}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            required
-            value={this.state.user.name}
-          />
-
-          <TextField
-            id="lastName"
-            label="Last Name"
-            className={classes.textField}
-            onChange={this.handleChange}
-            margin="normal"
-            variant="outlined"
-            required
-            value={this.state.user.lastName}
-          />
-          <div>
-            <Button
+        <div className={style.inputs}>
+          <form className={style.textsInputs} noValidate autoComplete="off">
+            <TextField
+              id="name"
+              label="Name"
+              className={classes.textField}
+              onChange={this.handleChange}
+              margin="normal"
               variant="outlined"
-              className={classes.button}
-              id="fileInputButton"
-            >
-              Add Photo
-              <FontAwesomeIcon
-                icon="envelope"
-                size="lg"
-                className={classes.rightIcon}
-              />
-            </Button>
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={this.handleClickInputPhoto}
-              id="fileInput"
+              required
+              value={user.name}
             />
+
+            <TextField
+              id="lastName"
+              label="Last Name"
+              className={classes.textField}
+              onChange={this.handleChange}
+              margin="normal"
+              variant="outlined"
+              required
+              value={user.lastName}
+            />
+          </form>
+          <div className={style.photo}>
+            <div>
+              <CardMedia
+                className={classes.media}
+                image={tmPhoto ? tmPhoto : user.photo}
+                title="Avatar"
+                id="photo"
+              />
+            </div>
+            <div className={style.inputButton}>
+              <Button
+                variant="outlined"
+                className={classes.button}
+                id="fileInputButton"
+              >
+                Add Photo
+                <FontAwesomeIcon
+                  icon="file-image"
+                  size="lg"
+                  className={classes.rightIcon}
+                />
+              </Button>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={this.handleClickInputPhoto}
+                id="fileInput"
+              />
+            </div>
           </div>
-        </form>
-        <div>
+        </div>
+        <div className={style.uploadButton}>
           <Button
             variant="outlined"
             className={classes.button}

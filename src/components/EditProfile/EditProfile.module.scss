@@ -2,5 +2,51 @@
 
 .container {
   margin: 20px 10px 0;
-  padding: 20px 0 0;
+  padding: 20px;
+
+  .inputs {
+    display: flex;
+
+    .textsInputs {
+    }
+    .photo {
+      width: 100%;
+      padding-top: 10px;
+
+      .avatar {
+        height: 140;
+        background-size: contain;
+      }
+      .inputButton {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .uploadButton {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  .container {
+    max-width: 600px;
+    margin: 20px auto 0 auto;
+
+    .inputs {
+      flex-direction: row;
+
+      .textsInputs {
+        flex-direction: column;
+      }
+      .photo {
+      }
+    }
+
+    .uploadButton {
+    }
+  }
 }

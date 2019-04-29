@@ -7,7 +7,8 @@ import {
   faTrash,
   faExclamationTriangle,
   faWindowClose,
-  faEnvelope
+  faEnvelope,
+  faFileImage
 } from "@fortawesome/free-solid-svg-icons";
 
 // Redux
@@ -24,7 +25,14 @@ import ProfilePage from "../ProfilePage/ProfilePage";
 import Footer from "../Footer/Footer";
 import PostForm from "../PostForm/PostForm";
 
-library.add(faTrash, faEdit, faExclamationTriangle, faWindowClose, faEnvelope);
+library.add(
+  faTrash,
+  faEdit,
+  faExclamationTriangle,
+  faWindowClose,
+  faEnvelope,
+  faFileImage
+);
 
 class App extends Component {
   state = {
