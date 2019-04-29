@@ -144,7 +144,7 @@ class EditProfile extends React.Component {
                 className={classes.button}
                 id="fileInputButton"
               >
-                Add Photo
+                {tmPhoto || user.photo ? "Change Photo" : "Add Photo"}
                 <FontAwesomeIcon
                   icon="file-image"
                   size="lg"

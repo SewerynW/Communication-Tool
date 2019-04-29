@@ -6,20 +6,19 @@
 
   .inputs {
     display: flex;
+    flex-direction: column;
 
     .textsInputs {
+      display: flex;
+      width: 100%;
     }
     .photo {
       width: 100%;
       padding-top: 10px;
 
-      .avatar {
-        height: 140;
-        background-size: contain;
-      }
       .inputButton {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         margin-top: 10px;
       }
     }
@@ -31,7 +30,7 @@
   }
 }
 
-@media (min-width: $mediumDevices) {
+@media (min-width: $smallDevice) {
   .container {
     max-width: 600px;
     margin: 20px auto 0 auto;
@@ -42,11 +41,6 @@
       .textsInputs {
         flex-direction: column;
       }
-      .photo {
-      }
-    }
-
-    .uploadButton {
     }
   }
 }
