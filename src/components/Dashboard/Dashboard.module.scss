@@ -6,11 +6,23 @@
 
   .features {
     width: 100%;
+    position: sticky;
     justify-content: center;
   }
+}
 
-  .icon {
-    padding-left: 5px;
-    font-size: 40px;
+@media (min-width: $smallDevice) {
+  .container {
+    flex-direction: row;
+    justify-content: space-around;
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+      max-width: 250px;
+      position: sticky;
+      top: 80px;
+    }
   }
 }
