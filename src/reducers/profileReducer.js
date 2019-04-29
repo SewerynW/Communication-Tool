@@ -17,8 +17,7 @@ import {
           userProfile: { ...state.userProfile, 
             Name:action.Name,
             GivenName:action.GivenName,
-            //Photo: getPhoto(action) ? action.Photo : state.Photo
-        }
+          }
         };
       case REMOVE_PROFILE:
         return {
@@ -29,13 +28,11 @@ import {
             Name:action.payload.Name,
             GivenName:action.payload.GivenName,
             Photo:action.payload.Photo
-      
      };
      case REMOVE_DATA:
     return{
       state:null
     }
-
       default:
         return state;
     }

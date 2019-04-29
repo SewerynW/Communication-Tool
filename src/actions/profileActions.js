@@ -1,7 +1,7 @@
 import Axios from "./../http/dataBase/user";
 export const EDIT_PROFILE = "Edit_Profile";
 export const REMOVE_PROFILE = "Remove_Profile";
-export const REMOVE_DATA = "Remove_Data";
+export const REMOVE_DATA = "Remove_Data"; 
 export const FETCH_PROFILE = "Fetch_Profile";
 
 
@@ -43,7 +43,6 @@ const editProfileSuccess = ({ Name, Surname, Photo }) => ({
 
   export const removeProfile = () => dispatch => {
       return Axios.deleteUserProfile().then(response => {
-          console.log(response);
           dispatch(removeProfileSuccess()
         )})};
  
