@@ -42,7 +42,8 @@ class DeleteProfilePopUp extends React.PureComponent {
 handleDeleteProfile = () =>{
   this.props.deleteProfile();
   this.props.deleteAllPosts();
-
+  //dokoncz przesylanie propsami
+ // this.props.history.push("/logout");
   this.props.offBlur();
 }
   
