@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import { removeProfile } from '../../actions/profileActions';
 import { removeAllPosts} from '../../actions/postActions'
-
+import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
 const stylesMaterialUi = theme => ({
@@ -42,8 +42,7 @@ class DeleteProfilePopUp extends React.PureComponent {
 handleDeleteProfile = () =>{
   this.props.deleteProfile();
   this.props.deleteAllPosts();
-  //dokoncz przesylanie propsami
- // this.props.history.push("/logout");
+  this.props.history.push("/logout"); 
   this.props.offBlur();
 }
   
@@ -125,5 +124,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-
-export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));
+ export default withRouter(connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp)));

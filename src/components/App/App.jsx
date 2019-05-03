@@ -114,12 +114,8 @@ class App extends Component {
            <Route
             path="/logout"
             render={()=>{this.logoutAndClearSession();
-                  return <Redirect to="/"/>}  
+                    return <Redirect to="/"/>}  
             }
-            //?render
-            //wywołam logoutandclearsesson
-            //potem redirect na /
-            //redirect 
           />
           <Footer />
         </BrowserRouter>
