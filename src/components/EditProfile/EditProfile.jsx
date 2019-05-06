@@ -12,6 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { editProfile } from "../../actions/profileActions";
 import { withRouter } from "react-router-dom";
+import AvatarPhoto from "../../assets/profile.png";
 
 const styles = theme => ({
   textField: {
@@ -35,9 +36,10 @@ class EditProfile extends React.Component {
     user: {
       name: "",
       lastName: "",
-      photo: ""
+      photo: null
     },
-    tmPhoto: ""
+    tmPhoto: null,
+    currentPhoto: null
   };
 
   componentDidMount = () => {
@@ -90,15 +92,17 @@ class EditProfile extends React.Component {
     this.setState(() => ({
       user: {
         name: Name,
-        lastName: GivenName,
-        photo: Photo
-      }
+        lastName: GivenName
+      },
+      currentPhoto: Photo
     }));
   };
 
   render() {
     const { classes } = this.props;
-    const { user, tmPhoto } = this.state;
+    const { user, currentPhoto, tmPhoto } = this.state;
+    // console.log(currentPhoto, tmPhoto);
+    // console.log(typeof currentPhoto, typeof tmPhoto);
     return (
       <Card className={style.container}>
         <Typography align="center" variant="h4" component="h4" gutterBottom>
@@ -132,7 +136,9 @@ class EditProfile extends React.Component {
             <div>
               <CardMedia
                 className={classes.media}
-                image={tmPhoto ? tmPhoto : user.photo}
+                image={
+                  tmPhoto ? tmPhoto : currentPhoto ? currentPhoto : AvatarPhoto
+                }
                 title="Avatar"
                 id="photo"
               />
@@ -143,7 +149,7 @@ class EditProfile extends React.Component {
                 className={classes.button}
                 id="fileInputButton"
               >
-                {tmPhoto || user.photo ? "Change Photo" : "Add Photo"}
+                {currentPhoto || user.photo ? "Change Photo" : "Add Photo"}
                 <FontAwesomeIcon
                   icon="file-image"
                   size="lg"
