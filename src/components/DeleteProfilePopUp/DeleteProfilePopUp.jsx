@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core";
 import { removeProfile } from '../../actions/profileActions';
 import { removeAllPosts} from '../../actions/postActions'
-import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
 const stylesMaterialUi = theme => ({
@@ -124,4 +123,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
- export default withRouter(connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp)));
+ export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));
