@@ -6,6 +6,7 @@ export const EDIT_POST = "Edit_Post";
 export const REMOVE_POST = "Remove_Post";
 export const FILTER_POSTS = "Filter_Posts";
 export const REMOVE_ALL_POST= "Remove_All_Posts";
+export const FETCH_FRIENDS_POSTS = "Fetch_Friends_Posts";
 
 
 export const removeAllPosts = () => ({
@@ -93,3 +94,6 @@ export const filterPosts = query => ({
   type: FILTER_POSTS,
   payload: query
 });
+
+//fetch firends post success
+//fetch firends post middleware
