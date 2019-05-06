@@ -16,7 +16,6 @@ export default class PrivateRoute extends React.Component {
           return logged ? (
             <Component
               logoutAndClearSession={this.props.logoutAndClearSession}
-              person={this.props.person}
             />
           ) : (
             <Login setSession={this.props.setSession} path={this.props.path} />
@@ -32,6 +31,5 @@ PrivateRoute.propTypes = {
   setSession: PropTypes.func,
   path: PropTypes.string,
   logged: PropTypes.bool,
-  person: PropTypes.object,
   logoutAndClearSession: PropTypes.func
 };

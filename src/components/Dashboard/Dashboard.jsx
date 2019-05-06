@@ -42,6 +42,13 @@ class Dashboard extends React.Component {
     const { classes } = this.props;
     return (
       <div className={style.container}>
+        <PostsList
+          userPosts={
+            this.state.query.length
+              ? this.props.filteredUserPosts
+              : this.props.userPosts
+          }
+        />
         <div className={style.features}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="component-simple">Search Post</InputLabel>
@@ -60,14 +67,6 @@ class Dashboard extends React.Component {
             />
           </Button>
         </div>
-
-        <PostsList
-          userPosts={
-            this.state.query.length
-              ? this.props.filteredUserPosts
-              : this.props.userPosts
-          }
-        />
       </div>
     );
   }
