@@ -148,11 +148,7 @@ class Header extends React.Component {
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
-                  src={
-                    userProfile.Photo !== (null || undefined)
-                      ? userProfile.Photo
-                      : AvatarPhoto
-                  }
+                  src={userProfile.Photo ? userProfile.Photo : AvatarPhoto}
                   className={classes.avatar}
                 />
               </div>
