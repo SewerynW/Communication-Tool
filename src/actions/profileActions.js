@@ -1,7 +1,7 @@
 import Axios from "./../http/dataBase/user";
 export const EDIT_PROFILE = "Edit_Profile";
 export const REMOVE_PROFILE = "Remove_Profile";
-export const REMOVE_DATA = "Remove_Data"; 
+export const REMOVE_DATA = "Remove_Data";
 export const FETCH_PROFILE = "Fetch_Profile";
 
 export const editProfile = profile => dispatch => {
@@ -11,8 +11,10 @@ export const editProfile = profile => dispatch => {
     Name: profile.name,
     GivenName: profile.lastName
   };
-  formData.append("photo", userPhoto);
   formData.append("user", JSON.stringify(userProfile));
+  if (profile.photo) {
+    formData.append("photo", userPhoto);
+  }
 
   return Axios.updateUserProfile(formData).then(response =>
     dispatch(editProfileSuccess(response))
