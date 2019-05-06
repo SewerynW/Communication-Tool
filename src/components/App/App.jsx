@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter,Redirect, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import style from "./App.module.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -110,12 +110,6 @@ class App extends Component {
             component={EditProfile}
             setSession={this.setSession}
             logged={this.state.logged}
-          />
-           <Route
-            path="/logout"
-            render={()=>{this.logoutAndClearSession();
-                    return <Redirect to="/"/>}  
-            }
           />
           <Footer />
         </BrowserRouter>
