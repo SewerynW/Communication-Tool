@@ -11,7 +11,7 @@ class ProfilePage extends React.Component {
     return (
       <React.Fragment>
         <Maincontent
-          profilePhoto={Photo !== (null || undefined) ? Photo : AvatarPhoto}
+          profilePhoto={Photo ? Photo : AvatarPhoto}
           profileInfoName={Name}
           profileInfoSurname={GivenName}
         />
