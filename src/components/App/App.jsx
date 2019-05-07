@@ -13,7 +13,7 @@ import {
 
 // Redux
 import { connect } from "react-redux";
-import { fetchPosts } from "../../actions/postActions";
+import { fetchPosts, fetchFriendsPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
 
 // Components
@@ -61,6 +61,8 @@ class App extends Component {
   };
 
   setUser = async () => {
+    //załadować wszystkie posty od firendsów
+    await this.props.fetchFriendsPosts();
     await this.props.fetchPosts();
     await this.props.fetchProfile();
   };
@@ -125,9 +127,14 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchProfile: () => {
     dispatch(fetchProfile());
+  },
+  fetchFriendsPosts: () => {
+    dispatch(fetchFriendsPosts());
   }
 });
 
+
+//friendsPosts
 export default connect(
   null,
   mapDispatchToProps
