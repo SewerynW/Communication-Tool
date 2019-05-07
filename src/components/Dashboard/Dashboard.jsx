@@ -50,22 +50,30 @@ class Dashboard extends React.Component {
           }
         />
         <div className={style.features}>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="component-simple">Search Post</InputLabel>
-            <Input id="component-simple" onChange={this.handleInputChanges} />
-          </FormControl>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            onClick={this.handleClick}
-          >
-            New Post
-            <FontAwesomeIcon
-              icon="envelope"
-              size="lg"
-              className={classes.rightIcon}
-            />
-          </Button>
+          <div className={style.posts}>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="component-simple">Search Post</InputLabel>
+              <Input id="component-simple" onChange={this.handleInputChanges} />
+            </FormControl>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              onClick={this.handleClick}
+            >
+              New Post
+              <FontAwesomeIcon
+                icon="envelope"
+                size="lg"
+                className={classes.rightIcon}
+              />
+            </Button>
+          </div>
+          <div className={style.friends}>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="component-simple">Find Friends</InputLabel>
+              <Input id="component-simple" onChange={this.handleInputChanges} />
+            </FormControl>
+          </div>
         </div>
       </div>
     );
