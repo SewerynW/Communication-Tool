@@ -15,13 +15,16 @@ import {
   DialogTitle,
   DialogContentText,
   DialogActions,
-  withMobileDialog
+  withMobileDialog,
+  Avatar
 } from "@material-ui/core/";
 import PostModal from "./../PostModal/PostModal";
 import FontAwesomeButton from "./../FontAwesomeButton/FontAwesomeButton";
 import { connect } from "react-redux";
 import { removePost } from "../../actions/postActions";
 import { withRouter } from "react-router-dom";
+import AvatarPhoto from "../../assets/profile.png";
+
 
 const stylesMaterialUi = {
   media: {
@@ -114,7 +117,10 @@ class ShortPostElement extends PureComponent {
               justify="flex-start"
               className={style.postTextContent}
             >
-              <Grid container justify="flex-end">
+            {/* {userPost?(<React.Fragment>
+
+            </React.Fragment>):null} */}
+              {/* <Grid container justify="flex-end">
                 <FontAwesomeButton
                   icon="edit"
                   colorButton={buttonStyle.green}
@@ -125,7 +131,21 @@ class ShortPostElement extends PureComponent {
                   colorButton={buttonStyle.red}
                   handleOnClick={this.handleOnClickDelete}
                 />
-              </Grid>
+              </Grid> */}
+              <Grid container >
+              <div className={style.userInfo}>
+                <Typography
+                  className={style.userName}
+                >
+                  Hi user
+                </Typography>
+                <Avatar
+                  alt="Remy Sharp"
+                  src={AvatarPhoto}
+                  className={classes.avatar}
+                />
+            </div>
+              </Grid> 
               <CardContent className={style.mainContent}>
                 <Typography
                   align="left"

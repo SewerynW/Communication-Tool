@@ -8,7 +8,6 @@ const updateFriendsStatusSuccess = ({Id, Show}) =>({
         Id, 
         Show
     }
-
 });
 
 export const updateFriendsStatus = profile => dispatch=>{

@@ -32,6 +32,14 @@
         box-sizing: border-box;
         overflow: hidden;
       }
+      
+    }
+  }
+  & .userInfo{
+      display:flex;
+      justify-content: flex-end;
+    & .userName{
+        color:blue;
     }
   }
 }
