@@ -66,6 +66,7 @@ class App extends Component {
   };
 
   render() {
+   // console.log(sessionStorage.userId);
     return (
       <div className={style.App}>
         <BrowserRouter>

@@ -132,7 +132,7 @@ class ShortPostElement extends PureComponent {
                   handleOnClick={this.handleOnClickDelete}
                 />
               </Grid> */}
-              <Grid container >
+              <Grid container justify="flex-end">
               <div className={style.userInfo}>
                 <Typography
                   className={style.userName}

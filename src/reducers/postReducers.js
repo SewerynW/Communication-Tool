@@ -65,7 +65,9 @@ export const postReducer = (state = initState, action) => {
         userPosts:[]
       }
     case FETCH_FRIENDS_POSTS:
+    console.log(action.payload)
     return{
+      
       ...state,
       friendsPosts: [...action.payload]
 

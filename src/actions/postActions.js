@@ -1,4 +1,6 @@
 import Axios from "./../http/dataBase/posts";
+import AxiosFriends from "./../http/dataBase/friends";
+
 
 export const ADD_POST = "Add_Post";
 export const FETCH_POSTS = "Fetch_Posts";
@@ -101,7 +103,7 @@ export const filterPosts = query => ({
 })
 
 export const fetchFriendsPosts = () => dispatch =>
-  Axios.getFriendPosts()
+  AxiosFriends.getAllFriendsPosts()
     .then(response =>{
       dispatch(fetchFriendsPostsSuccess(response));
     })

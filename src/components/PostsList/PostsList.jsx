@@ -2,8 +2,14 @@ import React, { PureComponent } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
+//import Axios from "../../http/dataBase/friends";
+import { fetchFriendsPosts} from '../../actions/postActions';
+import { connect } from 'react-redux';
 
 class PostsList extends PureComponent {
+  handleGetFriends = ()=>{
+    this.props.getMyFriendsPosts();
+  };
   get userPostsSorted() {
     if (this.props.userPosts.length > 2) {
       return [...this.props.userPosts].sort(
@@ -17,6 +23,7 @@ class PostsList extends PureComponent {
   render() {
     return (
       <ul className={style.postsList}>
+      <button onClick={this.handleGetFriends}>get friends posts</button>
         {this.userPostsSorted.length
           ? this.userPostsSorted.map(post => (
               <li key={post.Id}>
@@ -38,5 +45,21 @@ class PostsList extends PureComponent {
 PostsList.propTypes = {
   userPosts: PropTypes.array
 };
+console.log(typeof fetchFriendsPosts);
+const mapDispatchToProps = dispatch => ({
+  getMyFriendsPosts: () => {
+    dispatch(fetchFriendsPosts());
+  }
+})
 
-export default PostsList;
+// const mapDispatchToProps = dispatch => ({
+//   deleteProfile: () => {
+//     dispatch(removeProfile()); // z reduxa
+//   },
+//   deleteAllPosts: () =>{
+//     dispatch(removeAllPosts());
+//   }
+// })
+
+export default connect (null, mapDispatchToProps)(PostsList);
+//export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));
