@@ -6,6 +6,11 @@ export default {
       api
         .get("/post")
         .then(res => resolve(res.data))
+      //  then(res => {
+      //   console.log(res.data)
+      //   console.log(res)
+      //   resolve(res.data)
+      //  })
         .catch(err => reject(err));
     });
   },

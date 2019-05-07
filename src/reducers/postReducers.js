@@ -4,12 +4,14 @@ import {
   FETCH_POSTS,
   REMOVE_POST,
   FILTER_POSTS,
-  REMOVE_ALL_POST
+  REMOVE_ALL_POST,
+  FETCH_FRIENDS_POSTS
 } from "../actions/postActions";
 
 const initState = {
   userPosts: [],
-  filteredUserPosts: []
+  filteredUserPosts: [],
+  friendsPosts: []
 };
 
 const checkText = (text, payload) =>
@@ -58,11 +60,16 @@ export const postReducer = (state = initState, action) => {
             isInPostText(post, action.payload)
         )
       };
-      //
-      case REMOVE_ALL_POST:
-        return{
-          userPosts:[]
-        }
+    case REMOVE_ALL_POST:
+      return{
+        userPosts:[]
+      }
+    case FETCH_FRIENDS_POSTS:
+    return{
+      ...state,
+      friendsPosts: [...action.payload]
+
+    };
     default:
       return state;
   }

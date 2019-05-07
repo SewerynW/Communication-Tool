@@ -95,5 +95,18 @@ export const filterPosts = query => ({
   payload: query
 });
 
-//fetch firends post success
-//fetch firends post middleware
+ const fetchFriendsPostsSuccess = postsArray=>({
+  type: FETCH_FRIENDS_POSTS,
+  payload: postsArray
+})
+
+export const fetchFriendsPosts = () => dispatch =>
+  Axios.getFriendPosts()
+    .then(response =>{
+      dispatch(fetchFriendsPostsSuccess(response));
+    })
+    .catch(error => {
+      throw error;
+    });
+
+
