@@ -2,6 +2,22 @@ import Axios from "./../http/dataBase/friends";
 
 export const FIND_FRIENDS = "Find_Friends";
 export const ADD_FRIEND = "Add_Friend";
+export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
+
+export const fetchFriendsList = () => dispatch => {
+  Axios.getFriendsList()
+    .then(response => {
+      dispatch(fetchFriendsListSuccess(response));
+    })
+    .catch(error => {
+      throw error;
+    });
+
+  const fetchFriendsListSuccess = friendsList => ({
+    type: FETCH_FRIENDS_LIST,
+    payload: friendsList
+  });
+};
 
 export const findFriends = query => dispatch => {
   Axios.findFriend(query)

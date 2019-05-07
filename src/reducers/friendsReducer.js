@@ -1,7 +1,11 @@
-import { FIND_FRIENDS, ADD_FRIEND } from "../actions/friendsActions";
+import {
+  FIND_FRIENDS,
+  ADD_FRIEND,
+  FETCH_FRIENDS_LIST
+} from "../actions/friendsActions";
 
 const initState = {
-  myFriends: ["Olaf"],
+  myFriends: [],
   foundPeople: []
 };
 
@@ -16,6 +20,11 @@ export const friendsReducer = (state = initState, action) => {
       return {
         ...state,
         myFriends: [...state.myFriends, action.payload]
+      };
+    case FETCH_FRIENDS_LIST:
+      return {
+        ...state,
+        myFriends: [...action.payload]
       };
     default:
       return state;
