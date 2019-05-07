@@ -22,10 +22,7 @@ class ListOfHints extends React.Component {
   };
 
   render() {
-    const { filteredData, activePopup, handleTogglePopup } = this.props;
-    console.log("list", filteredData);
-    console.log("jestem tutaj");
-    const data = this.props.filteredData;
+    const { filteredData, handleTogglePopup } = this.props;
 
     return (
       <div ref={this.setWrapperRef}>
@@ -34,7 +31,6 @@ class ListOfHints extends React.Component {
             <Hint
               key={post.Id}
               post={post}
-              activePopup={activePopup}
               handleTogglePopup={handleTogglePopup}
             />
           ))}

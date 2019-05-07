@@ -68,12 +68,7 @@ class Dashboard extends React.Component {
               />
             </Button>
           </div>
-          <div className={style.friends}>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="component-simple">Find Friends</InputLabel>
-              <Input id="component-simple" onChange={this.handleInputChanges} />
-            </FormControl>
-          </div>
+          <div className={style.friends} />
         </div>
       </div>
     );
