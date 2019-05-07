@@ -1,28 +1,20 @@
 import React from "react";
-
-import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import {
-  FormControl,
-  Input,
-  InputLabel,
-  Button,
-  Chip,
-  Avatar
-} from "@material-ui/core";
+import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import style from "./Dashboard.module.scss";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Redux
+import { connect } from "react-redux";
 import { filterPosts } from "../../actions/postActions";
 import { findFriends, addFriend } from "../../actions/friendsActions";
 
 // Components
 import PostsList from "../PostsList/PostsList";
 import Search from "../Search/Search";
+import FriendsList from "../FriendsList/FriendsList";
 
 const styles = theme => ({
   button: {
@@ -74,10 +66,9 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes, myFriends, foundPeople } = this.props;
+    const { classes, foundPeople } = this.props;
     const { hintPopUp } = this.state;
-    console.log("foundPeople", foundPeople);
-    console.log("myFriends", myFriends);
+
     return (
       <div className={style.container}>
         <PostsList
@@ -88,7 +79,8 @@ class Dashboard extends React.Component {
           }
         />
         <div className={style.features}>
-          <div className={style.posts}>
+          <div className={`${style.sideBox} ${style.posts}`}>
+            <h2>Posts</h2>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="component-simple">Search Post</InputLabel>
               <Input
@@ -109,8 +101,8 @@ class Dashboard extends React.Component {
               />
             </Button>
           </div>
-          <div className={style.friends}>
-            <h5>Friends</h5>
+          <div className={`${style.sideBox} ${style.friends}`}>
+            <h2>Friends</h2>
             <Search
               handleInputChanges={this.handleFriendsInputChanges}
               // filteredData={filteredUserPosts}
@@ -118,10 +110,7 @@ class Dashboard extends React.Component {
               hintPopUp={hintPopUp}
             />
             <div>
-              <div className={style.friend}>
-                <Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />
-                <p>Imie i nazwisko </p>
-              </div>
+              <FriendsList />
             </div>
           </div>
         </div>
@@ -133,7 +122,6 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   userPosts: state.postReducer.userPosts,
   filteredUserPosts: state.postReducer.filteredUserPosts,
-  myFriends: state.friendsReducer.myFriends,
   foundPeople: state.friendsReducer.foundPeople
 });
 

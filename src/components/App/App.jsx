@@ -8,7 +8,9 @@ import {
   faExclamationTriangle,
   faWindowClose,
   faEnvelope,
-  faFileImage
+  faFileImage,
+  faEye,
+  faEyeSlash
 } from "@fortawesome/free-solid-svg-icons";
 
 // Redux
@@ -32,7 +34,9 @@ library.add(
   faExclamationTriangle,
   faWindowClose,
   faEnvelope,
-  faFileImage
+  faFileImage,
+  faEye,
+  faEyeSlash
 );
 
 class App extends Component {
