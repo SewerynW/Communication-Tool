@@ -60,7 +60,6 @@ class Header extends React.Component {
     const path =
       location.pathname !== "/dashboard" && location.pathname !== "/";
     const welcome = `Hi ${userProfile.Name}`;
-    console.log(filteredUserPosts);
 
     return (
       <AppBar position="sticky" className={`${style.appBar} ${classes.root} `}>

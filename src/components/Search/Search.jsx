@@ -18,7 +18,7 @@ const styles = theme => ({
     marginLeft: 0,
     width: "50%",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit,
+      // marginLeft: theme.spacing.unit,
       width: "auto"
     }
   },
@@ -60,7 +60,8 @@ class Search extends React.Component {
       filteredData,
       hintPopUp
     } = this.props;
-    console.log("search", filteredData);
+
+    // console.log("search", filteredData);
 
     return (
       <div className={classes.search}>
@@ -75,13 +76,13 @@ class Search extends React.Component {
           }}
           onChange={handleInputChanges}
         />
-        {hintPopUp ? (
+        {/* {hintPopUp ? (
           <ListOfHints
             id="listOfHints"
             filteredData={filteredData}
             handleCloseHintPopUp={handleCloseHintPopUp}
           />
-        ) : null}
+        ) : null} */}
       </div>
     );
   }

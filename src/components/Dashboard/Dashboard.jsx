@@ -1,13 +1,28 @@
 import React from "react";
-import PostsList from "../PostsList/PostsList";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import {
+  FormControl,
+  Input,
+  InputLabel,
+  Button,
+  Chip,
+  Avatar
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import style from "./Dashboard.module.scss";
-import { filterPosts } from "../../actions/postActions";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Redux
+import { filterPosts } from "../../actions/postActions";
+import { findFriends, addFriend } from "../../actions/friendsActions";
+
+// Components
+import PostsList from "../PostsList/PostsList";
+import Search from "../Search/Search";
 
 const styles = theme => ({
   button: {
@@ -23,14 +38,19 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
   state = {
-    query: ""
+    query: "",
+    hintPopUp: null,
+    friend: {
+      friendId: "",
+      show: false
+    }
   };
 
   handleClick = () => {
     this.props.history.push("/newPost");
   };
 
-  handleInputChanges = event => {
+  handlePostsInputChanges = event => {
     let queryFromInput = event.target.value;
     this.setState(() => ({
       query: queryFromInput
@@ -38,8 +58,26 @@ class Dashboard extends React.Component {
     this.props.filterPosts(queryFromInput);
   };
 
+  handleCloseHintPopUp = () => {
+    this.setState(() => ({ hintPopUp: false }));
+  };
+
+  handleFriendsInputChanges = event => {
+    let queryFromInput = event.target.value;
+    if (queryFromInput.length > 0) {
+      this.props.findFriends(queryFromInput);
+      this.setState(() => ({ hintPopUp: true }));
+    }
+    if (!queryFromInput) {
+      this.handleCloseHintPopUp();
+    }
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, myFriends, foundPeople } = this.props;
+    const { hintPopUp } = this.state;
+    console.log("foundPeople", foundPeople);
+    console.log("myFriends", myFriends);
     return (
       <div className={style.container}>
         <PostsList
@@ -53,7 +91,10 @@ class Dashboard extends React.Component {
           <div className={style.posts}>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="component-simple">Search Post</InputLabel>
-              <Input id="component-simple" onChange={this.handleInputChanges} />
+              <Input
+                id="component-simple"
+                onChange={this.handlePostsInputChanges}
+              />
             </FormControl>
             <Button
               variant="outlined"
@@ -68,7 +109,21 @@ class Dashboard extends React.Component {
               />
             </Button>
           </div>
-          <div className={style.friends} />
+          <div className={style.friends}>
+            <h5>Friends</h5>
+            <Search
+              handleInputChanges={this.handleFriendsInputChanges}
+              // filteredData={filteredUserPosts}
+              handleCloseHintPopUp={this.handleCloseHintPopUp}
+              hintPopUp={hintPopUp}
+            />
+            <div>
+              <div className={style.friend}>
+                <Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />
+                <p>Imie i nazwisko </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -77,13 +132,21 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   userPosts: state.postReducer.userPosts,
-  filteredUserPosts: state.postReducer.filteredUserPosts
+  filteredUserPosts: state.postReducer.filteredUserPosts,
+  myFriends: state.friendsReducer.myFriends,
+  foundPeople: state.friendsReducer.foundPeople
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     filterPosts: query => {
       dispatch(filterPosts(query));
+    },
+    findFriends: query => {
+      dispatch(findFriends(query));
+    },
+    addFriend: friend => {
+      dispatch(addFriend(friend));
     }
   };
 };

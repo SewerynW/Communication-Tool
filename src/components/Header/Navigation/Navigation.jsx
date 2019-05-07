@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 const Navigation = props => {
   return (
     <div className={style.headerLinks}>
+      <Link to="/dashboard" className={style.link}>
+        #home page
+      </Link>
       <Link to="/profilePage" className={style.link}>
         #profile page
       </Link>
-      <Link to="/dashboard" className={style.link}>
-        #post list
-      </Link>
+
       <p onClick={props.logoutAndClearSession} className={style.link}>
         #log out
       </p>
