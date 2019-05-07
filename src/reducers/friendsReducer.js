@@ -6,7 +6,8 @@ import {
 
 const initState = {
   myFriends: [],
-  foundPeople: []
+  foundPeople: [],
+  type: "people"
 };
 
 export const friendsReducer = (state = initState, action) => {

@@ -54,7 +54,8 @@ class Header extends React.Component {
       logoutAndClearSession,
       location,
       filteredUserPosts,
-      userProfile
+      userProfile,
+      dataType
     } = this.props;
     const { hintPopUp } = this.state;
     const path =
@@ -79,6 +80,7 @@ class Header extends React.Component {
                 filteredData={filteredUserPosts}
                 handleCloseHintPopUp={this.handleCloseHintPopUp}
                 hintPopUp={hintPopUp}
+                dataType={dataType}
               />
             ) : null}
             <div className={style.rightBar}>
@@ -111,7 +113,8 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({
   filteredUserPosts: state.postReducer.filteredUserPosts,
-  userProfile: state.profileReducer
+  userProfile: state.profileReducer,
+  dataType: state.postReducer.type
 });
 
 const mapDispatchToProps = dispatch => {

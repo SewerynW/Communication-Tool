@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import style from "./ListOfHints.module.scss";
-import Hint from "./Hint/Hint";
+import PostHint from "./PostHint/PostHint";
+import FriendHint from "./FriendHint/FriendHint";
 
 class ListOfHints extends React.Component {
   componentDidMount() {
@@ -21,19 +22,39 @@ class ListOfHints extends React.Component {
     this.wrapperRef = node;
   };
 
+  renderPosts = data => {
+    return data.map(post => <PostHint key={post.Id} post={post} />);
+  };
+
+  renderPeople = data => {
+    return data.map(friend => (
+      <FriendHint
+        key={friend.Id}
+        photo={friend.Photo}
+        name={friend.Name}
+        lastName={friend.GivenName}
+      />
+    ));
+  };
+
+  renderHints = (dataType, data) => {
+    switch (dataType) {
+      case "people":
+        return this.renderPeople(data);
+      case "post":
+        return this.renderPosts(data);
+      default:
+        break;
+    }
+  };
+
   render() {
-    const { filteredData, handleTogglePopup } = this.props;
+    const { filteredData, dataType, additionalStyle } = this.props;
 
     return (
       <div ref={this.setWrapperRef}>
-        <Card className={style.container}>
-          {filteredData.map(post => (
-            <Hint
-              key={post.Id}
-              post={post}
-              handleTogglePopup={handleTogglePopup}
-            />
-          ))}
+        <Card className={style.container} style={additionalStyle}>
+          {this.renderHints(dataType, filteredData)}
         </Card>
       </div>
     );

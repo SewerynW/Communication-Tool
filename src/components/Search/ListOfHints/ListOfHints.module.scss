@@ -7,7 +7,8 @@
   top: 63px;
   left: 0px;
   right: 0px;
-  padding: 0px 5px 10px 5px;
+  padding: 10px 5px;
+  z-index: 2;
 }
 
 @media (min-width: $smallDevice) {
@@ -16,6 +17,9 @@
     top: 40px;
     right: 0;
     left: auto;
-    width: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

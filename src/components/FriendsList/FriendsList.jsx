@@ -25,7 +25,6 @@ class FriendsList extends React.Component {
 
   render() {
     const { myFriends } = this.props;
-    console.log("myFriends", myFriends);
 
     return (
       <div className={style.container}>

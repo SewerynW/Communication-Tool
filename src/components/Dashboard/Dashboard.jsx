@@ -66,8 +66,16 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes, foundPeople } = this.props;
+    const { classes, foundPeople, dataType } = this.props;
     const { hintPopUp } = this.state;
+    console.log("ze stora", foundPeople);
+
+    const additionalStyle = {
+      maxHeight: "425px",
+      border: "1px solid #3f51b5",
+      overflow: "auto",
+      width: "265px"
+    };
 
     return (
       <div className={style.container}>
@@ -104,8 +112,10 @@ class Dashboard extends React.Component {
           <div className={`${style.sideBox} ${style.friends}`}>
             <h2>Friends</h2>
             <Search
+              additionalStyle={additionalStyle}
               handleInputChanges={this.handleFriendsInputChanges}
-              // filteredData={filteredUserPosts}
+              filteredData={foundPeople}
+              dataType={dataType}
               handleCloseHintPopUp={this.handleCloseHintPopUp}
               hintPopUp={hintPopUp}
             />
@@ -122,7 +132,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   userPosts: state.postReducer.userPosts,
   filteredUserPosts: state.postReducer.filteredUserPosts,
-  foundPeople: state.friendsReducer.foundPeople
+  foundPeople: state.friendsReducer.foundPeople,
+  dataType: state.friendsReducer.type
 });
 
 const mapDispatchToProps = dispatch => {
