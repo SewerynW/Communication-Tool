@@ -11,7 +11,9 @@ import {
   faFileImage,
   faEye,
   faEyeSlash,
-  faHandshake
+  faHandshake,
+  faArrowCircleRight,
+  faArrowCircleLeft
 } from "@fortawesome/free-solid-svg-icons";
 
 // Redux
@@ -38,7 +40,9 @@ library.add(
   faFileImage,
   faEye,
   faEyeSlash,
-  faHandshake
+  faHandshake,
+  faArrowCircleRight,
+  faArrowCircleLeft
 );
 
 class App extends Component {

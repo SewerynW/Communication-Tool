@@ -18,13 +18,15 @@ import FriendsList from "../FriendsList/FriendsList";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    marginBottom: "10px",
+    width: "100%"
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
   },
   formControl: {
-    margin: theme.spacing.unit
+    marginBottom: "20px",
+    width: "100%"
   }
 });
 
@@ -35,11 +37,27 @@ class Dashboard extends React.Component {
     friend: {
       friendId: "",
       show: false
-    }
+    },
+    mobileFeatureStatus: false
   };
 
   handleClick = () => {
     this.props.history.push("/newPost");
+  };
+
+  handlerClickIcons = () => {
+    const friends = document.getElementById("friends");
+    const posts = document.getElementById("posts");
+    if (this.state.mobileFeatureStatus) {
+      friends.style.display = "none";
+      posts.style.display = "none";
+    } else {
+      friends.style.display = "flex";
+      posts.style.display = "flex";
+    }
+    this.setState(() => ({
+      mobileFeatureStatus: !this.state.mobileFeatureStatus
+    }));
   };
 
   handlePostsInputChanges = event => {
@@ -67,10 +85,11 @@ class Dashboard extends React.Component {
 
   render() {
     const { classes, foundPeople, dataType } = this.props;
-    const { hintPopUp } = this.state;
-    console.log("ze stora", foundPeople);
-
+    const { hintPopUp, mobileFeatureStatus } = this.state;
     const additionalStyle = {
+      position: "absolute",
+      top: "40px",
+      right: "0",
       maxHeight: "425px",
       border: "1px solid #3f51b5",
       overflow: "auto",
@@ -87,7 +106,7 @@ class Dashboard extends React.Component {
           }
         />
         <div className={style.features}>
-          <div className={`${style.sideBox} ${style.posts}`}>
+          <div className={`${style.sideBox} ${style.posts}`} id="posts">
             <h2>Posts</h2>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="component-simple">Search Post</InputLabel>
@@ -109,7 +128,7 @@ class Dashboard extends React.Component {
               />
             </Button>
           </div>
-          <div className={`${style.sideBox} ${style.friends}`}>
+          <div className={`${style.sideBox} ${style.friends}`} id="friends">
             <h2>Friends</h2>
             <Search
               additionalStyle={additionalStyle}
@@ -122,6 +141,15 @@ class Dashboard extends React.Component {
             <div>
               <FriendsList />
             </div>
+          </div>
+          <div className={`${style.sideBox} ${style.toggle}`}>
+            <FontAwesomeIcon
+              icon={
+                mobileFeatureStatus ? "arrow-circle-right" : "arrow-circle-left"
+              }
+              size="2x"
+              onClick={this.handlerClickIcons}
+            />
           </div>
         </div>
       </div>

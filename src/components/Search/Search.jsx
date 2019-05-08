@@ -1,5 +1,4 @@
 import React from "react";
-import style from "./Search.module.scss";
 import { withStyles } from "@material-ui/core/styles";
 import ListOfHints from "./ListOfHints/ListOfHints";
 import { InputBase } from "@material-ui/core";
