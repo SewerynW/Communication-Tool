@@ -3,6 +3,7 @@ import Axios from "./../http/dataBase/friends";
 export const FIND_FRIENDS = "Find_Friends";
 export const ADD_FRIEND = "Add_Friend";
 export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
+export const DELETE_FRIEND = "Delete_Friend";
 
 export const fetchFriendsList = () => dispatch => {
   Axios.getFriendsList()
@@ -52,5 +53,20 @@ export const addFriend = friend => dispatch => {
       Photo,
       Show
     }
+  });
+};
+
+export const deleteFriend = friendId => dispatch => {
+  Axios.deleteFriend(friendId)
+    .then(response => {
+      dispatch(deleteFriendSuccess(friendId));
+    })
+    .catch(error => {
+      throw error;
+    });
+
+  const deleteFriendSuccess = friendId => ({
+    type: DELETE_FRIEND,
+    payload: friendId
   });
 };

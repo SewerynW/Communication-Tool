@@ -11,16 +11,6 @@ class FriendsList extends React.Component {
     console.log("tylko friend");
   };
 
-  handlerOnClickEye = e => {
-    e.stopPropagation();
-    console.log("tylko oko");
-  };
-
-  handlerOnClickTrash = e => {
-    e.stopPropagation();
-    console.log("tylko smieci");
-  };
-
   info = () => <p>Sorry you don't have any friends...</p>;
 
   render() {
@@ -32,13 +22,12 @@ class FriendsList extends React.Component {
           ? myFriends.map(friend => (
               <Friend
                 key={friend.Id}
+                id={friend.Id}
                 name={friend.Name}
                 lastName={friend.GivenName}
                 photo={friend.Photo}
                 show={friend.Show}
                 onClickFriend={this.handlerOnClickFriend}
-                onClickEye={this.handlerOnClickEye}
-                onClickTrash={this.handlerOnClickTrash}
               />
             ))
           : this.info()}

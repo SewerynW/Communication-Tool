@@ -5,45 +5,52 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withStyles } from "@material-ui/core/styles";
 
+// Redux
+import { connect } from "react-redux";
+import { deleteFriend } from "../../../actions/friendsActions";
+
 const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit
   }
 });
 
-const Friend = props => {
-  const {
-    photo,
-    name,
-    lastName,
-    classes,
-    onClickFriend,
-    onClickEye,
-    onClickTrash,
-    show
-  } = props;
+class Friend extends React.Component {
+  onClickTrash = e => {
+    e.stopPropagation();
+    this.props.deleteFriend(this.props.id);
+  };
 
-  return (
-    <div className={style.container} onClick={onClickFriend}>
-      <Avatar alt="Avatar" src={photo} />
-      <p> {`${name} ${lastName}`}</p>
-      <div className={style.icons}>
-        <FontAwesomeIcon
-          icon={show ? "eye" : "eye-slash"}
-          size="sm"
-          className={`${style.icon} ${classes.rightIcon}`}
-          onClick={onClickEye}
-        />
-        <FontAwesomeIcon
-          icon="trash"
-          size="sm"
-          className={`${style.icon} ${classes.rightIcon}`}
-          onClick={onClickTrash}
-        />
+  handlerOnClickEye = e => {
+    e.stopPropagation();
+    console.log("tylko oko");
+  };
+
+  render() {
+    const { photo, name, lastName, classes, onClickFriend, show } = this.props;
+
+    return (
+      <div className={style.container} onClick={onClickFriend}>
+        <Avatar alt="Avatar" src={photo} />
+        <p> {`${name} ${lastName}`}</p>
+        <div className={style.icons}>
+          <FontAwesomeIcon
+            icon={show ? "eye" : "eye-slash"}
+            size="sm"
+            className={`${style.icon} ${classes.rightIcon}`}
+            onClick={this.onClickEye}
+          />
+          <FontAwesomeIcon
+            icon="trash"
+            size="sm"
+            className={`${style.icon} ${classes.rightIcon}`}
+            onClick={this.onClickTrash}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Friend.propTypes = {
   classes: PropTypes.object,
@@ -57,4 +64,15 @@ Friend.propTypes = {
   onClickTrash: PropTypes.func
 };
 
-export default withStyles(styles)(Friend);
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteFriend: friendId => {
+      dispatch(deleteFriend(friendId));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(Friend));

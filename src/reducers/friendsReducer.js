@@ -1,7 +1,8 @@
 import {
   FIND_FRIENDS,
   ADD_FRIEND,
-  FETCH_FRIENDS_LIST
+  FETCH_FRIENDS_LIST,
+  DELETE_FRIEND
 } from "../actions/friendsActions";
 
 const initState = {
@@ -26,6 +27,13 @@ export const friendsReducer = (state = initState, action) => {
       return {
         ...state,
         myFriends: [...action.payload]
+      };
+    case DELETE_FRIEND:
+      return {
+        ...state,
+        myFriends: state.myFriends.filter(
+          friend => friend.Id !== action.payload
+        )
       };
     default:
       return state;
