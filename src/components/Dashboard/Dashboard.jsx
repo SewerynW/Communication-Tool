@@ -48,13 +48,9 @@ class Dashboard extends React.Component {
   handlerClickIcons = () => {
     const friends = document.getElementById("friends");
     const posts = document.getElementById("posts");
-    if (this.state.mobileFeatureStatus) {
-      friends.style.display = "none";
-      posts.style.display = "none";
-    } else {
-      friends.style.display = "flex";
-      posts.style.display = "flex";
-    }
+    let style = this.state.mobileFeatureStatus ? "none" : "flex";
+    friends.style.display = style;
+    posts.style.display = style;
     this.setState(() => ({
       mobileFeatureStatus: !this.state.mobileFeatureStatus
     }));
