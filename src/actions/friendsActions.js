@@ -34,23 +34,23 @@ export const findFriends = query => dispatch => {
   });
 };
 
-export const addFriend = ({ friendId, show }) => dispatch => {
-  const formData = new FormData();
-  formData.append("FriendId", friendId);
-  formData.append("Show", show);
-  Axios.addFriend(formData)
+export const addFriend = friend => dispatch => {
+  Axios.addFriend(friend)
     .then(response => {
-      dispatch(addFriendSuccess(response));
+      dispatch(addFriendSuccess(response.data));
     })
     .catch(error => {
       throw error;
     });
 
-  const addFriendSuccess = ({ friendId, show }) => ({
+  const addFriendSuccess = ({ Name, GivenName, Id, Photo, Show }) => ({
     type: ADD_FRIEND,
     payload: {
-      friendId,
-      show
+      Name,
+      GivenName,
+      Id,
+      Photo,
+      Show
     }
   });
 };
