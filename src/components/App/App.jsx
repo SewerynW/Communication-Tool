@@ -8,13 +8,19 @@ import {
   faExclamationTriangle,
   faWindowClose,
   faEnvelope,
-  faFileImage
+  faFileImage,
+  faEye,
+  faEyeSlash,
+  faHandshake,
+  faArrowCircleRight,
+  faArrowCircleLeft
 } from "@fortawesome/free-solid-svg-icons";
 
 // Redux
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
+import { fetchFriendsList } from "../../actions/friendsActions";
 
 // Components
 import EditProfile from "../EditProfile/EditProfile";
@@ -31,7 +37,12 @@ library.add(
   faExclamationTriangle,
   faWindowClose,
   faEnvelope,
-  faFileImage
+  faFileImage,
+  faEye,
+  faEyeSlash,
+  faHandshake,
+  faArrowCircleRight,
+  faArrowCircleLeft
 );
 
 class App extends Component {
@@ -60,9 +71,10 @@ class App extends Component {
     });
   };
 
-  setUser = async () => {
-    await this.props.fetchPosts();
-    await this.props.fetchProfile();
+  setUser = () => {
+    this.props.fetchPosts();
+    this.props.fetchProfile();
+    this.props.fetchFriendsList();
   };
 
   render() {
@@ -124,6 +136,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchProfile: () => {
     dispatch(fetchProfile());
+  },
+  fetchFriendsList: () => {
+    dispatch(fetchFriendsList());
   }
 });
 

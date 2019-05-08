@@ -9,7 +9,8 @@ import {
 
 const initState = {
   userPosts: [],
-  filteredUserPosts: []
+  filteredUserPosts: [],
+  type: "post"
 };
 
 const checkText = (text, payload) =>
@@ -58,11 +59,11 @@ export const postReducer = (state = initState, action) => {
             isInPostText(post, action.payload)
         )
       };
-      //
-      case REMOVE_ALL_POST:
-        return{
-          userPosts:[]
-        }
+    //
+    case REMOVE_ALL_POST:
+      return {
+        userPosts: []
+      };
     default:
       return state;
   }
