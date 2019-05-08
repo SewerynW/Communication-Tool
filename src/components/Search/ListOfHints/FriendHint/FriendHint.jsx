@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withStyles } from "@material-ui/core/styles";
 
+// Redux
+import { connect } from "react-redux";
+import { addFriend } from "../../../../actions/friendsActions";
+
 const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit
@@ -12,10 +16,24 @@ const styles = theme => ({
 });
 
 const FriendHint = props => {
-  const { photo, name, lastName, classes } = props;
+  const {
+    photo,
+    name,
+    lastName,
+    classes,
+    addFriend,
+    id,
+    show,
+    handleCloseHintPopUp
+  } = props;
 
   const handlerOnClick = () => {
-    console.log("dodaje gościa");
+    const friend = {
+      FriendId: id,
+      Show: show
+    };
+    addFriend(friend);
+    handleCloseHintPopUp();
   };
 
   return (
@@ -38,7 +56,22 @@ FriendHint.propTypes = {
   classes: PropTypes.object,
   name: PropTypes.string,
   lastName: PropTypes.string,
-  photo: PropTypes.string
+  photo: PropTypes.string,
+  addFriend: PropTypes.func,
+  id: PropTypes.string,
+  show: PropTypes.bool,
+  handleCloseHintPopUp: PropTypes.func
 };
 
-export default withStyles(styles)(FriendHint);
+const mapDispatchToProps = dispatch => {
+  return {
+    addFriend: friend => {
+      dispatch(addFriend(friend));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(FriendHint));

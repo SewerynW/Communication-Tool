@@ -130,14 +130,17 @@ class Dashboard extends React.Component {
           </div>
           <div className={`${style.sideBox} ${style.friends}`} id="friends">
             <h2>Friends</h2>
-            <Search
-              additionalStyle={additionalStyle}
-              handleInputChanges={this.handleFriendsInputChanges}
-              filteredData={foundPeople}
-              dataType={dataType}
-              handleCloseHintPopUp={this.handleCloseHintPopUp}
-              hintPopUp={hintPopUp}
-            />
+            <div className={style.search}>
+              <Search
+                additionalStyle={additionalStyle}
+                handleInputChanges={this.handleFriendsInputChanges}
+                filteredData={foundPeople}
+                dataType={dataType}
+                handleCloseHintPopUp={this.handleCloseHintPopUp}
+                hintPopUp={hintPopUp}
+              />
+            </div>
+
             <div>
               <FriendsList />
             </div>

@@ -26,21 +26,24 @@ class ListOfHints extends React.Component {
     return data.map(post => <PostHint key={post.Id} post={post} />);
   };
 
-  renderPeople = data => {
+  renderPeople = (data, handleCloseHintPopUp) => {
     return data.map(friend => (
       <FriendHint
         key={friend.Id}
+        id={friend.Id}
         photo={friend.Photo}
         name={friend.Name}
         lastName={friend.GivenName}
+        show={friend.Show}
+        handleCloseHintPopUp={handleCloseHintPopUp}
       />
     ));
   };
 
-  renderHints = (dataType, data) => {
+  renderHints = (dataType, data, handleCloseHintPopUp) => {
     switch (dataType) {
       case "people":
-        return this.renderPeople(data);
+        return this.renderPeople(data, handleCloseHintPopUp);
       case "post":
         return this.renderPosts(data);
       default:
@@ -49,12 +52,16 @@ class ListOfHints extends React.Component {
   };
 
   render() {
-    const { filteredData, dataType, additionalStyle } = this.props;
-
+    const {
+      filteredData,
+      dataType,
+      additionalStyle,
+      handleCloseHintPopUp
+    } = this.props;
     return (
       <div ref={this.setWrapperRef}>
         <Card className={style.container} style={additionalStyle}>
-          {this.renderHints(dataType, filteredData)}
+          {this.renderHints(dataType, filteredData, handleCloseHintPopUp)}
         </Card>
       </div>
     );
