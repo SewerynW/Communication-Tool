@@ -77,6 +77,7 @@ class ShortPostElement extends PureComponent {
   }
 
   render() {
+   // const { Photo, GivenName, Name } = this.props.myFriends;
     const {
       classes,
       Title,
@@ -86,6 +87,7 @@ class ShortPostElement extends PureComponent {
       fullScreen
     } = this.props;
     const { activePopup, activeConfirmDialog } = this.state;
+   // console.log(myFriends.Name)
     return (
       <>
         <Card className={style.shortPostElement}>
@@ -224,9 +226,13 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
+const mapStateToProps = state => ({
+  myFriends: state.friendsReducer.myFriends
+});
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(withMobileDialog()(withStyles(stylesMaterialUi)(ShortPostElement)))
 );

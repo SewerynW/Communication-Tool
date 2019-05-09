@@ -13,7 +13,9 @@ const initState = {
   friendsPosts: [], 
   type: "post"
 }
+// const ifPostShouldDisplay = () =>{
 
+// }
 const checkText = (text, payload) =>
   text.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
 
@@ -38,6 +40,8 @@ export const postReducer = (state = initState, action) => {
       return {
         ...state,
         userPosts: [...action.payload]
+        //userPosts: action.payload.filter(post => ifPostShouldDisplay(post.UserId, ))
+
       };
     case REMOVE_POST:
       return {

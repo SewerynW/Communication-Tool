@@ -20,6 +20,7 @@ import { toggleFilterFriends } from "../../actions/stateActions";
 import PostsList from "../PostsList/PostsList";
 import Search from "../Search/Search";
 import FriendsList from "../FriendsList/FriendsList";
+import user from "../../http/google/user";
 
 const styles = theme => ({
   button: {
@@ -125,6 +126,11 @@ class Dashboard extends React.Component {
       overflow: "auto",
       width: "265px"
     };
+    //console.log(userPosts, myFriends);
+   // console.log(myFriends.flat());
+   const getFlat= myFriends.flat();
+   console.log(getFlat);
+
     return (
       <div className={style.container}>
         <PostsList

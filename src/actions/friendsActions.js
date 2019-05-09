@@ -4,17 +4,9 @@ export const ADD_FRIEND = "Add_Friend";
 export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
 export const DELETE_FRIEND = "Delete_Friend";
 export const FILTER_FRIENDS = "Filter_Friends";
-
-
 export const UPDATE_FRIEND_STATUS = "Update_Friend_Status";
 
-const updateFriendsStatusSuccess = ({Id, Show}) =>({
-    type: UPDATE_FRIEND_STATUS,
-    payload: {
-        Id, 
-        Show
-    }
-});
+
 
 export const updateFriendsStatus = profile => dispatch=>{
     const friendProfile={
@@ -24,7 +16,13 @@ export const updateFriendsStatus = profile => dispatch=>{
         dispatch(updateFriendsStatusSuccess());
     })
 
-
+    const updateFriendsStatusSuccess = ({Id, Show}) =>({
+      type: UPDATE_FRIEND_STATUS,
+      payload: {
+          Id, 
+          Show
+      }
+  });
   }
 export const fetchFriendsList = () => dispatch => {
   Axios.getFriendsList()

@@ -2,8 +2,7 @@ import React, { PureComponent } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
-import { fetchFriendsPosts} from '../../actions/postActions';
-import { connect } from 'react-redux';
+
 
 class PostsList extends PureComponent {
   get userPostsSorted() {
