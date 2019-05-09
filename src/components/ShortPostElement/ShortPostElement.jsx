@@ -63,7 +63,7 @@ class ShortPostElement extends PureComponent {
     }));
   };
 
-  viewFirst200CharactersFullWords = fullPost => { //sortowanie
+  viewFirst200CharactersFullWords = fullPost => {
     if (fullPost === undefined) return null;
     return fullPost.length > 200
       ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 200))}...`

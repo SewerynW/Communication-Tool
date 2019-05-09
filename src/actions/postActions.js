@@ -38,15 +38,27 @@ const addPostSuccess = ({ Id, Title, Text, ThumbnailPhoto, PublishDate }) => ({
     PublishDate
   }
 });
+// export const fetchPosts = () => dispatch =>{
+//   const tempObject = {};
+//   Axios.getPosts()
+//     .then(response => {
+//       dispatch(fetchPostsSuccess(response));
+//     })
+//     .catch(error => {
+//       throw error;
+//     });}
 
-export const fetchPosts = () => dispatch =>
-  Axios.getPosts()
-    .then(response => {
-      dispatch(fetchPostsSuccess(response));
-    })
-    .catch(error => {
-      throw error;
-    });
+export const fetchPosts = () => async dispatch =>{
+  try{
+    const userPosts = await Axios.getPosts();
+    const friendsData = await AxiosFriends.getAllFriendsPosts();
+    const friendsPosts = [];
+    friendsData.map(data => data.Posts.map(post => friendsPosts.push(post)));
+    dispatch(fetchPostsSuccess( [...userPosts, ...friendsPosts] ));
+  }catch(error){
+    throw error;
+  }}
+
 
 const fetchPostsSuccess = postsArray => ({
   type: FETCH_POSTS,
@@ -96,19 +108,5 @@ export const filterPosts = query => ({
   type: FILTER_POSTS,
   payload: query
 });
-
- const fetchFriendsPostsSuccess = postsArray=>({
-  type: FETCH_FRIENDS_POSTS,
-  payload: postsArray
-})
-
-export const fetchFriendsPosts = () => dispatch =>
-  AxiosFriends.getAllFriendsPosts()
-    .then(response =>{
-      dispatch(fetchFriendsPostsSuccess(response));
-    })
-    .catch(error => {
-      throw error;
-    });
 
 

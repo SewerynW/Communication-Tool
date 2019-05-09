@@ -4,8 +4,7 @@ import {
   FETCH_POSTS,
   REMOVE_POST,
   FILTER_POSTS,
-  REMOVE_ALL_POST,
-  FETCH_FRIENDS_POSTS
+  REMOVE_ALL_POST
 } from "../actions/postActions";
 
 const initState = {
@@ -64,14 +63,6 @@ export const postReducer = (state = initState, action) => {
       return{
         userPosts:[]
       }
-    case FETCH_FRIENDS_POSTS:
-    console.log(action.payload)
-    return{
-      
-      ...state,
-      friendsPosts: [...action.payload]
-
-    };
     default:
       return state;
   }
