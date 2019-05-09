@@ -51,6 +51,12 @@ export const postReducer = (state = initState, action) => {
             : post
         )
       };
+      case FETCH_FRIENDS_POSTS:
+      //  console.log(action.payload)
+        return{
+          ...state,
+          friendsPosts: [...action.payload]
+        };
     case FILTER_POSTS:
       return {
         ...state,
@@ -59,19 +65,21 @@ export const postReducer = (state = initState, action) => {
             isInPostTitle(post, action.payload) ||
             isInPostText(post, action.payload)
         )
+
+        // ...state,
+        // allPosts:[state.userPosts, state.friendsPosts],
+        // filteredUserPosts: this.allPosts.filter(
+        //   post =>
+        //     isInPostTitle(post, action.payload) ||
+        //     isInPostText(post, action.payload)
+        // )
+
       };
     case REMOVE_ALL_POST:
       return{
         userPosts:[]
       }
-    case FETCH_FRIENDS_POSTS:
-    console.log(action.payload)
-    return{
-      
-      ...state,
-      friendsPosts: [...action.payload]
-
-    };
+  
     default:
       return state;
   }

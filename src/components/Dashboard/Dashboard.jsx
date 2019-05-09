@@ -73,8 +73,11 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userPosts: state.postReducer.userPosts,
-  filteredUserPosts: state.postReducer.filteredUserPosts
+  //userPosts: state.postReducer.userPosts,
+  filteredUserPosts: state.postReducer.filteredUserPosts,
+  userPosts: [state.postReducer.userPosts,
+              state.postReducer.friendsPosts]
+
 });
 
 const mapDispatchToProps = dispatch => {

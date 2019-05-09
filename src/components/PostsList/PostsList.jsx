@@ -2,23 +2,24 @@ import React, { PureComponent } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
-//import Axios from "../../http/dataBase/friends";
 import { fetchFriendsPosts} from '../../actions/postActions';
 import { connect } from 'react-redux';
 
 class PostsList extends PureComponent {
   constructor(props){
     super(props);
-    this.state = {
-      summaryPosts:[...this.props.userPosts, ...this.props.friendsPost]
-    }
+    //this.state = {friendsPost: [...this.props.friendsPost]}
+   // summaryPosts:[...this.props.userPosts, ...this.props.friendsPost]
+    // summaryPosts:[...this.props.userPosts ]
+
+    
   }
   handleGetFriends = ()=>{
     this.props.getMyFriendsPosts();
   };
   get userPostsSorted() {
     //    if (this.state.summarypost.length > 2) {
-console.log(this.state.summaryPosts)
+console.log(this.props.userPosts);
     if (this.props.userPosts.length > 2) {
       return [...this.props.userPosts].sort(
         (a, b) => Date.parse(b.PublishDate) - Date.parse(a.PublishDate)
@@ -27,8 +28,9 @@ console.log(this.state.summaryPosts)
       return this.props.userPosts.length ? [...this.props.userPosts] : [];
     }
   }
-
   render() {
+    //console.log(this.props.friendsPost);
+
     return (
       <ul className={style.postsList}>
       <button onClick={this.handleGetFriends}>get friends posts</button>
@@ -61,18 +63,12 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  friendsPost: state.postReducer.friendsPosts
+ // friendsPost: state.postReducer.friendsPosts,
+  userPosts: state.postReducer.userPosts
+
   
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   deleteProfile: () => {
-//     dispatch(removeProfile()); // z reduxa
-//   },
-//   deleteAllPosts: () =>{
-//     dispatch(removeAllPosts());
-//   }
-// })
+
 
 export default connect (mapStateToProps, mapDispatchToProps)(PostsList);
-//export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));
