@@ -131,6 +131,11 @@ class Dashboard extends React.Component {
           <div className={`${style.sideBox} ${style.friends}`} id="friends">
             <h2>Friends</h2>
             <div className={style.search}>
+              <FontAwesomeIcon
+                icon="filter"
+                size="lg"
+                className={style.filterIcon}
+              />
               <Search
                 additionalStyle={additionalStyle}
                 handleInputChanges={this.handleFriendsInputChanges}
