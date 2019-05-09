@@ -13,7 +13,8 @@ import {
   faEyeSlash,
   faHandshake,
   faArrowCircleRight,
-  faArrowCircleLeft
+  faArrowCircleLeft,
+  faFilter
 } from "@fortawesome/free-solid-svg-icons";
 
 import { connect } from "react-redux";
@@ -40,7 +41,8 @@ library.add(
   faEyeSlash,
   faHandshake,
   faArrowCircleRight,
-  faArrowCircleLeft
+  faArrowCircleLeft,
+  faFilter
 );
 
 class App extends Component {

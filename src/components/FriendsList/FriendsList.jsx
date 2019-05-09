@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./FriendsList.module.scss";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 // Components
@@ -36,15 +35,8 @@ class FriendsList extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  myFriends: state.friendsReducer.myFriends
-});
-
 FriendsList.propTypes = {
   myFriends: PropTypes.array
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(FriendsList);
+export default FriendsList;
