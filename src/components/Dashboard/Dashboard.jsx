@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import { filterPosts } from "../../actions/postActions";
 import { findFriends, addFriend } from "../../actions/friendsActions";
+import { toggleFilterFriends } from "../../actions/stateActions";
 
 // Components
 import PostsList from "../PostsList/PostsList";
@@ -38,8 +39,7 @@ class Dashboard extends React.Component {
       friendId: "",
       show: false
     },
-    mobileFeatureStatus: false,
-    activeFilter: false
+    mobileFeatureStatus: false
   };
 
   handleClick = () => {
@@ -86,11 +86,9 @@ class Dashboard extends React.Component {
 
   handleClickFilterIcon = () => {
     const filter = document.getElementById("filterIcon");
-    let style = this.state.activeFilter ? "gray" : "black";
+    let style = this.props.activeFilter ? "gray" : "black";
     filter.style.color = style;
-    this.setState(() => ({
-      activeFilter: !this.state.activeFilter
-    }));
+    this.props.toggleFilterFriends();
   };
 
   render() {
@@ -181,7 +179,8 @@ const mapStateToProps = state => ({
   userPosts: state.postReducer.userPosts,
   filteredUserPosts: state.postReducer.filteredUserPosts,
   foundPeople: state.friendsReducer.foundPeople,
-  dataType: state.friendsReducer.type
+  dataType: state.friendsReducer.type,
+  activeFilter: state.stateReducer.activeFilter
 });
 
 const mapDispatchToProps = dispatch => {
@@ -194,6 +193,9 @@ const mapDispatchToProps = dispatch => {
     },
     addFriend: friend => {
       dispatch(addFriend(friend));
+    },
+    toggleFilterFriends: () => {
+      dispatch(toggleFilterFriends());
     }
   };
 };
