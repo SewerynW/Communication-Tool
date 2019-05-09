@@ -9,7 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Redux
 import { connect } from "react-redux";
 import { filterPosts } from "../../actions/postActions";
-import { findFriends, addFriend } from "../../actions/friendsActions";
+import {
+  findFriends,
+  addFriend,
+  filterFriends
+} from "../../actions/friendsActions";
+import { toggleFilterFriends } from "../../actions/stateActions";
 
 // Components
 import PostsList from "../PostsList/PostsList";
@@ -32,7 +37,8 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
   state = {
-    query: "",
+    queryPost: "",
+    queryFriends: "",
     hintPopUp: null,
     friend: {
       friendId: "",
@@ -59,7 +65,7 @@ class Dashboard extends React.Component {
   handlePostsInputChanges = event => {
     let queryFromInput = event.target.value;
     this.setState(() => ({
-      query: queryFromInput
+      queryPost: queryFromInput
     }));
     this.props.filterPosts(queryFromInput);
   };
@@ -70,18 +76,46 @@ class Dashboard extends React.Component {
 
   handleFriendsInputChanges = event => {
     let queryFromInput = event.target.value;
-    if (queryFromInput.length > 0) {
-      this.props.findFriends(queryFromInput);
-      this.setState(() => ({ hintPopUp: true }));
-    }
-    if (!queryFromInput) {
-      this.handleCloseHintPopUp();
+
+    if (this.props.activeFilter) {
+      this.setState(() => ({
+        queryFriends: queryFromInput
+      }));
+      this.props.filterFriends(queryFromInput);
+    } else {
+      if (queryFromInput.length > 0) {
+        this.props.findFriends(queryFromInput);
+        this.setState(() => ({ hintPopUp: true }));
+      }
+      if (!queryFromInput) {
+        this.handleCloseHintPopUp();
+      }
     }
   };
 
+  handleClickFilterIcon = () => {
+    const filter = document.getElementById("filterIcon");
+    let style = this.props.activeFilter ? "gray" : "black";
+    filter.style.color = style;
+    this.props.toggleFilterFriends();
+  };
+
   render() {
-    const { classes, foundPeople, dataType } = this.props;
-    const { hintPopUp, mobileFeatureStatus } = this.state;
+    const {
+      classes,
+      foundPeople,
+      dataType,
+      filteredUserPosts,
+      userPosts,
+      myFriends,
+      filteredMyFriends
+    } = this.props;
+    const {
+      hintPopUp,
+      mobileFeatureStatus,
+      queryPost,
+      queryFriends
+    } = this.state;
     const additionalStyle = {
       position: "absolute",
       top: "40px",
@@ -91,15 +125,10 @@ class Dashboard extends React.Component {
       overflow: "auto",
       width: "265px"
     };
-
     return (
       <div className={style.container}>
         <PostsList
-          userPosts={
-            this.state.query.length
-              ? this.props.filteredUserPosts
-              : this.props.userPosts
-          }
+          userPosts={queryPost.length ? filteredUserPosts : userPosts}
         />
         <div className={style.features}>
           <div className={`${style.sideBox} ${style.posts}`} id="posts">
@@ -127,6 +156,13 @@ class Dashboard extends React.Component {
           <div className={`${style.sideBox} ${style.friends}`} id="friends">
             <h2>Friends</h2>
             <div className={style.search}>
+              <FontAwesomeIcon
+                id="filterIcon"
+                icon="filter"
+                size="lg"
+                className={style.filterIcon}
+                onClick={this.handleClickFilterIcon}
+              />
               <Search
                 additionalStyle={additionalStyle}
                 handleInputChanges={this.handleFriendsInputChanges}
@@ -138,7 +174,9 @@ class Dashboard extends React.Component {
             </div>
 
             <div>
-              <FriendsList />
+              <FriendsList
+                myFriends={queryFriends.length ? filteredMyFriends : myFriends}
+              />
             </div>
           </div>
           <div className={`${style.sideBox} ${style.toggle}`}>
@@ -160,7 +198,10 @@ const mapStateToProps = state => ({
   userPosts: state.postReducer.userPosts,
   filteredUserPosts: state.postReducer.filteredUserPosts,
   foundPeople: state.friendsReducer.foundPeople,
-  dataType: state.friendsReducer.type
+  dataType: state.friendsReducer.type,
+  activeFilter: state.stateReducer.activeFilter,
+  myFriends: state.friendsReducer.myFriends,
+  filteredMyFriends: state.friendsReducer.filteredMyFriends
 });
 
 const mapDispatchToProps = dispatch => {
@@ -173,13 +214,20 @@ const mapDispatchToProps = dispatch => {
     },
     addFriend: friend => {
       dispatch(addFriend(friend));
+    },
+    toggleFilterFriends: () => {
+      dispatch(toggleFilterFriends());
+    },
+    filterFriends: query => {
+      dispatch(filterFriends(query));
     }
   };
 };
 
 Dashboard.propTypes = {
   classes: PropTypes.object,
-  userPosts: PropTypes.array
+  userPosts: PropTypes.array,
+  filteredMyFriends: PropTypes.array
 };
 
 export default withRouter(

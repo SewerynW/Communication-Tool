@@ -13,7 +13,8 @@ import {
   faEyeSlash,
   faHandshake,
   faArrowCircleRight,
-  faArrowCircleLeft
+  faArrowCircleLeft,
+  faFilter
 } from "@fortawesome/free-solid-svg-icons";
 
 // Redux
@@ -42,7 +43,8 @@ library.add(
   faEyeSlash,
   faHandshake,
   faArrowCircleRight,
-  faArrowCircleLeft
+  faArrowCircleLeft,
+  faFilter
 );
 
 class App extends Component {
