@@ -38,7 +38,8 @@ class Dashboard extends React.Component {
       friendId: "",
       show: false
     },
-    mobileFeatureStatus: false
+    mobileFeatureStatus: false,
+    activeFilter: false
   };
 
   handleClick = () => {
@@ -81,6 +82,15 @@ class Dashboard extends React.Component {
     if (!queryFromInput) {
       this.handleCloseHintPopUp();
     }
+  };
+
+  handleClickFilterIcon = () => {
+    const filter = document.getElementById("filterIcon");
+    let style = this.state.activeFilter ? "gray" : "black";
+    filter.style.color = style;
+    this.setState(() => ({
+      activeFilter: !this.state.activeFilter
+    }));
   };
 
   render() {
@@ -132,9 +142,11 @@ class Dashboard extends React.Component {
             <h2>Friends</h2>
             <div className={style.search}>
               <FontAwesomeIcon
+                id="filterIcon"
                 icon="filter"
                 size="lg"
                 className={style.filterIcon}
+                onClick={this.handleClickFilterIcon}
               />
               <Search
                 additionalStyle={additionalStyle}
