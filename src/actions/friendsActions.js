@@ -4,6 +4,7 @@ export const FIND_FRIENDS = "Find_Friends";
 export const ADD_FRIEND = "Add_Friend";
 export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
 export const DELETE_FRIEND = "Delete_Friend";
+export const FILTER_FRIENDS = "Filter_Friends";
 
 export const fetchFriendsList = () => dispatch => {
   Axios.getFriendsList()
@@ -70,3 +71,8 @@ export const deleteFriend = friendId => dispatch => {
     payload: friendId
   });
 };
+
+export const filterFriends = query => ({
+  type: FILTER_FRIENDS,
+  payload: query
+});
