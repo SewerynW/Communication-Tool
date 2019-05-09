@@ -20,9 +20,8 @@ const isInName = (person, payload) => checkPerson(person.GivenName, payload);
 
 const isInLastName = (person, payload) => checkPerson(person.Name, payload);
 
-const checkMyList = (id, myFriends) => {
-  const found = myFriends.some(el => el.Id === id);
-  return !found;
+const ifExists = (id, myFriends) => {
+  return !myFriends.some(el => el.Id === id);
 };
 
 export const friendsReducer = (state = initState, action) => {
@@ -31,7 +30,7 @@ export const friendsReducer = (state = initState, action) => {
       return {
         ...state,
         foundPeople: action.payload.filter(person =>
-          checkMyList(person.Id, state.myFriends)
+          ifExists(person.Id, state.myFriends)
         )
       };
     case ADD_FRIEND:
