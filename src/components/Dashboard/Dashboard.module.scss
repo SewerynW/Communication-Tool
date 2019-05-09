@@ -41,23 +41,15 @@
     .search {
       border-bottom: 2px solid #3f51b5;
       margin-bottom: 15px;
-      display: flex;
-      align-items: center;
 
       .filterIcon {
+        position: absolute;
+        z-index: 1;
+        padding-top: 7px;
         color: gray;
         &:hover {
           cursor: pointer;
         }
-
-        //   }
-        //   &:active {
-        //     color: brown;
-        //   }
-        // }
-
-        // .activeFilter {
-        //   color: gray;
       }
     }
 
