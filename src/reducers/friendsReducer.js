@@ -4,7 +4,8 @@ import {
   ADD_FRIEND,
   FETCH_FRIENDS_LIST,
   DELETE_FRIEND,
-  FILTER_FRIENDS
+  FILTER_FRIENDS,
+  DELETE_ALL_FRIENDS
 } from "../actions/friendsActions";
 
 
@@ -66,6 +67,10 @@ export const friendsReducer = (state = initState, action) => {
             isInName(person, action.payload) ||
             isInLastName(person, action.payload)
         )
+      };
+      case DELETE_ALL_FRIENDS:
+      return {
+        myFriends: []
       };
     default:
       return state;

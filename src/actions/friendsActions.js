@@ -5,6 +5,8 @@ export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
 export const DELETE_FRIEND = "Delete_Friend";
 export const FILTER_FRIENDS = "Filter_Friends";
 export const UPDATE_FRIEND_STATUS = "Update_Friend_Status";
+export const DELETE_ALL_FRIENDS = "Delete_All_Friends";
+
 
 
 
@@ -93,4 +95,8 @@ export const deleteFriend = friendId => dispatch => {
 export const filterFriends = query => ({
   type: FILTER_FRIENDS,
   payload: query
+});
+
+export const deleteAllFriends = () => ({
+  type: DELETE_ALL_FRIENDS
 });
