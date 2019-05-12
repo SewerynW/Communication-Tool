@@ -40,24 +40,11 @@ export default {
     return new Promise((resolve, reject) => {
       api
         .get("/post/friend")
+
         .then(res => resolve(res.data))
-        // .then(res => {
-        //   console.log(res);
-        //   resolve(res.data)})
         .catch(err => reject(err));
     });
   },
-  //   getFriendPosts(friendId) {
-  //   return new Promise((resolve, reject) => {
-  //     api
-  //       .get(`/post/friend/${friendId}`)
-  //       .then(res =>{ 
-  //         console.log(res.data);
-  //         resolve(res.data)})
-  //       .catch(err => reject(err));
-  //   });
-  // },
-  
 
   addFriend(friend) {
     return new Promise((resolve, reject) => {

@@ -63,7 +63,7 @@ class ShortPostElement extends PureComponent {
     }));
   };
 
-  viewFirst200CharactersFullWords = fullPost => { //sortowanie
+  viewFirst200CharactersFullWords = fullPost => {
     if (fullPost === undefined) return null;
     return fullPost.length > 200
       ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 200))}...`
@@ -77,6 +77,7 @@ class ShortPostElement extends PureComponent {
   }
 
   render() {
+   // const { Photo, GivenName, Name } = this.props.myFriends;
     const {
       classes,
       Title,
@@ -86,6 +87,7 @@ class ShortPostElement extends PureComponent {
       fullScreen
     } = this.props;
     const { activePopup, activeConfirmDialog } = this.state;
+   // console.log(myFriends.Name)
     return (
       <>
         <Card className={style.shortPostElement}>
@@ -120,7 +122,7 @@ class ShortPostElement extends PureComponent {
             {/* {userPost?(<React.Fragment>
 
             </React.Fragment>):null} */}
-              {/* <Grid container justify="flex-end">
+               <Grid container justify="flex-end">
                 <FontAwesomeButton
                   icon="edit"
                   colorButton={buttonStyle.green}
@@ -131,8 +133,8 @@ class ShortPostElement extends PureComponent {
                   colorButton={buttonStyle.red}
                   handleOnClick={this.handleOnClickDelete}
                 />
-              </Grid> */}
-              <Grid container justify="flex-end">
+              </Grid> 
+              {/* <Grid container justify="flex-end">
               <div className={style.userInfo}>
                 <Typography
                   className={style.userName}
@@ -145,7 +147,7 @@ class ShortPostElement extends PureComponent {
                   className={classes.avatar}
                 />
             </div>
-              </Grid> 
+              </Grid>  */}
               <CardContent className={style.mainContent}>
                 <Typography
                   align="left"
@@ -224,9 +226,13 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
+const mapStateToProps = state => ({
+  myFriends: state.friendsReducer.myFriends
+});
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(withMobileDialog()(withStyles(stylesMaterialUi)(ShortPostElement)))
 );

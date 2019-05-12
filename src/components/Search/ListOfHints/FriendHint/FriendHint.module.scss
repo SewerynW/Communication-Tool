@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(233, 229, 229);
+  border-radius: 25px;
+  align-items: center;
+  margin: 10px 0px;
+  padding: 2px;
+  justify-content: space-between;
+  width: 100%;
+  p {
+    margin: 0;
+  }
+
+  .icons {
+    margin-right: 8px;
+    .icon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

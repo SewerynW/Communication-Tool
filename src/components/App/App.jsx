@@ -8,15 +8,20 @@ import {
   faExclamationTriangle,
   faWindowClose,
   faEnvelope,
-  faFileImage
+  faFileImage,
+  faEye,
+  faEyeSlash,
+  faHandshake,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faFilter
 } from "@fortawesome/free-solid-svg-icons";
 
-// Redux
 import { connect } from "react-redux";
-import { fetchPosts, fetchFriendsPosts } from "../../actions/postActions";
+import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
+import { fetchFriendsList } from "../../actions/friendsActions";
 
-// Components
 import EditProfile from "../EditProfile/EditProfile";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
@@ -31,7 +36,13 @@ library.add(
   faExclamationTriangle,
   faWindowClose,
   faEnvelope,
-  faFileImage
+  faFileImage,
+  faEye,
+  faEyeSlash,
+  faHandshake,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faFilter
 );
 
 class App extends Component {
@@ -60,15 +71,13 @@ class App extends Component {
     });
   };
 
-  setUser = async () => {
-    //załadować wszystkie posty od firendsów
-    await this.props.fetchFriendsPosts();
-    await this.props.fetchPosts();
-    await this.props.fetchProfile();
+  setUser = () => {
+    this.props.fetchPosts();
+    this.props.fetchProfile();
+    this.props.fetchFriendsList();
   };
 
   render() {
-   // console.log(sessionStorage.userId);
     return (
       <div className={style.App}>
         <BrowserRouter>
@@ -128,13 +137,11 @@ const mapDispatchToProps = dispatch => ({
   fetchProfile: () => {
     dispatch(fetchProfile());
   },
-  fetchFriendsPosts: () => {
-    dispatch(fetchFriendsPosts());
+  fetchFriendsList: () => {
+    dispatch(fetchFriendsList());
   }
 });
 
-
-//friendsPosts
 export default connect(
   null,
   mapDispatchToProps
