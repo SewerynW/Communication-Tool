@@ -77,7 +77,6 @@ class ShortPostElement extends PureComponent {
   }
 
   render() {
-   // const { Photo, GivenName, Name } = this.props.myFriends;
     const {
       classes,
       Title,
@@ -87,7 +86,6 @@ class ShortPostElement extends PureComponent {
       fullScreen
     } = this.props;
     const { activePopup, activeConfirmDialog } = this.state;
-   // console.log(myFriends.Name)
     return (
       <>
         <Card className={style.shortPostElement}>
@@ -119,11 +117,8 @@ class ShortPostElement extends PureComponent {
               justify="flex-start"
               className={style.postTextContent}
             >
-            {/* {userPost?(<React.Fragment>
-
-            </React.Fragment>):null} */}
-               <Grid container justify="flex-end">
-                <FontAwesomeButton
+            <Grid container justify="flex-end">
+              <FontAwesomeButton
                   icon="edit"
                   colorButton={buttonStyle.green}
                   handleOnClick={this.handleOnClickEdit}
@@ -134,20 +129,6 @@ class ShortPostElement extends PureComponent {
                   handleOnClick={this.handleOnClickDelete}
                 />
               </Grid> 
-              {/* <Grid container justify="flex-end">
-              <div className={style.userInfo}>
-                <Typography
-                  className={style.userName}
-                >
-                  Hi user
-                </Typography>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={AvatarPhoto}
-                  className={classes.avatar}
-                />
-            </div>
-              </Grid>  */}
               <CardContent className={style.mainContent}>
                 <Typography
                   align="left"
@@ -226,13 +207,8 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const mapStateToProps = state => ({
-  myFriends: state.friendsReducer.myFriends
-});
-
 export default withRouter(
   connect(
-    mapStateToProps,
     mapDispatchToProps
   )(withMobileDialog()(withStyles(stylesMaterialUi)(ShortPostElement)))
 );

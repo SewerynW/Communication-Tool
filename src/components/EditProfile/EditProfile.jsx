@@ -61,10 +61,7 @@ class EditProfile extends React.Component {
   };
 
   handleClickInputPhoto = event => {
-    const file = event.target.files[0];
     const reader = new FileReader();
-    const url = reader.readAsDataURL(file);
-
     reader.onloadend = () => {
       this.setState({
         tmPhoto: reader.result
