@@ -15,13 +15,16 @@ import {
   DialogTitle,
   DialogContentText,
   DialogActions,
-  withMobileDialog
+  withMobileDialog,
+  Avatar
 } from "@material-ui/core/";
 import PostModal from "./../PostModal/PostModal";
 import FontAwesomeButton from "./../FontAwesomeButton/FontAwesomeButton";
 import { connect } from "react-redux";
 import { removePost } from "../../actions/postActions";
 import { withRouter } from "react-router-dom";
+import AvatarPhoto from "../../assets/profile.png";
+
 
 const stylesMaterialUi = {
   media: {
@@ -60,7 +63,7 @@ class ShortPostElement extends PureComponent {
     }));
   };
 
-  viewFirst200CharactersFullWords = fullPost => { //sortowanie
+  viewFirst200CharactersFullWords = fullPost => {
     if (fullPost === undefined) return null;
     return fullPost.length > 200
       ? `${fullPost.slice(0, fullPost.lastIndexOf(" ", 200))}...`
@@ -114,8 +117,8 @@ class ShortPostElement extends PureComponent {
               justify="flex-start"
               className={style.postTextContent}
             >
-              <Grid container justify="flex-end">
-                <FontAwesomeButton
+            <Grid container justify="flex-end">
+              <FontAwesomeButton
                   icon="edit"
                   colorButton={buttonStyle.green}
                   handleOnClick={this.handleOnClickEdit}
@@ -125,7 +128,7 @@ class ShortPostElement extends PureComponent {
                   colorButton={buttonStyle.red}
                   handleOnClick={this.handleOnClickDelete}
                 />
-              </Grid>
+              </Grid> 
               <CardContent className={style.mainContent}>
                 <Typography
                   align="left"
@@ -206,7 +209,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default withRouter(
   connect(
-    null,
     mapDispatchToProps
   )(withMobileDialog()(withStyles(stylesMaterialUi)(ShortPostElement)))
 );

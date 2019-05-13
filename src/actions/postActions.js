@@ -1,4 +1,5 @@
-import Axios from "./../http/dataBase/posts";
+import Axios from "../http/dataBase/posts";
+import AxiosFriends from "../http/dataBase/friends";
 
 export const ADD_POST = "Add_Post";
 export const FETCH_POSTS = "Fetch_Posts";
@@ -6,7 +7,7 @@ export const EDIT_POST = "Edit_Post";
 export const REMOVE_POST = "Remove_Post";
 export const FILTER_POSTS = "Filter_Posts";
 export const REMOVE_ALL_POST= "Remove_All_Posts";
-
+export const FETCH_FRIENDS_POSTS = "Fetch_Friends_Posts";
 
 export const removeAllPosts = () => ({
   type: REMOVE_ALL_POST
@@ -36,14 +37,16 @@ const addPostSuccess = ({ Id, Title, Text, ThumbnailPhoto, PublishDate }) => ({
   }
 });
 
-export const fetchPosts = () => dispatch =>
-  Axios.getPosts()
-    .then(response => {
-      dispatch(fetchPostsSuccess(response));
-    })
-    .catch(error => {
-      throw error;
-    });
+export const fetchPosts = () => async dispatch =>{
+  try{
+    const userPosts = await Axios.getPosts();
+    const friendsData = await AxiosFriends.getAllFriendsPosts();
+    const friendsPosts = [];
+    friendsData.map(data => data.Posts.map(post => friendsPosts.push(post)));
+    dispatch(fetchPostsSuccess( [...userPosts, ...friendsPosts] ));
+  }catch(error){
+    throw error;
+  }}
 
 const fetchPostsSuccess = postsArray => ({
   type: FETCH_POSTS,

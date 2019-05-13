@@ -17,13 +17,11 @@ import {
   faFilter
 } from "@fortawesome/free-solid-svg-icons";
 
-// Redux
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
 import { fetchFriendsList } from "../../actions/friendsActions";
 
-// Components
 import EditProfile from "../EditProfile/EditProfile";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";

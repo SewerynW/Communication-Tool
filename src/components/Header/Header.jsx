@@ -8,7 +8,6 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { filterPosts } from "../../actions/postActions";
 
-// Components
 import MobileMenu from "./MobileMenu/MobileMenu";
 import Navigation from "./Navigation/Navigation";
 import Search from "../Search/Search";
