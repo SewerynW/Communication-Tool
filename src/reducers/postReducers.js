@@ -37,7 +37,6 @@ export const postReducer = (state = initState, action) => {
       return {
         ...state,
         userPosts: [...action.payload]
-
       };
     case REMOVE_POST:
       return {

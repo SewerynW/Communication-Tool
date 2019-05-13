@@ -126,11 +126,8 @@ class Dashboard extends React.Component {
       overflow: "auto",
       width: "265px"
     };
-    //console.log(userPosts, myFriends);
-   // console.log(myFriends.flat());
+    
    const getFlat= myFriends.flat();
-   console.log(getFlat);
-
     return (
       <div className={style.container}>
         <PostsList
@@ -178,7 +175,6 @@ class Dashboard extends React.Component {
                 hintPopUp={hintPopUp}
               />
             </div>
-
             <div>
               <FriendsList
                 myFriends={queryFriends.length ? filteredMyFriends : myFriends}
