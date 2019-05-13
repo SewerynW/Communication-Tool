@@ -5,7 +5,7 @@ import PostHint from "./PostHint/PostHint";
 import FriendHint from "./FriendHint/FriendHint";
 
 class ListOfHints extends React.Component {
-  componentDidMount() {
+  component() {
     document.addEventListener("mousedown", this.handleClickOutSide);
   }
   componentWillUnmount() {

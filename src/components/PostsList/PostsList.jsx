@@ -1,10 +1,22 @@
-import React, { PureComponent } from "react";
+//import React, { PureComponent } from "react";
+import React, { Component } from "react";
+
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
 
 
-class PostsList extends PureComponent {
+class PostsList extends Component {
+  //should component, prev state and next state
+  // shouldComponentUpdate(nextProps) {
+  //   return this.props.logged !== nextProps.logged;
+  // }
+  shouldComponentUpdate(nextProps, nextState){
+    //return this.props.userPosts
+    console.log(this.props, this.state);
+    console.log (nextProps, nextState);
+    return 'returning false will prevent re-rendering!';
+  }
   get userPostsSorted() {
     if (this.props.userPosts.length > 2) {
       return [...this.props.userPosts].sort(

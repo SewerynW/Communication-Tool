@@ -7,9 +7,6 @@ export const FILTER_FRIENDS = "Filter_Friends";
 export const UPDATE_FRIEND_STATUS = "Update_Friend_Status";
 export const DELETE_ALL_FRIENDS = "Delete_All_Friends";
 
-
-
-
 export const updateFriendsStatus = profile => dispatch=>{
     const friendProfile={
         Show: profile.updateShowPosts
