@@ -5,6 +5,7 @@ export const ADD_FRIEND = "Add_Friend";
 export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
 export const DELETE_FRIEND = "Delete_Friend";
 export const FILTER_FRIENDS = "Filter_Friends";
+export const FETCH_FRIEND_POSTS = "Fetch_friend_posts";
 
 export const fetchFriendsList = () => dispatch => {
   Axios.getFriendsList()
@@ -76,3 +77,18 @@ export const filterFriends = query => ({
   type: FILTER_FRIENDS,
   payload: query
 });
+
+export const fetchFriendPosts = friendId => dispatch => {
+  Axios.getFriendPosts(friendId)
+    .then(response => {
+      dispatch(fetchFriendPostsSuccess(response));
+    })
+    .catch(error => {
+      throw error;
+    });
+
+  const fetchFriendPostsSuccess = postsArray => ({
+    type: FETCH_FRIEND_POSTS,
+    payload: postsArray
+  });
+};
