@@ -1,0 +1,60 @@
+@import "../../scss//variables";
+
+.container {
+  overflow-y: scroll;
+  .modal {
+    padding: 1%;
+    width: auto;
+    left: 10vw;
+    right: 10vw;
+    max-width: 80vw;
+    top: 10vh;
+    margin-bottom: 10vh;
+    border-radius: 25px;
+    text-align: justify;
+
+    .btn {
+      font-size: 1.5em;
+      // color: inherit;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      transform: translate(-10%, 10%);
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  //   .container {
+  //     & .modal {
+  //       padding: 3%;
+  //       width: auto;
+  //       left: 20vw;
+  //       right: 20vw;
+  //       max-width: 60vw;
+  //       top: 10vh;
+  //       margin-bottom: 10vh;
+  //       border-radius: 25px;
+  //     }
+  //   }
+}
+
+@media (min-width: $desktop) {
+  .container {
+    .modal {
+      .btn {
+        transition: 0.3s;
+        transform: translate(-50%, 50%) scale(1);
+        &:hover {
+          transform: translate(-40%, 40%) scale(1.2);
+        }
+      }
+    }
+  }
+}

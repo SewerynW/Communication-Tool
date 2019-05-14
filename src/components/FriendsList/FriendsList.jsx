@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import Friend from "./Friend/Friend";
 
 class FriendsList extends React.Component {
-  handlerOnClickFriend = () => {};
-
   info = () => <p>Sorry you don't have any friends...</p>;
 
   render() {

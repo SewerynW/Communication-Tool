@@ -10,7 +10,7 @@ import {
 } from "../actions/friendsActions";
 
 const initState = {
-  clickedFriend: [],
+  clickedFriendPosts: [],
   friendProfile: {},
   myFriends: [],
   foundPeople: [],
@@ -72,7 +72,7 @@ export const friendsReducer = (state = initState, action) => {
     case FETCH_FRIEND_POSTS:
       return {
         ...state,
-        clickedFriend: action.payload
+        clickedFriendPosts: action.payload
       };
     case DELETE_ALL_FRIENDS:
       return {

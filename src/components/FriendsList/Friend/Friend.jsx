@@ -8,6 +8,10 @@ import { withStyles } from "@material-ui/core/styles";
 // Redux
 import { connect } from "react-redux";
 import { deleteFriend } from "../../../actions/friendsActions";
+import { fetchFriendPosts } from "../../../actions/friendsActions";
+
+// Components
+import FriendModal from "../../FriendModal/FriendModal";
 
 const styles = theme => ({
   rightIcon: {
@@ -16,6 +20,9 @@ const styles = theme => ({
 });
 
 class Friend extends React.Component {
+  state = {
+    activePopup: false
+  };
   onClickTrash = e => {
     e.stopPropagation();
     this.props.deleteFriend(this.props.id);
@@ -24,29 +31,61 @@ class Friend extends React.Component {
   handlerOnClickEye = e => {
     e.stopPropagation();
   };
+  handlerOnClickFriend = () => {
+    this.setState(prevState => ({
+      activePopup: !prevState.activePopup
+    }));
+    this.props.fetchFriendPosts(this.props.id);
+  };
+
+  handleTogglePopup = () => {
+    this.setState(prevState => ({
+      activePopup: !prevState.activePopup
+    }));
+  };
 
   render() {
-    const { photo, name, lastName, classes, onClickFriend, show } = this.props;
+    const {
+      photo,
+      name,
+      lastName,
+      classes,
+      show,
+      clickedFriendPosts
+    } = this.props;
+    const { activePopup } = this.state;
 
     return (
-      <div className={style.container} onClick={onClickFriend}>
-        <Avatar alt="Avatar" src={photo} />
-        <p> {`${name} ${lastName}`}</p>
-        <div className={style.icons}>
-          <FontAwesomeIcon
-            icon={show ? "eye" : "eye-slash"}
-            size="sm"
-            className={`${style.icon} ${classes.rightIcon}`}
-            onClick={this.onClickEye}
-          />
-          <FontAwesomeIcon
-            icon="trash"
-            size="sm"
-            className={`${style.icon} ${classes.rightIcon}`}
-            onClick={this.onClickTrash}
-          />
+      <React.Fragment>
+        <div className={style.container} onClick={this.handlerOnClickFriend}>
+          <Avatar alt="Avatar" src={photo} />
+          <p> {`${name} ${lastName}`}</p>
+          <div className={style.icons}>
+            <FontAwesomeIcon
+              icon={show ? "eye" : "eye-slash"}
+              size="sm"
+              className={`${style.icon} ${classes.rightIcon}`}
+              onClick={this.onClickEye}
+            />
+            <FontAwesomeIcon
+              icon="trash"
+              size="sm"
+              className={`${style.icon} ${classes.rightIcon}`}
+              onClick={this.onClickTrash}
+            />
+          </div>
         </div>
-      </div>
+        {activePopup ? (
+          <FriendModal
+            onClose={this.handleTogglePopup}
+            open={activePopup}
+            photo={photo}
+            name={name}
+            lastName={lastName}
+            friendPosts={clickedFriendPosts}
+          />
+        ) : null}
+      </React.Fragment>
     );
   }
 }
@@ -63,15 +102,20 @@ Friend.propTypes = {
   onClickTrash: PropTypes.func
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteFriend: friendId => {
-      dispatch(deleteFriend(friendId));
-    }
-  };
-};
+const mapStateToProps = state => ({
+  clickedFriendPosts: state.friendsReducer.clickedFriendPosts
+});
+
+const mapDispatchToProps = dispatch => ({
+  deleteFriend: friendId => {
+    dispatch(deleteFriend(friendId));
+  },
+  fetchFriendPosts: friendId => {
+    dispatch(fetchFriendPosts(friendId));
+  }
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(Friend));

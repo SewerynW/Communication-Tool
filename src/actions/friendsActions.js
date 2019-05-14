@@ -4,32 +4,27 @@ export const ADD_FRIEND = "Add_Friend";
 export const FETCH_FRIENDS_LIST = "Fetch_Friends_List";
 export const DELETE_FRIEND = "Delete_Friend";
 export const FILTER_FRIENDS = "Filter_Friends";
-<<<<<<< HEAD
 export const FETCH_FRIEND_POSTS = "Fetch_friend_posts";
-=======
 export const UPDATE_FRIEND_STATUS = "Update_Friend_Status";
 export const DELETE_ALL_FRIENDS = "Delete_All_Friends";
 
-
-
->>>>>>> origin/development
-
-export const updateFriendsStatus = profile => dispatch=>{
-    const friendProfile={
-        Show: profile.updateShowPosts
-    };
-    return Axios.updateFriendStatus().then(reponse=>{
-        dispatch(updateFriendsStatusSuccess());
-    })
-
-    const updateFriendsStatusSuccess = ({Id, Show}) =>({
-      type: UPDATE_FRIEND_STATUS,
-      payload: {
-          Id, 
-          Show
-      }
+export const updateFriendsStatus = profile => dispatch => {
+  const friendProfile = {
+    Show: profile.updateShowPosts
+  };
+  return Axios.updateFriendStatus().then(reponse => {
+    dispatch(updateFriendsStatusSuccess());
   });
-  }
+
+  const updateFriendsStatusSuccess = ({ Id, Show }) => ({
+    type: UPDATE_FRIEND_STATUS,
+    payload: {
+      Id,
+      Show
+    }
+  });
+};
+
 export const fetchFriendsList = () => dispatch => {
   Axios.getFriendsList()
     .then(response => {
@@ -115,6 +110,7 @@ export const fetchFriendPosts = friendId => dispatch => {
     payload: postsArray
   });
 };
+
 export const deleteAllFriends = () => ({
   type: DELETE_ALL_FRIENDS
 });
