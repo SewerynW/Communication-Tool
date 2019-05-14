@@ -3,6 +3,7 @@ import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
 
+
 class PostsList extends PureComponent {
   get userPostsSorted() {
     if (this.props.userPosts.length > 2) {
@@ -13,7 +14,6 @@ class PostsList extends PureComponent {
       return this.props.userPosts.length ? [...this.props.userPosts] : [];
     }
   }
-
   render() {
     return (
       <ul className={style.postsList}>
@@ -29,7 +29,7 @@ class PostsList extends PureComponent {
                 />
               </li>
             ))
-          : "You have not any post on your profile. We wait for your activity!"}
+          : "You have no post on your profile. We wait for your activity!"}
       </ul>
     );
   }

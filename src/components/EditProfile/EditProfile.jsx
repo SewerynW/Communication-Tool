@@ -61,10 +61,7 @@ class EditProfile extends React.Component {
   };
 
   handleClickInputPhoto = event => {
-    const file = event.target.files[0];
     const reader = new FileReader();
-    const url = reader.readAsDataURL(file);
-
     reader.onloadend = () => {
       this.setState({
         tmPhoto: reader.result
@@ -101,8 +98,6 @@ class EditProfile extends React.Component {
   render() {
     const { classes } = this.props;
     const { user, currentPhoto, tmPhoto } = this.state;
-    // console.log(currentPhoto, tmPhoto);
-    // console.log(typeof currentPhoto, typeof tmPhoto);
     return (
       <Card className={style.container}>
         <Typography align="center" variant="h4" component="h4" gutterBottom>
