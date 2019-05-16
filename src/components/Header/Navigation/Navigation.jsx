@@ -12,10 +12,12 @@ const Navigation = props => {
       <Link to="/profilePage" className={style.link}>
         #profile page
       </Link>
-
       <p onClick={props.logoutAndClearSession} className={style.link}>
         #log out
       </p>
+      <Link to="/chat" className={style.link}>
+        #chat
+      </Link>
     </div>
   );
 };

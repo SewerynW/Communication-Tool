@@ -17,11 +17,13 @@ import {
   faFilter
 } from "@fortawesome/free-solid-svg-icons";
 
+// Redux
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
 import { fetchFriendsList } from "../../actions/friendsActions";
 
+// Components
 import EditProfile from "../EditProfile/EditProfile";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
@@ -29,6 +31,7 @@ import Header from "../Header/Header";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import Footer from "../Footer/Footer";
 import PostForm from "../PostForm/PostForm";
+import Chat from "../Chat/Chat";
 
 library.add(
   faTrash,
@@ -120,6 +123,12 @@ class App extends Component {
           <PrivateRoute
             path="/editProfile"
             component={EditProfile}
+            setSession={this.setSession}
+            logged={this.state.logged}
+          />
+          <PrivateRoute
+            path="/chat"
+            component={Chat}
             setSession={this.setSession}
             logged={this.state.logged}
           />
