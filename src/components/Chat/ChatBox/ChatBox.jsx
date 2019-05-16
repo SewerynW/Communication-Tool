@@ -3,16 +3,19 @@ import style from "./ChatBox.module.scss";
 
 class ChatBox extends Component {
   render() {
-    const { handleTextChange, text } = this.props;
+    const { handleTextChange, text, handleSubmit } = this.props;
     return (
       <div className="">
-        <input
-          type="text"
-          value={text}
-          placeholder="chat here..."
-          className=""
-          onChange={handleTextChange}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={text}
+            placeholder="chat here..."
+            className=""
+            onChange={handleTextChange}
+          />
+          <button type="submit" />
+        </form>
       </div>
     );
   }

@@ -29,16 +29,33 @@ class Chat extends Component {
 
   handleTextChange = e => {
     const text = e.target.value;
-    if (e.keyCode === 13) {
-      console.log("ładuje wiadomość");
-      const payload = {
-        username: this.state.username,
-        message: this.state.text
-      };
-      axios.post("http://localhost:5000/message", payload);
-    } else {
-      this.setState({ text });
-    }
+    const payload = {
+      username: this.state.username,
+      message: this.state.text
+    };
+    console.log("wpisuje", text);
+    this.setState({ text });
+
+    // if (e.keyCode === 13) {
+    //   console.log("ładuje wiadomość");
+    //   const payload = {
+    //     username: this.state.username,
+    //     message: this.state.text
+    //   };
+    //   axios.post("http://localhost:5000/message", payload);
+    // } else {
+    //   this.setState({ text });
+    // }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const payload = {
+      username: this.state.username,
+      message: this.state.text
+    };
+    console.log("wysyłam", payload);
+    axios.post("http://localhost:5000/message", payload);
   };
 
   render() {
@@ -46,6 +63,7 @@ class Chat extends Component {
       <div>
         Chat
         <ChatBox
+          handleSubmit={this.handleSubmit}
           handleTextChange={this.handleTextChange}
           text={this.state.text}
         />
