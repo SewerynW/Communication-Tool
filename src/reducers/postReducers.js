@@ -10,9 +10,9 @@ import {
 const initState = {
   userPosts: [],
   filteredUserPosts: [],
+  friendsPosts: [], 
   type: "post"
-};
-
+}
 const checkText = (text, payload) =>
   text.toLowerCase().indexOf(payload.toLowerCase()) !== -1;
 
@@ -59,7 +59,6 @@ export const postReducer = (state = initState, action) => {
             isInPostText(post, action.payload)
         )
       };
-    //
     case REMOVE_ALL_POST:
       return {
         userPosts: []

@@ -15,6 +15,9 @@ import {
 } from "@material-ui/core";
 import { removeProfile } from '../../actions/profileActions';
 import { removeAllPosts} from '../../actions/postActions'
+import { deleteAllFriends} from '../../actions/friendsActions'
+
+
 import { connect } from 'react-redux';
 
 const stylesMaterialUi = theme => ({
@@ -41,6 +44,8 @@ class DeleteProfilePopUp extends React.PureComponent {
 handleDeleteProfile = async () =>{
   await this.props.deleteProfile();
   await this.props.deleteAllPosts();
+  await this.props.deleteAllFriends();
+  
   this.props.logoutAndClearSession();
   this.props.offBlur();
 }
@@ -118,6 +123,9 @@ const mapDispatchToProps = dispatch => ({
   },
   deleteAllPosts: () =>{
     dispatch(removeAllPosts());
+  },
+   deleteAllFriends: () =>{
+    dispatch(deleteAllFriends());
   }
 
 })

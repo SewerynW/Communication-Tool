@@ -1,12 +1,16 @@
 import {
+  UPDATE_FRIEND_STATUS,
   FIND_FRIENDS,
   ADD_FRIEND,
   FETCH_FRIENDS_LIST,
   DELETE_FRIEND,
-  FILTER_FRIENDS
+  FILTER_FRIENDS,
+  DELETE_ALL_FRIENDS
 } from "../actions/friendsActions";
 
+
 const initState = {
+  friendProfile: {},
   myFriends: [],
   foundPeople: [],
   filteredMyFriends: [],
@@ -26,6 +30,11 @@ const ifExists = (id, myFriends) => {
 
 export const friendsReducer = (state = initState, action) => {
   switch (action.type) {
+    case UPDATE_FRIEND_STATUS:
+      return{
+        ...state.friendProfile,
+        Show: action.payload.Show
+      };
     case FIND_FRIENDS:
       return {
         ...state,
@@ -58,6 +67,10 @@ export const friendsReducer = (state = initState, action) => {
             isInName(person, action.payload) ||
             isInLastName(person, action.payload)
         )
+      };
+      case DELETE_ALL_FRIENDS:
+      return {
+        myFriends: []
       };
     default:
       return state;
