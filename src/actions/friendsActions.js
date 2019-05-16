@@ -54,25 +54,25 @@ export const findFriends = query => dispatch => {
 };
 
 export const addFriend = friend => dispatch => {
-  Axios.addFriend(friend)
+   return Axios.addFriend(friend)
     .then(response => {
       dispatch(addFriendSuccess(response.data));
     })
     .catch(error => {
       throw error;
     });
-
-  const addFriendSuccess = ({ Name, GivenName, Id, Photo, Show }) => ({
-    type: ADD_FRIEND,
-    payload: {
-      Name,
-      GivenName,
-      Id,
-      Photo,
-      Show
-    }
-  });
 };
+
+const addFriendSuccess = ({ Name, GivenName, Id, Photo, Show }) => ({
+  type: ADD_FRIEND,
+  payload: {
+    Name,
+    GivenName,
+    Id,
+    Photo,
+    Show
+  }
+});
 
 export const deleteFriend = friendId => dispatch => {
   Axios.deleteFriend(friendId)

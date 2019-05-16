@@ -16,8 +16,6 @@ import {
 import { removeProfile } from '../../actions/profileActions';
 import { removeAllPosts} from '../../actions/postActions'
 import { deleteAllFriends} from '../../actions/friendsActions'
-
-
 import { connect } from 'react-redux';
 
 const stylesMaterialUi = theme => ({
@@ -45,7 +43,6 @@ handleDeleteProfile = async () =>{
   await this.props.deleteProfile();
   await this.props.deleteAllPosts();
   await this.props.deleteAllFriends();
-  
   this.props.logoutAndClearSession();
   this.props.offBlur();
 }
@@ -127,8 +124,6 @@ const mapDispatchToProps = dispatch => ({
    deleteAllFriends: () =>{
     dispatch(deleteAllFriends());
   }
-
 })
 
-
- export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));
+export default connect(null, mapDispatchToProps)(withStyles(stylesMaterialUi)(DeleteProfilePopUp));

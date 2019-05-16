@@ -4,13 +4,13 @@ import {
   FETCH_POSTS,
   REMOVE_POST,
   FILTER_POSTS,
-  REMOVE_ALL_POST
+  REMOVE_ALL_POST,
+  ADD_FRIEND_POSTS
 } from "../actions/postActions";
 
 const initState = {
   userPosts: [],
   filteredUserPosts: [],
-  friendsPosts: [], 
   type: "post"
 }
 const checkText = (text, payload) =>
@@ -62,6 +62,12 @@ export const postReducer = (state = initState, action) => {
     case REMOVE_ALL_POST:
       return {
         userPosts: []
+      };
+    case ADD_FRIEND_POSTS:
+    console.log(action.payload)
+      return {
+       ...state,
+       userPosts: [...state.userPosts, ...action.payload]
       };
     default:
       return state;

@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 // Redux
 import { connect } from "react-redux";
 import { addFriend } from "../../../../actions/friendsActions";
+import { addFriendsPosts} from "../../../../actions/postActions"
 
 const styles = theme => ({
   rightIcon: {
@@ -24,17 +25,42 @@ const FriendHint = props => {
     addFriend,
     id,
     show,
-    handleCloseHintPopUp
+    handleCloseHintPopUp,
+    addFriendsPosts
   } = props;
 
-  const handlerOnClick = () => {
+  // const handlerOnClick = () => {
+  //   const friend = {
+  //     FriendId: id,
+  //     Show: show
+  //   };
+  //   addFriend(friend);
+  //   handleCloseHintPopUp();
+  //   addFriendsPosts(friend.FriendId);
+  //   console.log(friend.FriendId);
+  // };
+
+  const handlerOnClick = async () => {
     const friend = {
       FriendId: id,
       Show: show
     };
-    addFriend(friend);
-    handleCloseHintPopUp();
+   await addFriend(friend);
+   await handleCloseHintPopUp();
+    addFriendsPosts(friend.FriendId);
+    console.log(friend.FriendId);
   };
+
+
+
+  // handleDeleteProfile = async () =>{
+  //   await this.props.deleteProfile();
+  //   await this.props.deleteAllPosts();
+  //   await this.props.deleteAllFriends();
+  //   this.props.logoutAndClearSession();
+  //   this.props.offBlur();
+  // }
+
 
   return (
     <div className={style.container}>
@@ -63,13 +89,22 @@ FriendHint.propTypes = {
   handleCloseHintPopUp: PropTypes.func
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addFriend: friend => {
-      dispatch(addFriend(friend));
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addFriend: friend => {
+//       dispatch(addFriend(friend));
+//     }
+//   };
+// };
+
+const mapDispatchToProps = dispatch => ({
+    addFriend: friend => 
+      dispatch(addFriend(friend)),
+    
+    addFriendsPosts: (friendId) =>{
+      dispatch(addFriendsPosts(friendId));
     }
-  };
-};
+});
 
 export default connect(
   null,
