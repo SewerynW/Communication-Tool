@@ -4,11 +4,6 @@ import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
 
 class PostsList extends Component {
-  // shouldComponentUpdate(nextProps, nextState){
-  //  // console.log('bb', this.props);
-  // //  console.log('nn', nextProps);
-  //   return this.props.myFriends & this.props.nextProps & this.props.myFriends !== 0 & this.props.length !==  nextProps.length 
-  // }
   get userPostsSorted() {
     if (this.props.userPosts.length > 2) {
       return [...this.props.userPosts].sort(

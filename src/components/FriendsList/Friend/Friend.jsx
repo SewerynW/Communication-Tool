@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 // Redux
 import { connect } from "react-redux";
 import { deleteFriend } from "../../../actions/friendsActions";
+import { fetchPosts } from "../../../actions/postActions";
 
 const styles = theme => ({
   rightIcon: {
@@ -15,10 +16,18 @@ const styles = theme => ({
   }
 });
 
+// class Friend extends React.Component {
+//   onClickTrash = e => {
+//     e.stopPropagation();
+//     this.props.deleteFriend(this.props.id);
+//   };
+
 class Friend extends React.Component {
+  
   onClickTrash = e => {
     e.stopPropagation();
     this.props.deleteFriend(this.props.id);
+    this.props.fetchPosts();
   };
 
   handlerOnClickEye = e => {
@@ -64,10 +73,21 @@ Friend.propTypes = {
   onClickTrash: PropTypes.func
 };
 
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     deleteFriend: friendId => {
+//       dispatch(deleteFriend(friendId));
+//     }
+//   };
+// };
+
 const mapDispatchToProps = dispatch => {
   return {
     deleteFriend: friendId => {
       dispatch(deleteFriend(friendId));
+    }, 
+    fetchPosts: () => {
+      dispatch(fetchPosts());
     }
   };
 };

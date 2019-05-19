@@ -14,8 +14,6 @@ class FriendsList extends React.Component {
 
   render() {
     const { myFriends } = this.props;
-    //console.log(this.props.myFriends)
-
     return (
       <div className={style.container}>
         {myFriends.length !== 0
