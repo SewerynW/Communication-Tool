@@ -9,6 +9,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { deleteFriend } from "../../../actions/friendsActions";
 import { fetchPosts } from "../../../actions/postActions";
+import { updateFriendsStatus } from "../../../actions/friendsActions";
+
 
 const styles = theme => ({
   rightIcon: {
@@ -16,24 +18,44 @@ const styles = theme => ({
   }
 });
 
-// class Friend extends React.Component {
-//   onClickTrash = e => {
-//     e.stopPropagation();
-//     this.props.deleteFriend(this.props.id);
-//   };
-
 class Friend extends React.Component {
-  
   onClickTrash = e => {
     e.stopPropagation();
     this.props.deleteFriend(this.props.id);
     this.props.fetchPosts();
   };
 
-  handlerOnClickEye = e => {
+  onClickEye = e => {
     e.stopPropagation();
     console.log("tylko oko");
+    console.log(this.props.show)
+  // this.props.show == true;
+  //return { showMe : false };
+    // this.setState(() => ({ hintPopUp: false }));
+
+    // this.props.updateFriendsStatus()
+//w tym miejscu zrobić na onclick show ustawione na false i wywołać zapytanie axiosa do api.
   };
+
+
+//  const handlerOnClick = async () => {
+//     const friend = {
+//       FriendId: id,
+//       Show: show
+//     };
+//    await addFriend(friend);
+//    await handleCloseHintPopUp();
+//     addFriendsPosts(friend.FriendId);
+//   };
+
+  // handlerOnClickEye = async (e) => {
+  //   e.stopPropagation();
+  //   console.log("tylko oko");
+  //   await this.props.updateFriendsStatus();
+  //   await console.log()
+
+    
+  // };
 
   render() {
     const { photo, name, lastName, classes, onClickFriend, show } = this.props;
@@ -73,14 +95,6 @@ Friend.propTypes = {
   onClickTrash: PropTypes.func
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     deleteFriend: friendId => {
-//       dispatch(deleteFriend(friendId));
-//     }
-//   };
-// };
-
 const mapDispatchToProps = dispatch => {
   return {
     deleteFriend: friendId => {
@@ -88,6 +102,9 @@ const mapDispatchToProps = dispatch => {
     }, 
     fetchPosts: () => {
       dispatch(fetchPosts());
+    },
+    updateFriendsStatus: (friendId) =>{
+      dispatch(updateFriendsStatus(friendId));
     }
   };
 };

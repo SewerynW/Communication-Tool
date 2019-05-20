@@ -126,7 +126,6 @@ class Dashboard extends React.Component {
       overflow: "auto",
       width: "265px"
     };
-   // console.log('ffd',queryPost, filteredUserPosts, userPosts);
    const getFlat= myFriends.flat();
     return (
       <div className={style.container}>

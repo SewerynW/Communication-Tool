@@ -9,20 +9,22 @@ export const DELETE_ALL_FRIENDS = "Delete_All_Friends";
 
 export const updateFriendsStatus = profile => dispatch=>{
     const friendProfile={
-        Show: profile.updateShowPosts
+        Id: profile.Id,
+        Show: !profile.updateShowPosts
     };
-    return Axios.updateFriendStatus().then(reponse=>{
-        dispatch(updateFriendsStatusSuccess());
+    return Axios.updateFriendStatus(friendProfile.Id, friendProfile).then(response=>{
+        dispatch(updateFriendsStatusSuccess(response));
     })
+}
 
-    const updateFriendsStatusSuccess = ({Id, Show}) =>({
-      type: UPDATE_FRIEND_STATUS,
-      payload: {
-          Id, 
-          Show
-      }
-  });
+const updateFriendsStatusSuccess = ({Id, Show}) =>({
+  type: UPDATE_FRIEND_STATUS,
+  payload: {
+      Id, 
+      Show
   }
+});
+
 export const fetchFriendsList = () => dispatch => {
   Axios.getFriendsList()
     .then(response => {

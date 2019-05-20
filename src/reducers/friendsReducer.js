@@ -8,7 +8,6 @@ import {
   DELETE_ALL_FRIENDS
 } from "../actions/friendsActions";
 
-
 const initState = {
   friendProfile: {},
   myFriends: [],
