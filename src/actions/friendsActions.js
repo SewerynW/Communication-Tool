@@ -8,7 +8,7 @@ export const UPDATE_FRIEND_STATUS = "Update_Friend_Status";
 export const DELETE_ALL_FRIENDS = "Delete_All_Friends";
 
 export const updateFriendStatus = (friendId, show) => dispatch=>{
-  console.log(show);
+  console.log(show,"ktfkutkut");
     const friendProfile={
         Id: friendId,
         Show: !show

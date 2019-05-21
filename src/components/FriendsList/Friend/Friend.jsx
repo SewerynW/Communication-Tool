@@ -7,9 +7,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 // Redux
 import { connect } from "react-redux";
-import { deleteFriend } from "../../../actions/friendsActions";
+import { deleteFriend, updateFriendStatus } from "../../../actions/friendsActions";
 import { fetchPosts } from "../../../actions/postActions";
-import { updateFriendStatus } from "../../../actions/friendsActions";
 
 
 const styles = theme => ({
@@ -44,7 +43,7 @@ class Friend extends React.Component {
     console.log("tylko oko");
     
     console.log(this.state.show, this.state.friendId);
-    updateFriendStatus(this.state.friendId, this.state.show);
+    this.props.updateFriendStatus(this.state.friendId, this.state.show);
   }
   // onClickEye = e => {
   //   e.stopPropagation();
