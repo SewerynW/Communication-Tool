@@ -19,23 +19,38 @@ const styles = theme => ({
 });
 
 class Friend extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      show: false
+    }
+  }
+ 
   onClickTrash = e => {
     e.stopPropagation();
     this.props.deleteFriend(this.props.id);
     this.props.fetchPosts();
   };
-
-  onClickEye = e => {
-    e.stopPropagation();
+  onClickOnEye = e => {
+    //console.log(this.state);
+console.log(this.props.show);
     console.log("tylko oko");
-    console.log(this.props.show)
+    this.setState({
+    //  show: !this.state.show
+    });
+    console.log(this.state);
+  }
+  // onClickEye = e => {
+  //   e.stopPropagation();
+  //   console.log("tylko oko");
+  //   console.log(this.props.show)
   // this.props.show == true;
   //return { showMe : false };
     // this.setState(() => ({ hintPopUp: false }));
 
     // this.props.updateFriendsStatus()
 //w tym miejscu zrobić na onclick show ustawione na false i wywołać zapytanie axiosa do api.
-  };
+  // };
 
 
 //  const handlerOnClick = async () => {
@@ -56,10 +71,10 @@ class Friend extends React.Component {
 
     
   // };
-
+  
   render() {
     const { photo, name, lastName, classes, onClickFriend, show } = this.props;
-
+console.log(this.props.show);
     return (
       <div className={style.container} onClick={onClickFriend}>
         <Avatar alt="Avatar" src={photo} />
@@ -69,7 +84,7 @@ class Friend extends React.Component {
             icon={show ? "eye" : "eye-slash"}
             size="sm"
             className={`${style.icon} ${classes.rightIcon}`}
-            onClick={this.onClickEye}
+            onClick={this.onClickOnEye}
           />
           <FontAwesomeIcon
             icon="trash"
@@ -103,8 +118,8 @@ const mapDispatchToProps = dispatch => {
     fetchPosts: () => {
       dispatch(fetchPosts());
     },
-    updateFriendsStatus: (friendId) =>{
-      dispatch(updateFriendsStatus(friendId));
+    updateFriendsStatus: (friendId,show) =>{
+      dispatch(updateFriendsStatus(friendId, show));
     }
   };
 };
