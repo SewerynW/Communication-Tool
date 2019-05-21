@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { deleteFriend } from "../../../actions/friendsActions";
 import { fetchPosts } from "../../../actions/postActions";
-import { updateFriendsStatus } from "../../../actions/friendsActions";
+import { updateFriendStatus } from "../../../actions/friendsActions";
 
 
 const styles = theme => ({
@@ -22,23 +22,29 @@ class Friend extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      show: false
+      show: this.props.show,
+      friendId: this.props.friendId
     }
   }
- 
+  componentDidUpdate(prevProps) {
+    if (prevProps.show !== this.props.show) {
+      this.setState({
+        show: !this.state.show
+       });
+    }
+  }
+
   onClickTrash = e => {
     e.stopPropagation();
     this.props.deleteFriend(this.props.id);
     this.props.fetchPosts();
   };
   onClickOnEye = e => {
-    //console.log(this.state);
-console.log(this.props.show);
+    e.stopPropagation();
     console.log("tylko oko");
-    this.setState({
-    //  show: !this.state.show
-    });
-    console.log(this.state);
+    
+    console.log(this.state.show, this.state.friendId);
+    updateFriendStatus(this.state.friendId, this.state.show);
   }
   // onClickEye = e => {
   //   e.stopPropagation();
@@ -49,7 +55,6 @@ console.log(this.props.show);
     // this.setState(() => ({ hintPopUp: false }));
 
     // this.props.updateFriendsStatus()
-//w tym miejscu zrobić na onclick show ustawione na false i wywołać zapytanie axiosa do api.
   // };
 
 
@@ -63,18 +68,8 @@ console.log(this.props.show);
 //     addFriendsPosts(friend.FriendId);
 //   };
 
-  // handlerOnClickEye = async (e) => {
-  //   e.stopPropagation();
-  //   console.log("tylko oko");
-  //   await this.props.updateFriendsStatus();
-  //   await console.log()
-
-    
-  // };
-  
   render() {
     const { photo, name, lastName, classes, onClickFriend, show } = this.props;
-console.log(this.props.show);
     return (
       <div className={style.container} onClick={onClickFriend}>
         <Avatar alt="Avatar" src={photo} />
@@ -118,8 +113,8 @@ const mapDispatchToProps = dispatch => {
     fetchPosts: () => {
       dispatch(fetchPosts());
     },
-    updateFriendsStatus: (friendId,show) =>{
-      dispatch(updateFriendsStatus(friendId, show));
+    updateFriendStatus: (friendId,show) =>{
+      dispatch(updateFriendStatus(friendId, show));
     }
   };
 };

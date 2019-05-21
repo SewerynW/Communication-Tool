@@ -32,7 +32,7 @@ export const friendsReducer = (state = initState, action) => {
     case UPDATE_FRIEND_STATUS:
       return{
         ...state.friendProfile,
-        Show: action.payload.Show
+        Show: !action.payload.Show
       };
     case FIND_FRIENDS:
       return {
