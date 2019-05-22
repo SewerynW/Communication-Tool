@@ -55,7 +55,8 @@ class Chat extends Component {
       message: this.state.text
     };
     console.log("wysyłam", payload);
-    axios.post("http://localhost:5000/message", payload);
+    axios.post("https://dream-chat.herokuapp.com//message", payload);
+    // axios.post("http://localhost:5000/message", payload);
   };
 
   render() {
