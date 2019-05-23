@@ -18,20 +18,20 @@ const styles = theme => ({
 });
 
 class Friend extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      show: this.props.show,
-      friendId: this.props.friendId
-    }
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.show !== this.props.show) {
-      this.setState({
-        show: !this.state.show
-       });
-    }
-  }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     show: this.props.show,
+  //     friendId: this.props.id
+  //   }
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.show !== this.props.show) {
+  //     this.setState({
+  //       show: !this.state.show
+  //      });
+  //   }
+  // }
 
   onClickTrash = e => {
     e.stopPropagation();
@@ -41,9 +41,11 @@ class Friend extends React.Component {
   onClickOnEye = e => {
     e.stopPropagation();
     console.log("tylko oko");
-    
-    console.log(this.state.show, this.state.friendId);
-    this.props.updateFriendStatus(this.state.friendId, this.state.show);
+    console.log(this.props.id);
+    console.log("on click show:", this.props.show);
+   
+    this.props.updateFriendStatus(this.props.id, this.props.show);
+
   }
   // onClickEye = e => {
   //   e.stopPropagation();
@@ -112,8 +114,8 @@ const mapDispatchToProps = dispatch => {
     fetchPosts: () => {
       dispatch(fetchPosts());
     },
-    updateFriendStatus: (friendId,show) =>{
-      dispatch(updateFriendStatus(friendId, show));
+    updateFriendStatus: (id,show) =>{
+      dispatch(updateFriendStatus(id, show));
     }
   };
 };
@@ -122,3 +124,5 @@ export default connect(
   null,
   mapDispatchToProps
 )(withStyles(styles)(Friend));
+
+

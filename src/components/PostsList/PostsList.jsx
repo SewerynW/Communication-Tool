@@ -14,7 +14,7 @@ class PostsList extends Component {
     }
   }
   render() {
-   const { myFriends } = this.props;
+ //  const { myFriends } = this.props;
     return (
       <ul className={style.postsList}>
         {this.userPostsSorted.length

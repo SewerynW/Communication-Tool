@@ -16,7 +16,7 @@ class FriendsList extends React.Component {
     const { myFriends } = this.props;
     return (
       <div className={style.container}>
-        {myFriends.length !== 0
+        {myFriends && myFriends.length !== 0
           ? myFriends.map(friend => (
               <Friend
                 key={friend.Id}
