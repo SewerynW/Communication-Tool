@@ -14,7 +14,6 @@ class ChatBox extends Component {
             value={text}
             type="text"
             placeholder="chat here..."
-            defaultValue="Hello world"
             className={style.input}
             inputProps={{
               "aria-label": "Description"

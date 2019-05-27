@@ -24,10 +24,18 @@ class Chat extends Component {
     });
     const channel = pusher.subscribe("my-channel");
     channel.bind("my-event", data => {
+      console.log("zczytuje ms", data);
       this.props.setConversation(data);
-      // this.setState({ chats: [...this.state.chats, data] });
+      if (!this.props.chatFeatureStatus) {
+        this.notificationStatus();
+      }
     });
   }
+
+  notificationStatus = () => {
+    const chatIcon = document.getElementById("chatIcon");
+    chatIcon.style.backgroundColor = "red";
+  };
 
   handleTextChange = e => {
     const text = e.target.value;
@@ -50,10 +58,7 @@ class Chat extends Component {
   };
 
   render() {
-    console.log("user", this.props.userProfile);
-    console.log("chat", this.props.conversation);
     const { conversation } = this.props;
-    // console.log(conversation);
     return (
       <div className={style.container} id="chat">
         <ChatMessages chats={conversation} />

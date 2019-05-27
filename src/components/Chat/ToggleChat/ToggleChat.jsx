@@ -12,7 +12,13 @@ class ToggleChat extends React.Component {
   }
   handlerClickIcons = () => {
     this.toggleChatStyle("none", "flex");
+    this.notificationStatus();
     this.props.toggleChat();
+  };
+
+  notificationStatus = () => {
+    const chatIcon = document.getElementById("chatIcon");
+    chatIcon.style.backgroundColor = "white";
   };
 
   toggleChatStyle = (parm1, parm2) => {
@@ -23,7 +29,7 @@ class ToggleChat extends React.Component {
 
   render() {
     return (
-      <div className={style.container}>
+      <div className={style.container} id="chatIcon">
         <FontAwesomeIcon
           icon="comments"
           size="2x"
