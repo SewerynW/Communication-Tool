@@ -7,15 +7,25 @@ import { connect } from "react-redux";
 import { toggleChat } from "../../../actions/stateActions";
 
 class ToggleChat extends React.Component {
+  componentDidMount() {
+    this.toggleChatStyle("flex", "none");
+  }
   handlerClickIcons = () => {
-    const chat = document.getElementById("chat");
-    let style = this.props.chatFeatureStatus ? "none" : "flex";
-    chat.style.display = style;
+    // const chat = document.getElementById("chat");
+    // let style = this.props.chatFeatureStatus ? "none" : "flex";
+    // chat.style.display = style;
+    this.toggleChatStyle("none", "flex");
     this.props.toggleChat();
   };
 
+  toggleChatStyle = (parm1, parm2) => {
+    const chat = document.getElementById("chat");
+    let style = this.props.chatFeatureStatus ? parm1 : parm2;
+    chat.style.display = style;
+    // console.log("klick");
+  };
+
   render() {
-    console.log(this.props.chatFeatureStatus);
     return (
       <div className={style.container}>
         <FontAwesomeIcon
