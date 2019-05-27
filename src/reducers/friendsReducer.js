@@ -36,6 +36,7 @@ export const friendsReducer = (state = initState, action) => {
       return{
         ...state,
         friendProfile: {...state.friendProfile, Show: action.payload.Show}
+        
       };
     case FIND_FRIENDS:
       return {

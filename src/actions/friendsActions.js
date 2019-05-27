@@ -11,7 +11,7 @@ export const updateFriendStatus = (friendId, show) => dispatch=>{
   console.log(show,"ktfkutkut", friendId);
     const friendProfile={
         Id: friendId,
-        Show: !show
+        Show: show
     };
 
     return Axios.updateFriendStatus(friendProfile.Id, friendProfile).then(response=>{

@@ -39,12 +39,15 @@ class Friend extends React.Component {
     this.props.fetchPosts();
   };
   onClickOnEye = e => {
-    e.stopPropagation();
+    //e.stopPropagation();
     console.log("tylko oko");
     console.log(this.props.id);
     console.log("on click show:", this.props.show);
    
-    this.props.updateFriendStatus(this.props.id, this.props.show);
+    this.props.updateFriendStatus(this.props.id, !this.props.show);
+
+
+
 
   }
   // onClickEye = e => {
@@ -116,6 +119,7 @@ const mapDispatchToProps = dispatch => {
     },
     updateFriendStatus: (id,show) =>{
       dispatch(updateFriendStatus(id, show));
+      console.log("w dispatch", show);
     }
   };
 };
