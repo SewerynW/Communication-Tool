@@ -29,7 +29,7 @@ ProfilePage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userProfile: state.profileReducer
+  userProfile: state.profileReducer.userProfile
 });
 
 export default connect(

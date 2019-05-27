@@ -3,6 +3,7 @@ export const EDIT_PROFILE = "Edit_Profile";
 export const REMOVE_PROFILE = "Remove_Profile";
 export const REMOVE_DATA = "Remove_Data";
 export const FETCH_PROFILE = "Fetch_Profile";
+export const SET_CONVERSATION = "Set_Conversation";
 
 export const editProfile = profile => dispatch => {
   const formData = new FormData();
@@ -52,4 +53,9 @@ export const fetchProfile = () => dispatch =>
 const fetchProfileSuccess = user => ({
   type: FETCH_PROFILE,
   payload: user
+});
+
+export const setConversation = data => ({
+  type: SET_CONVERSATION,
+  payload: data
 });

@@ -11,9 +11,6 @@ class ToggleChat extends React.Component {
     this.toggleChatStyle("flex", "none");
   }
   handlerClickIcons = () => {
-    // const chat = document.getElementById("chat");
-    // let style = this.props.chatFeatureStatus ? "none" : "flex";
-    // chat.style.display = style;
     this.toggleChatStyle("none", "flex");
     this.props.toggleChat();
   };
@@ -22,7 +19,6 @@ class ToggleChat extends React.Component {
     const chat = document.getElementById("chat");
     let style = this.props.chatFeatureStatus ? parm1 : parm2;
     chat.style.display = style;
-    // console.log("klick");
   };
 
   render() {

@@ -10,16 +10,18 @@ class ChatMessages extends Component {
     const { chats } = this.props;
     return (
       <div className={style.container}>
-        {chats.map((chat, key) => (
-          <Message
-            key={key}
-            name={chat.name}
-            lastName={chat.lastName}
-            message={chat.message}
-            userId={chat.userId}
-            photo={chat.photo}
-          />
-        ))}
+        {chats
+          ? chats.map((chat, key) => (
+              <Message
+                key={key}
+                name={chat.name}
+                lastName={chat.lastName}
+                message={chat.message}
+                userId={chat.userId}
+                photo={chat.photo}
+              />
+            ))
+          : null}
       </div>
     );
   }

@@ -114,7 +114,7 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({
   filteredUserPosts: state.postReducer.filteredUserPosts,
-  userProfile: state.profileReducer,
+  userProfile: state.profileReducer.userProfile,
   dataType: state.postReducer.type
 });
 

@@ -5,6 +5,7 @@ import style from "./Chat.module.scss";
 
 // Redux
 import { connect } from "react-redux";
+import { setConversation } from "../../actions/profileActions";
 
 // Components
 import ChatBox from "./ChatBox/ChatBox";
@@ -23,7 +24,8 @@ class Chat extends Component {
     });
     const channel = pusher.subscribe("my-channel");
     channel.bind("my-event", data => {
-      this.setState({ chats: [...this.state.chats, data] });
+      this.props.setConversation(data);
+      // this.setState({ chats: [...this.state.chats, data] });
     });
   }
 
@@ -48,9 +50,13 @@ class Chat extends Component {
   };
 
   render() {
+    console.log("user", this.props.userProfile);
+    console.log("chat", this.props.conversation);
+    const { conversation } = this.props;
+    // console.log(conversation);
     return (
       <div className={style.container} id="chat">
-        <ChatMessages chats={this.state.chats} />
+        <ChatMessages chats={conversation} />
         <h2>Chat</h2>
         <ChatBox
           handleSubmit={this.handleSubmit}
@@ -63,11 +69,20 @@ class Chat extends Component {
 }
 
 const mapStateToProps = state => ({
-  userProfile: state.profileReducer,
+  userProfile: state.profileReducer.userProfile,
+  conversation: state.profileReducer.conversation,
   chatFeatureStatus: state.stateReducer.chatFeatureStatus
 });
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setConversation: data => {
+      dispatch(setConversation(data));
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Chat);

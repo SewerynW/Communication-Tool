@@ -180,7 +180,7 @@ class EditProfile extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  userProfile: state.profileReducer
+  userProfile: state.profileReducer.userProfile
 });
 
 const mapDispatchToProps = dispatch => {
