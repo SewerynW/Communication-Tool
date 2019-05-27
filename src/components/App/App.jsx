@@ -73,11 +73,13 @@ class App extends Component {
 
   setUser = () => {
     this.props.fetchPosts();
+    //
     this.props.fetchProfile();
     this.props.fetchFriendsList();
   };
 
   render() {
+    console.log(this.props.myFriends);
     return (
       <div className={style.App}>
         <BrowserRouter>
@@ -129,6 +131,9 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  myFriends: state.friendsReducer.myFriends
+});
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => {
@@ -143,6 +148,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

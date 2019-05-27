@@ -126,12 +126,11 @@ class Dashboard extends React.Component {
       overflow: "auto",
       width: "265px"
     };
-   //const getFlat= myFriends.flat() || null;
-   
     return (
       <div className={style.container}>
         <PostsList
           userPosts={queryPost.length ? filteredUserPosts : userPosts}
+          myFriends={this.props.myFriends}
         />
         <div className={style.features}>
           <div className={`${style.sideBox} ${style.posts}`} id="posts">

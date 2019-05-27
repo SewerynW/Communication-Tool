@@ -9,7 +9,6 @@ import {
 } from "../actions/friendsActions";
 
 const initState = {
-  friendProfile: {},
   myFriends: [],
   foundPeople: [],
   filteredMyFriends: [],
@@ -33,11 +32,21 @@ const ifExists = (id, myFriends) => {
 export const friendsReducer = (state = initState, action) => {
   switch (action.type) {
     case UPDATE_FRIEND_STATUS:
+      console.log("aaa", action.payload);
       return{
         ...state,
-        friendProfile: {...state.friendProfile, Show: action.payload.Show}
+        myFriends: state.myFriends.map(friend=>friend.Id === action.payload.Id? {...friend, Show:action.payload.Show} :friend)
         
       };
+
+//true   = 
+//false = 
+
+      // userPosts: state.userPosts.map(post =>
+      //   post.Id === action.payload.Id
+      //     ? getNewPost(post, action.payload)
+      //     : post
+      // )
     case FIND_FRIENDS:
       return {
         ...state,

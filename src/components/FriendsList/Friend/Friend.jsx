@@ -32,6 +32,9 @@ class Friend extends React.Component {
   //      });
   //   }
   // }
+  // state = {
+  //   mobileFeatureStatus: this.props.show
+  // };
 
   onClickTrash = e => {
     e.stopPropagation();
@@ -39,7 +42,7 @@ class Friend extends React.Component {
     this.props.fetchPosts();
   };
   onClickOnEye = e => {
-    //e.stopPropagation();
+    e.stopPropagation();
     console.log("tylko oko");
     console.log(this.props.id);
     console.log("on click show:", this.props.show);
