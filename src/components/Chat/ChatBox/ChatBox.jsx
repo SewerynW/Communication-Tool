@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import style from "./ChatBox.module.scss";
+import Input from "@material-ui/core/Input";
+import PropTypes from "prop-types";
 
 class ChatBox extends Component {
   render() {
     const { handleTextChange, text, handleSubmit } = this.props;
     return (
-      <div className="">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={text}
-            placeholder="chat here..."
-            className=""
+      <div>
+        <form onSubmit={handleSubmit} className={style.input}>
+          <Input
             onChange={handleTextChange}
+            value={text}
+            type="text"
+            placeholder="chat here..."
+            defaultValue="Hello world"
+            className={style.input}
+            inputProps={{
+              "aria-label": "Description"
+            }}
           />
           <button type="submit" style={{ display: "none" }} />
         </form>
@@ -20,5 +26,11 @@ class ChatBox extends Component {
     );
   }
 }
+
+ChatBox.propTypes = {
+  handleTextChange: PropTypes.func,
+  text: PropTypes.string,
+  handleSubmit: PropTypes.func
+};
 
 export default ChatBox;

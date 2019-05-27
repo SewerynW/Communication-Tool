@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar } from "@material-ui/core";
 import style from "./Message.module.scss";
+import PropTypes from "prop-types";
 
 class Message extends React.Component {
   render() {
@@ -16,5 +17,12 @@ class Message extends React.Component {
     );
   }
 }
+
+Message.propTypes = {
+  name: PropTypes.string,
+  lastName: PropTypes.string,
+  message: PropTypes.string,
+  photo: PropTypes.string
+};
 
 export default Message;

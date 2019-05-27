@@ -1,0 +1,7 @@
+.container {
+  max-height: 69vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

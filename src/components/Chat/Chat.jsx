@@ -50,9 +50,8 @@ class Chat extends Component {
   render() {
     return (
       <div className={style.container} id="chat">
-        <h2>Chat</h2>
-
         <ChatMessages chats={this.state.chats} />
+        <h2>Chat</h2>
         <ChatBox
           handleSubmit={this.handleSubmit}
           handleTextChange={this.handleTextChange}

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import style from "./ChatMessages.module.scss";
+import PropTypes from "prop-types";
 
 // Components
 import Message from "./Message/Message";
-import { checkPropTypes } from "prop-types";
 
-class ChatBox extends Component {
+class ChatMessages extends Component {
   render() {
     const { chats } = this.props;
     return (
-      <div>
+      <div className={style.container}>
         {chats.map((chat, key) => (
           <Message
             key={key}
@@ -25,4 +25,8 @@ class ChatBox extends Component {
   }
 }
 
-export default ChatBox;
+ChatMessages.propTypes = {
+  chats: PropTypes.array
+};
+
+export default ChatMessages;
