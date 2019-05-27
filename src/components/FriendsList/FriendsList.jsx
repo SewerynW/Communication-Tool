@@ -20,8 +20,8 @@ class FriendsList extends React.Component {
               <Friend
                 key={friend.Id}
                 id={friend.Id}
-                name={friend.Name}
-                lastName={friend.GivenName}
+                name={friend.GivenName}
+                lastName={friend.Name}
                 photo={friend.Photo}
                 show={friend.Show}
                 onClickFriend={this.handlerOnClickFriend}

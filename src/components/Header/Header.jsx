@@ -59,7 +59,7 @@ class Header extends React.Component {
     const { hintPopUp } = this.state;
     const path =
       location.pathname !== "/dashboard" && location.pathname !== "/";
-    const welcome = `Hi ${userProfile.Name}`;
+    const welcome = `Hi ${userProfile.GivenName}`;
 
     return (
       <AppBar position="sticky" className={`${style.appBar} ${classes.root} `}>
@@ -87,7 +87,9 @@ class Header extends React.Component {
                 <Typography
                   className={`${style.welcomeText} ${classes.typography}`}
                 >
-                  {userProfile.Name !== (null || undefined) ? welcome : "Hi"}
+                  {userProfile.GivenName !== (null || undefined)
+                    ? welcome
+                    : "Hi"}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"

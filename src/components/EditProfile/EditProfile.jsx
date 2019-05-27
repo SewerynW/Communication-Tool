@@ -88,8 +88,8 @@ class EditProfile extends React.Component {
     const { Name, GivenName, Photo } = this.props.userProfile;
     this.setState(() => ({
       user: {
-        name: Name,
-        lastName: GivenName
+        name: GivenName,
+        lastName: Name
       },
       currentPhoto: Photo
     }));

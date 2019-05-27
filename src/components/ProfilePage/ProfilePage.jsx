@@ -12,8 +12,8 @@ class ProfilePage extends React.Component {
       <React.Fragment>
         <Maincontent
           profilePhoto={Photo ? Photo : AvatarPhoto}
-          profileInfoName={Name}
-          profileInfoSurname={GivenName}
+          profileInfoName={GivenName}
+          profileInfoSurname={Name}
         />
         <ButtonsPanel
           logoutAndClearSession={this.props.logoutAndClearSession}

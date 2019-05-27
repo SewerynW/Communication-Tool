@@ -1,8 +1,16 @@
 .container {
   display: flex;
   flex-direction: column;
+  border: 1px solid rgb(233, 229, 229);
+  margin: 10px 0px;
+
+  p {
+    margin: 0;
+  }
   .user {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    padding: 5px;
   }
 }

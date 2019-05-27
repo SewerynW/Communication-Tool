@@ -36,8 +36,8 @@ class Chat extends Component {
     e.preventDefault();
     const payload = {
       userId: this.props.userProfile.Id,
-      name: this.props.userProfile.Name,
-      lastName: this.props.userProfile.GivenName,
+      name: this.props.userProfile.GivenName,
+      lastName: this.props.userProfile.Name,
       photo: this.props.userProfile.Photo,
       message: this.state.text
     };
