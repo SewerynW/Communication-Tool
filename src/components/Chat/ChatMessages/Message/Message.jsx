@@ -7,12 +7,11 @@ class Message extends React.Component {
     const { name, lastName, message, photo } = this.props;
     return (
       <div className={style.container}>
-        <div className={style.user}>
-          <Avatar alt="Avatar" src={photo} />
-          <p> {`${name} ${lastName}`}</p>
+        <Avatar alt="Avatar" src={photo} />
+        <div className={style.message}>
+          <p className={style.user}> {`${name} ${lastName}`}</p>
+          <p> {message} </p>
         </div>
-
-        <p> {message} </p>
       </div>
     );
   }

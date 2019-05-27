@@ -48,7 +48,6 @@ class Chat extends Component {
   };
 
   render() {
-    console.log("user", this.props.userProfile);
     return (
       <div className={style.container} id="chat">
         <h2>Chat</h2>
@@ -65,7 +64,8 @@ class Chat extends Component {
 }
 
 const mapStateToProps = state => ({
-  userProfile: state.profileReducer
+  userProfile: state.profileReducer,
+  chatFeatureStatus: state.stateReducer.chatFeatureStatus
 });
 
 export default connect(

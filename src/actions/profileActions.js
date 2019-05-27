@@ -8,8 +8,8 @@ export const editProfile = profile => dispatch => {
   const formData = new FormData();
   const userPhoto = profile.photo;
   const userProfile = {
-    Name: profile.name,
-    GivenName: profile.lastName
+    Name: profile.lastName,
+    GivenName: profile.name
   };
   formData.append("user", JSON.stringify(userProfile));
   if (profile.photo) {

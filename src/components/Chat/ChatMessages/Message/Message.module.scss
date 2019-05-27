@@ -1,16 +1,25 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-end;
   border: 1px solid rgb(233, 229, 229);
+  border-radius: 10px;
   margin: 10px 0px;
+  padding: 10px;
+  min-width: 200px;
 
+  .message {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+
+    .user {
+      color: gray;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+  }
   p {
     margin: 0;
-  }
-  .user {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 5px;
   }
 }

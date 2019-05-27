@@ -6,9 +6,7 @@ import Message from "./Message/Message";
 import { checkPropTypes } from "prop-types";
 
 class ChatBox extends Component {
-  componentDidMount() {}
   render() {
-    console.log("wiadomości", this.props.chats);
     const { chats } = this.props;
     return (
       <div>
