@@ -14,7 +14,7 @@ class ChatBox extends Component {
             className=""
             onChange={handleTextChange}
           />
-          <button type="submit" />
+          <button type="submit" style={{ display: "none" }} />
         </form>
       </div>
     );
