@@ -14,7 +14,8 @@ import {
   faHandshake,
   faArrowCircleRight,
   faArrowCircleLeft,
-  faFilter
+  faFilter,
+  faComments
 } from "@fortawesome/free-solid-svg-icons";
 
 // Redux
@@ -31,7 +32,6 @@ import Header from "../Header/Header";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import Footer from "../Footer/Footer";
 import PostForm from "../PostForm/PostForm";
-import Chat from "../Chat/Chat";
 
 library.add(
   faTrash,
@@ -45,7 +45,8 @@ library.add(
   faHandshake,
   faArrowCircleRight,
   faArrowCircleLeft,
-  faFilter
+  faFilter,
+  faComments
 );
 
 class App extends Component {
@@ -123,12 +124,6 @@ class App extends Component {
           <PrivateRoute
             path="/editProfile"
             component={EditProfile}
-            setSession={this.setSession}
-            logged={this.state.logged}
-          />
-          <PrivateRoute
-            path="/chat"
-            component={Chat}
             setSession={this.setSession}
             logged={this.state.logged}
           />

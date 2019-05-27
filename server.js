@@ -24,13 +24,6 @@ app.post("/message", (req, res) => {
   pusher.trigger("my-channel", "my-event", payload);
   res.send(payload);
 });
-app.get("/cos", (req, res) => res.send(show()));
-
 app.listen(app.get("PORT"), () =>
   console.log("Listening at " + app.get("PORT"))
 );
-
-const show = () => {
-  let cos = "Siema";
-  return cos;
-};

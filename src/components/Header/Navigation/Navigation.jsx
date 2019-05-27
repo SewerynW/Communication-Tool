@@ -15,9 +15,6 @@ const Navigation = props => {
       <p onClick={props.logoutAndClearSession} className={style.link}>
         #log out
       </p>
-      <Link to="/chat" className={style.link}>
-        #chat
-      </Link>
     </div>
   );
 };

@@ -10,13 +10,13 @@ import ChatMessages from "./ChatMessages/ChatMessages";
 class Chat extends Component {
   state = {
     text: "",
-    username: "",
+    username: "sewww",
     chats: []
   };
 
   componentDidMount() {
-    const username = window.prompt("Username: ", "Anonymous");
-    this.setState({ username });
+    // const username = window.prompt("Username: ", "Anonymous");
+    // this.setState({ username });
     const pusher = new Pusher("13b13be20c4a53363def", {
       cluster: "eu",
       forceTLS: true
@@ -33,19 +33,7 @@ class Chat extends Component {
       username: this.state.username,
       message: this.state.text
     };
-    console.log("wpisuje", text);
     this.setState({ text });
-
-    // if (e.keyCode === 13) {
-    //   console.log("ładuje wiadomość");
-    //   const payload = {
-    //     username: this.state.username,
-    //     message: this.state.text
-    //   };
-    //   axios.post("http://localhost:5000/message", payload);
-    // } else {
-    //   this.setState({ text });
-    // }
   };
 
   handleSubmit = e => {
@@ -54,15 +42,14 @@ class Chat extends Component {
       username: this.state.username,
       message: this.state.text
     };
-    console.log("wysyłam", payload);
-    axios.post("https://dream-chat.herokuapp.com//message", payload);
+    axios.post("https://dream-chat.herokuapp.com/message", payload);
     // axios.post("http://localhost:5000/message", payload);
   };
 
   render() {
     return (
-      <div>
-        Chat
+      <div className={style.container} id="chat">
+        <h2>Chat</h2>
         <ChatBox
           handleSubmit={this.handleSubmit}
           handleTextChange={this.handleTextChange}

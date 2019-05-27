@@ -126,13 +126,10 @@ class Dashboard extends React.Component {
       overflow: "auto",
       width: "265px"
     };
-    
-   const getFlat= myFriends.flat();
+
+    const getFlat = myFriends.flat();
     return (
       <div className={style.container}>
-        <PostsList
-          userPosts={queryPost.length ? filteredUserPosts : userPosts}
-        />
         <div className={style.features}>
           <div className={`${style.sideBox} ${style.posts}`} id="posts">
             <h2>Posts</h2>
@@ -191,13 +188,15 @@ class Dashboard extends React.Component {
             />
           </div>
         </div>
+        <PostsList
+          userPosts={queryPost.length ? filteredUserPosts : userPosts}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-
   userPosts: state.postReducer.userPosts,
   filteredUserPosts: state.postReducer.filteredUserPosts,
   foundPeople: state.friendsReducer.foundPeople,

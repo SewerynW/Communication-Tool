@@ -9,12 +9,8 @@ class ChatBox extends Component {
     const { chats } = this.props;
     return (
       <div>
-        {chats.map(chat => (
-          <Message
-            key={chat.id}
-            username={chat.username}
-            message={chat.message}
-          />
+        {chats.map((chat, key) => (
+          <Message key={key} username={chat.username} message={chat.message} />
         ))}
       </div>
     );
