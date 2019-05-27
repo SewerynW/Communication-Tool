@@ -14,14 +14,17 @@ import {
   faHandshake,
   faArrowCircleRight,
   faArrowCircleLeft,
-  faFilter
+  faFilter,
+  faComments
 } from "@fortawesome/free-solid-svg-icons";
 
+// Redux
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/postActions";
 import { fetchProfile } from "../../actions/profileActions";
 import { fetchFriendsList } from "../../actions/friendsActions";
 
+// Components
 import EditProfile from "../EditProfile/EditProfile";
 import PrivateRoute from "../PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
@@ -42,7 +45,8 @@ library.add(
   faHandshake,
   faArrowCircleRight,
   faArrowCircleLeft,
-  faFilter
+  faFilter,
+  faComments
 );
 
 class App extends Component {

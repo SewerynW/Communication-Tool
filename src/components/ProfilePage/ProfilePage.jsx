@@ -12,8 +12,8 @@ class ProfilePage extends React.Component {
       <React.Fragment>
         <Maincontent
           profilePhoto={Photo ? Photo : AvatarPhoto}
-          profileInfoName={Name}
-          profileInfoSurname={GivenName}
+          profileInfoName={GivenName}
+          profileInfoSurname={Name}
         />
         <ButtonsPanel
           logoutAndClearSession={this.props.logoutAndClearSession}
@@ -29,7 +29,7 @@ ProfilePage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userProfile: state.profileReducer
+  userProfile: state.profileReducer.userProfile
 });
 
 export default connect(

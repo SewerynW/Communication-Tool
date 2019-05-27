@@ -6,9 +6,7 @@ import PropTypes from "prop-types";
 import Friend from "./Friend/Friend";
 
 class FriendsList extends React.Component {
-  handlerOnClickFriend = () => {
-    console.log("tylko friend");
-  };
+  handlerOnClickFriend = () => {};
 
   info = () => <p>Sorry you don't have any friends...</p>;
 
@@ -22,8 +20,8 @@ class FriendsList extends React.Component {
               <Friend
                 key={friend.Id}
                 id={friend.Id}
-                name={friend.Name}
-                lastName={friend.GivenName}
+                name={friend.GivenName}
+                lastName={friend.Name}
                 photo={friend.Photo}
                 show={friend.Show}
                 onClickFriend={this.handlerOnClickFriend}

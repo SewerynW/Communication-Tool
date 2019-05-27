@@ -66,13 +66,13 @@
 @media (min-width: $smallDevice) {
   .container {
     flex-direction: row;
-    justify-content: space-around;
 
     .features {
       width: 100%;
       position: sticky;
       top: 90px;
       height: 82vh;
+      margin: 0px 20px;
 
       .sideBox {
         background-color: none;
@@ -82,6 +82,14 @@
       .toggle {
         display: none;
       }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .container {
+    .features {
+      margin-right: 100px;
     }
   }
 }

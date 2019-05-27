@@ -23,7 +23,6 @@ class Friend extends React.Component {
 
   handlerOnClickEye = e => {
     e.stopPropagation();
-    console.log("tylko oko");
   };
 
   render() {

@@ -3,6 +3,10 @@ import { Route } from "react-router-dom";
 import Login from "../components/Login/Login";
 import PropTypes from "prop-types";
 
+// Components
+import ToggleChat from "./Chat/ToggleChat/ToggleChat";
+import Chat from "./Chat/Chat";
+
 export default class PrivateRoute extends React.Component {
   shouldComponentUpdate(nextProps) {
     return this.props.logged !== nextProps.logged;
@@ -14,9 +18,14 @@ export default class PrivateRoute extends React.Component {
         {...this.props}
         component={() => {
           return logged ? (
-            <Component
-              logoutAndClearSession={this.props.logoutAndClearSession}
-            />
+            <React.Fragment>
+              <ToggleChat />
+              <Component
+                logoutAndClearSession={this.props.logoutAndClearSession}
+              />
+
+              <Chat />
+            </React.Fragment>
           ) : (
             <Login setSession={this.props.setSession} path={this.props.path} />
           );
