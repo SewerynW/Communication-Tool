@@ -2,57 +2,55 @@ import React, { Component } from "react";
 import style from "./PostsList.module.scss";
 import ShortPostElement from "./../ShortPostElement/ShortPostElement";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 
 class PostsList extends Component {
   get userPostsSorted() {
-    //przekazac zmienna z checkfirendstatus
-    //stworzyc lokalna kopie postów odfiltorwana z użyciem
-    //i je tu wykorzystać
-    if (this.props.userPosts.length > 2) {
-      return [...this.props.userPosts].sort(
+    let userShowTrue =  this.checkFriendShowStatus();
+    let filteredPosts =[]       //filtracja postów
+    this.props.userPosts.forEach(post => {
+        userShowTrue.forEach(user =>{
+              if(post.UserId===user.Id)
+                filteredPosts.push(post)
+          })
+          if(post.UserId===this.props.userProfile.Id)
+            filteredPosts.push(post)
+        });                   // koniec filtracji postów  
+
+    if (filteredPosts.length > 2) {
+      return [...filteredPosts].sort(
         (a, b) => Date.parse(b.PublishDate) - Date.parse(a.PublishDate)
       );
     } else {
-      return this.props.userPosts.length ? [...this.props.userPosts] : [];
+      return filteredPosts.length ? [...filteredPosts] : [];
     }
   };
+    //przekazac zmienna z checkfirendstatus
+    //stworzyc lokalna kopie postów odfiltorwana z użyciem
+    //i je tu wykorzystać
+ 
   checkFriendShowStatus=()=> {
  
     let userAfterCheck = this.props.myFriends.filter(
       userPosts =>{
         
        let findResult= this.props.myFriends.find(friendOfMine => friendOfMine.Id === userPosts.Id);
-       console.log(findResult, userPosts);
         return     !findResult || findResult.Show;
-    
-      
       }
-    
     );
-    console.log("ddd",userAfterCheck);
+    return userAfterCheck;
    };
-   
-  //  map(friend => (
-  //   <Friend
-  //     key={friend.Id}
-  //     id={friend.Id}
-  //     name={friend.Name}
-  //     lastName={friend.GivenName}
-  //     photo={friend.Photo}
-  //     show={friend.Show}
-  //     onClickFriend={this.handlerOnClickFriend}
-  //   />
 
 
 
   render() {
- console.log("myfir", this.props.userPosts)
- console.log("myyy", this.props.myFriends)
+
+    console.log(this.props.userProfile.Id)
 
 
     return (
       <div>
-        <button onClick={this.checkFriendShowStatus}></button>
       <ul className={style.postsList}>
         {this.userPostsSorted.length
           ? this.userPostsSorted.map(post => (
@@ -77,4 +75,15 @@ PostsList.propTypes = {
   userPosts: PropTypes.array
 };
 
-export default PostsList;
+const mapStateToProps = state => ({
+  userProfile: state.profileReducer
+});
+
+export default connect(
+  mapStateToProps,null
+)(PostsList);
+
+
+
+
+//export default PostsList;

@@ -73,13 +73,12 @@ class App extends Component {
 
   setUser = () => {
     this.props.fetchPosts();
-    //
     this.props.fetchProfile();
     this.props.fetchFriendsList();
   };
 
   render() {
-    console.log(this.props.myFriends);
+   // console.log(this.props.userProfile);
     return (
       <div className={style.App}>
         <BrowserRouter>
