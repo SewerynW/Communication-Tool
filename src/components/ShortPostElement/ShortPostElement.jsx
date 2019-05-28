@@ -25,7 +25,6 @@ import { removePost } from "../../actions/postActions";
 import { withRouter } from "react-router-dom";
 import AvatarPhoto from "../../assets/profile.png";
 
-
 const stylesMaterialUi = {
   media: {
     width: "100%",
@@ -52,7 +51,8 @@ class ShortPostElement extends PureComponent {
       activeConfirmDialog: !prevState.activeConfirmDialog
     }));
 
-  handleOnClickConfirmDelete = () => this.props.deletePost(this.props.Id);
+   handleOnClickConfirmDelete = () => this.props.deletePost(this.props.Id);
+
 
   handleTogglePopup = () => {
     !this.state.activePopup
@@ -208,7 +208,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
+  connect(null,
     mapDispatchToProps
   )(withMobileDialog()(withStyles(stylesMaterialUi)(ShortPostElement)))
 );

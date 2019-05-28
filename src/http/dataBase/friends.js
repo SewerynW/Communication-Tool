@@ -58,11 +58,7 @@ export default {
     return new Promise((resolve, reject) => {
       api
         .put(`/friend/${friendId}`, data)
-       // .then(res => resolve(res))
-       .then(res => {
-         console.log(friendId, data)
-         resolve(res)})
-
+        .then(res => resolve(res))
         .catch(err => reject(err));
     });
   },

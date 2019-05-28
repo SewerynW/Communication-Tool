@@ -64,7 +64,6 @@ export const postReducer = (state = initState, action) => {
         userPosts: []
       };
     case ADD_FRIEND_POSTS:
-    console.log(action.payload)
       return {
        ...state,
        userPosts: [...state.userPosts, ...action.payload]

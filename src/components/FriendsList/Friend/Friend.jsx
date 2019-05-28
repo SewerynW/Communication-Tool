@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { deleteFriend, updateFriendStatus } from "../../../actions/friendsActions";
 import { fetchPosts } from "../../../actions/postActions";
 
-
 const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit
@@ -18,24 +17,6 @@ const styles = theme => ({
 });
 
 class Friend extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     show: this.props.show,
-  //     friendId: this.props.id
-  //   }
-  // }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.show !== this.props.show) {
-  //     this.setState({
-  //       show: !this.state.show
-  //      });
-  //   }
-  // }
-  // state = {
-  //   mobileFeatureStatus: this.props.show
-  // };
-
   onClickTrash = e => {
     e.stopPropagation();
     this.props.deleteFriend(this.props.id);
@@ -43,38 +24,8 @@ class Friend extends React.Component {
   };
   onClickOnEye = e => {
     e.stopPropagation();
-    console.log("tylko oko");
-    console.log(this.props.id);
-    console.log("on click show:", this.props.show);
-   
     this.props.updateFriendStatus(this.props.id, !this.props.show);
-
-
-
-
   }
-  // onClickEye = e => {
-  //   e.stopPropagation();
-  //   console.log("tylko oko");
-  //   console.log(this.props.show)
-  // this.props.show == true;
-  //return { showMe : false };
-    // this.setState(() => ({ hintPopUp: false }));
-
-    // this.props.updateFriendsStatus()
-  // };
-
-
-//  const handlerOnClick = async () => {
-//     const friend = {
-//       FriendId: id,
-//       Show: show
-//     };
-//    await addFriend(friend);
-//    await handleCloseHintPopUp();
-//     addFriendsPosts(friend.FriendId);
-//   };
-
   render() {
     const { photo, name, lastName, classes, onClickFriend, show } = this.props;
     return (
@@ -122,7 +73,6 @@ const mapDispatchToProps = dispatch => {
     },
     updateFriendStatus: (id,show) =>{
       dispatch(updateFriendStatus(id, show));
-      console.log("w dispatch", show);
     }
   };
 };
@@ -131,5 +81,4 @@ export default connect(
   null,
   mapDispatchToProps
 )(withStyles(styles)(Friend));
-
 

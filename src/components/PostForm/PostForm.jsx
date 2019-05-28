@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { addPost, editPost } from "./../../actions/postActions";
+import {  fetchPosts} from "../../actions/postActions"
 
 const materialStyle = theme => ({
   textField: {
@@ -68,7 +69,8 @@ class PostForm extends Component {
     }
   };
 
-  handleSendToServer = () => {
+  handleSendToServer = async() => {
+
     const { idPostToEdit, post, selectedFile } = this.state;
     const { text, title } = post;
     const messagesForUser = [];
@@ -91,9 +93,10 @@ class PostForm extends Component {
           userPost: post,
           image: selectedFile
         });
+    await this.props.fetchPosts();
     this.props.history.push({ pathname: "/" });
   };
-
+  
   render() {
     const { idPostToEdit } = this.state;
     const { classes } = this.props;
@@ -185,6 +188,9 @@ const mapDispatchToProps = dispatch => ({
   },
   editPost: post => {
     dispatch(editPost(post));
+  },
+  fetchPosts: () => {
+    dispatch(fetchPosts());
   }
 });
 
