@@ -24,7 +24,6 @@ class Chat extends Component {
     });
     const channel = pusher.subscribe("my-channel");
     channel.bind("my-event", data => {
-      console.log("zczytuje ms", data);
       this.props.setConversation(data);
       if (!this.props.chatFeatureStatus) {
         this.notificationStatus();

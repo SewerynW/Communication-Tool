@@ -60,7 +60,7 @@ class MobileMenu extends React.Component {
             className={style.mobileMenuLinks}
           >
             <Link to="/dashboard" className={style.linkMobileMenu}>
-              #post list
+              #home page
             </Link>
           </MenuItem>
           <MenuItem onClick={this.handleClose}>

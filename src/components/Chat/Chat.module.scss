@@ -3,8 +3,9 @@
 .container {
   display: none;
   position: fixed;
-  bottom: 80px;
-  right: 65px;
+  bottom: 120px;
+  right: 0px;
+  left: 0px;
   z-index: 20;
   flex-direction: column;
   border: 2px solid #000;
@@ -13,7 +14,6 @@
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 10px;
   background-color: #fff;
-  min-width: 300px;
 
   h2 {
     text-align: center;
@@ -26,5 +26,8 @@
   .container {
     background-color: none;
     min-width: 400px;
+    bottom: 80px;
+    right: 65px;
+    left: auto;
   }
 }

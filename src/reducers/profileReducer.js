@@ -15,10 +15,13 @@ export const profileReducer = (state = initState, action) => {
   switch (action.type) {
     case EDIT_PROFILE:
       return {
-        ...state.userProfile,
-        Name: action.payload.Name,
-        GivenName: action.payload.GivenName,
-        Photo: action.payload.Photo
+        ...state,
+        userProfile: {
+          ...state.userProfile,
+          Name: action.payload.Name,
+          GivenName: action.payload.GivenName,
+          Photo: action.payload.Photo
+        }
       };
     case REMOVE_PROFILE:
       return {
