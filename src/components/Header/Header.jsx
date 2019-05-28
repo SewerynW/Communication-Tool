@@ -59,7 +59,6 @@ class Header extends React.Component {
     const { hintPopUp } = this.state;
     const path =
       location.pathname !== "/dashboard" && location.pathname !== "/";
-    console.log("z profilu", userProfile);
     const welcome = `Hi ${userProfile.GivenName}`;
 
     return (
