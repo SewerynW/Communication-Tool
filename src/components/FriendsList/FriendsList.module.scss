@@ -1,0 +1,24 @@
+@import "../../scss//variables";
+
+.container {
+  max-height: 32vh;
+  overflow: auto;
+  p {
+    text-align: center;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .container {
+    max-height: 40vh;
+  }
+}
+
+@media (min-width: $desktop) {
+  .container {
+    max-height: 45vh;
+  }
+}

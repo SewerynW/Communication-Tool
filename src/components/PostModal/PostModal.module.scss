@@ -1,0 +1,72 @@
+@import "./../../scss/variables";
+
+.modal {
+  overflow-y: scroll;
+  & > div {
+    width: 99vw;
+  }
+  & .btn {
+    font-size: 1.5em;
+    color: inherit;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transform: translate(-10%, 10%);
+    &:focus {
+      outline: none;
+    }
+  }
+  & .modal_inner {
+    padding: 1%;
+    width: auto;
+    left: 10vw;
+    right: 10vw;
+    max-width: 80vw;
+    top: 10vh;
+    margin-bottom: 10vh;
+    border-radius: 25px;
+    text-align: justify;
+    & .modal_img {
+      margin-top: 3%;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    & .modal_publishDate {
+      margin-top: 1vh;
+    }
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  .modal {
+    & .modal_inner {
+      padding: 3%;
+      width: auto;
+      left: 20vw;
+      right: 20vw;
+      max-width: 60vw;
+      top: 10vh;
+      margin-bottom: 10vh;
+      border-radius: 25px;
+      & .modal_img {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .modal {
+    & .btn {
+      transition: 0.3s;
+      transform: translate(-50%, 50%) scale(1);
+      &:hover {
+        transform: translate(-60%, 60%) scale(1.2);
+      }
+    }
+  }
+}

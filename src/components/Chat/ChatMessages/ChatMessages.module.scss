@@ -1,0 +1,21 @@
+@import "../../../scss/variables";
+
+.container {
+  max-height: 55vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .container {
+    max-height: 65vh;
+  }
+}
+
+@media (min-width: $desktop) {
+  .container {
+    max-height: 69vh;
+  }
+}

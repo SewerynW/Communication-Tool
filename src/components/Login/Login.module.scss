@@ -1,0 +1,72 @@
+@import "../../scss/variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  width: 100%;
+
+  .login {
+    box-shadow: -2px 30px 75px -33px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+
+    & .text {
+      text-align: center;
+      padding: 10px;
+
+      h1 {
+        font-family: "Oleo Script", cursive;
+        font-size: 36px;
+      }
+
+      p {
+        font-family: "PT Serif", serif;
+        font-size: 18px;
+      }
+    }
+
+    & .googleButton {
+      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.49);
+      display: flex;
+      align-content: center;
+      margin: 10px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    & .googleButton:hover {
+      cursor: pointer;
+      box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.49);
+      transform: scale(1.1);
+      transition: 0.5s transform;
+    }
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .container {
+    & .login {
+      flex-direction: row;
+
+      & .text {
+        text-align: center;
+        padding: 10px;
+
+        h1 {
+          font-size: 42px;
+        }
+
+        p {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import "../../../scss/variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 63px;
+  left: 0px;
+  right: 0px;
+  padding: 10px 5px;
+  z-index: 3;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .container {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: auto;
+
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
+  }
+}

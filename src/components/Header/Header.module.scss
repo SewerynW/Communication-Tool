@@ -1,0 +1,59 @@
+@import "../../scss/variables";
+
+.appBar {
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+
+  .textLogo {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 16px;
+  }
+
+  .rightBar {
+    display: flex;
+    align-items: center;
+
+    .welcomeText {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .appBar {
+    .textLogo {
+      font-size: 24px;
+    }
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  .appBar {
+    .textLogo {
+      font-size: 38px;
+    }
+
+    .rightBar {
+      .personalBar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .welcomeText {
+        display: block;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .appBar {
+    .mobileMenu {
+      display: none;
+    }
+  }
+}

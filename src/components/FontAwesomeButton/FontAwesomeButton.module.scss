@@ -1,0 +1,79 @@
+@import "./../../scss/variables";
+
+@mixin animationButton($colorButton) {
+  0% {
+    transform: scale(1) translateY(0);
+    color: inherit;
+  }
+  25% {
+    transform: scale(1.2) translateY(0);
+    color: inherit;
+  }
+  25.01% {
+    transform: scale(1.2) translateY(0);
+    color: inherit;
+  }
+  50% {
+    transform: scale(1.2) translateY(0);
+    color: $colorButton;
+  }
+  50.01% {
+    transform: scale(1.2) translateY(0);
+    color: $colorButton;
+  }
+  100% {
+    transform: scale(1.2) translateY(17.5%);
+    color: $colorButton;
+  }
+}
+
+.awesomeButton {
+  background-color: transparent;
+  border: none;
+  padding: 2px 4px;
+  margin-right: 5px;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+@media (min-width: $desktop) {
+  .red {
+    &:hover {
+      animation: buttonAnimateRed 0.5s both,
+        buttonAnimateUpAndDown 0.5s 0.51s alternate infinite linear;
+    }
+  }
+  .green {
+    &:hover {
+      animation: buttonAnimateGreen 0.5s both,
+        buttonAnimateUpAndDown 0.5s 0.51s alternate infinite linear;
+    }
+  }
+  .yellow {
+    &:hover {
+      animation: buttonAnimateYellow 0.5s both,
+        buttonAnimateUpAndDown 0.5s 0.51s alternate infinite linear;
+    }
+  }
+  @keyframes buttonAnimateUpAndDown {
+    0% {
+      transform: scale(1.2) translateY(17.5%);
+    }
+    100% {
+      transform: scale(1.2) translateY(-17.5%);
+    }
+  }
+  @keyframes buttonAnimateRed {
+    @include animationButton(red);
+  }
+  @keyframes buttonAnimateGreen {
+    @include animationButton(green);
+  }
+  @keyframes buttonAnimateYellow {
+    @include animationButton(#cccc00);
+  }
+}

@@ -1,0 +1,90 @@
+@import "../../scss/variables";
+
+.reset {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.shortPostElement {
+  font-size: 1.2rem;
+  margin: 10px 2%;
+  max-width: 800px;
+  overflow: hidden;
+  & .postImage {
+    width: 50%;
+  }
+  & .postTextContent {
+    padding: 1%;
+    width: 50%;
+    text-align: justify;
+    & .mainContent {
+      box-sizing: border-box;
+      max-width: 100%;
+      flex-grow: 2;
+      & .postTitle {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      & .postDescription{
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      
+    }
+  }
+  & .userInfo{
+      display:flex;
+      justify-content: flex-end;
+    & .userName{
+        color:blue;
+    }
+  }
+}
+.toolTip{
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .shortPostElement {
+    margin-left: 5%;
+    margin-right: 5%;
+    & .postGrid {
+      flex-direction: column;
+    }
+    & .postImage {
+      width: 100%;
+      height: auto;
+    }
+    & .postTextContent {
+      padding: 1%;
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: $mediumDevices) {
+  .shortPostElement {
+    & .postImage {
+      width: 33.33333%;
+    }
+
+    & .postTextContent {
+      width: 66.66666%;
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .shortPostElement {
+    & .postTitle {
+      transition: 0.3s;
+
+      &:hover {
+        color: chocolate;
+      }
+    }
+  }
+}
