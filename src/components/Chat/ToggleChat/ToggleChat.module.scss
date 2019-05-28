@@ -3,8 +3,8 @@
 .container {
   position: fixed;
   display: flex;
-  bottom: 80px;
-  right: 10px;
+  bottom: 70px;
+  left: 10px;
 
   border: 2px solid #3f51b5;
   border-radius: 10px;
@@ -15,5 +15,13 @@
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+@media (min-width: $smallDevice) {
+  .container {
+    bottom: 80px;
+    right: 10px;
+    left: auto;
   }
 }

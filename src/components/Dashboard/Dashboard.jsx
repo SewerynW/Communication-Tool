@@ -55,10 +55,11 @@ class Dashboard extends React.Component {
   handlerClickIcons = () => {
     const friends = document.getElementById("friends");
     const posts = document.getElementById("posts");
+    const irrowIcon = document.getElementById("irrowIcon");
     let style = this.state.mobileFeatureStatus ? "none" : "flex";
     friends.style.display = style;
     posts.style.display = style;
-    this.setState(() => ({
+    irrowIcon.style.this.setState(() => ({
       mobileFeatureStatus: !this.state.mobileFeatureStatus
     }));
   };
@@ -130,6 +131,15 @@ class Dashboard extends React.Component {
     const getFlat = myFriends.flat();
     return (
       <div className={style.container}>
+        <div className={`${style.sideBox} ${style.toggle}`} id="arrowIcon">
+          <FontAwesomeIcon
+            icon={
+              mobileFeatureStatus ? "arrow-circle-right" : "arrow-circle-left"
+            }
+            size="2x"
+            onClick={this.handlerClickIcons}
+          />
+        </div>
         <div className={style.features}>
           <div className={`${style.sideBox} ${style.posts}`} id="posts">
             <h2>Posts</h2>
@@ -177,15 +187,6 @@ class Dashboard extends React.Component {
                 myFriends={queryFriends.length ? filteredMyFriends : myFriends}
               />
             </div>
-          </div>
-          <div className={`${style.sideBox} ${style.toggle}`}>
-            <FontAwesomeIcon
-              icon={
-                mobileFeatureStatus ? "arrow-circle-right" : "arrow-circle-left"
-              }
-              size="2x"
-              onClick={this.handlerClickIcons}
-            />
           </div>
         </div>
         <PostsList
