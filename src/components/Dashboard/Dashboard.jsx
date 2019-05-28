@@ -20,7 +20,6 @@ import { toggleFilterFriends } from "../../actions/stateActions";
 import PostsList from "../PostsList/PostsList";
 import Search from "../Search/Search";
 import FriendsList from "../FriendsList/FriendsList";
-import user from "../../http/google/user";
 
 const styles = theme => ({
   button: {
@@ -55,9 +54,18 @@ class Dashboard extends React.Component {
   handlerClickIcons = () => {
     const friends = document.getElementById("friends");
     const posts = document.getElementById("posts");
-    let style = this.state.mobileFeatureStatus ? "none" : "flex";
-    friends.style.display = style;
-    posts.style.display = style;
+    const arrowIcon = document.getElementById("arrowIcon");
+    let styles = this.state.mobileFeatureStatus ? "none" : "flex";
+
+    if (this.state.mobileFeatureStatus) {
+      arrowIcon.style.top = "90px";
+      arrowIcon.style.bottom = "auto";
+    } else {
+      arrowIcon.style.top = "auto";
+      arrowIcon.style.bottom = "52px";
+    }
+    friends.style.display = styles;
+    posts.style.display = styles;
     this.setState(() => ({
       mobileFeatureStatus: !this.state.mobileFeatureStatus
     }));
@@ -128,10 +136,16 @@ class Dashboard extends React.Component {
     };
     return (
       <div className={style.container}>
-        <PostsList
-          userPosts={queryPost.length ? filteredUserPosts : userPosts}
-          myFriends={this.props.myFriends}
-        />
+
+        <div className={`${style.sideBox} ${style.toggle}`} id="arrowIcon">
+          <FontAwesomeIcon
+            icon={
+              mobileFeatureStatus ? "arrow-circle-right" : "arrow-circle-left"
+            }
+            size="2x"
+            onClick={this.handlerClickIcons}
+          />
+        </div>
         <div className={style.features}>
           <div className={`${style.sideBox} ${style.posts}`} id="posts">
             <h2>Posts</h2>
@@ -180,23 +194,18 @@ class Dashboard extends React.Component {
               />
             </div>
           </div>
-          <div className={`${style.sideBox} ${style.toggle}`}>
-            <FontAwesomeIcon
-              icon={
-                mobileFeatureStatus ? "arrow-circle-right" : "arrow-circle-left"
-              }
-              size="2x"
-              onClick={this.handlerClickIcons}
-            />
-          </div>
         </div>
+        <PostsList
+          userPosts={queryPost.length ? filteredUserPosts : userPosts}
+          myFriends={this.props.myFriends}
+
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-
   userPosts: state.postReducer.userPosts,
   filteredUserPosts: state.postReducer.filteredUserPosts,
   foundPeople: state.friendsReducer.foundPeople,

@@ -1,11 +1,8 @@
-@import "../../scss//variables";
+@import "../../../scss/variables";
 
 .container {
-  max-height: 32vh;
+  max-height: 55vh;
   overflow: auto;
-  p {
-    text-align: center;
-  }
   &::-webkit-scrollbar {
     display: none;
   }
@@ -13,12 +10,12 @@
 
 @media (min-width: $smallDevice) {
   .container {
-    max-height: 40vh;
+    max-height: 65vh;
   }
 }
 
 @media (min-width: $desktop) {
   .container {
-    max-height: 45vh;
+    max-height: 69vh;
   }
 }

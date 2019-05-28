@@ -26,6 +26,9 @@ class Friend extends React.Component {
     e.stopPropagation();
     this.props.updateFriendStatus(this.props.id, !this.props.show);
   }
+
+  
+
   render() {
     const { photo, name, lastName, classes, onClickFriend, show } = this.props;
     return (
